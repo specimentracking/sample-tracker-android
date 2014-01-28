@@ -59,6 +59,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:support-v13:19.0.+'
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.google.guava:guava:15.0'
     compile 'com.squareup.okhttp:okhttp:1.2.1'
