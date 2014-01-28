@@ -1,5 +1,14 @@
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar"></style>
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- Widget styles -->
+        <item name="android:buttonStyle">@style/Widget.Button</item>
+    </style>
+
+    <!-- Widget styles -->
+    <style name="Widget.Button" parent="@android:style/Widget.Holo.Button">
+        <item name="android:minWidth">200dp</item>
+        <item name="android:minHeight">50dp</item>
+    </style>
 
 </resources>
