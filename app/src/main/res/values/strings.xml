@@ -2,7 +2,14 @@
 <resources>
 
     <string name="app_name">Galaxy Specimen Tracker</string>
+
+    <string name="glb_save">Save</string>
     <string name="glb_settings">Settings</string>
     <string name="glb_scan_barcode">Scan Barcode</string>
+
+    <string name="settings_key">API access key</string>
+    <string name="settings_key_hint">Please enter API key</string>
+    <string name="settings_project_id">ID of current project</string>
+    <string name="settings_project_id_hint">Please enter project ID</string>
 
 </resources>

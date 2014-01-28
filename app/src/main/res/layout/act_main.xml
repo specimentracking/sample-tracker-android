@@ -8,7 +8,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:padding="30dp"
+        android:minHeight="100dp"
+        android:onClick="onClick"
         android:text="@string/glb_scan_barcode"
         />
 
@@ -19,6 +20,7 @@
         android:layout_above="@id/scan"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="90dp"
+        android:onClick="onClick"
         android:text="@string/glb_settings"
         />
 
