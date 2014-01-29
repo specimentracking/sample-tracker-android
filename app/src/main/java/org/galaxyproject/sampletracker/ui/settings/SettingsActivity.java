@@ -11,9 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.common.base.Preconditions;
+import com.google.inject.Inject;
 
 import org.galaxyproject.sampletracker.GalaxyApplication;
 import org.galaxyproject.sampletracker.R;
+import org.galaxyproject.sampletracker.logic.settings.SettingsController;
 import org.galaxyproject.sampletracker.ui.core.BaseActivity;
 import org.galaxyproject.sampletracker.util.Toasts;
 
@@ -33,6 +35,7 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
         return new Intent(GalaxyApplication.get(), SettingsActivity.class);
     }
 
+    @Inject private SettingsController mSettingsController;
     @InjectView(R.id.key) private EditText mKeyField;
     @InjectView(R.id.project_id) private EditText mProjectIdField;
     @InjectView(R.id.save) private Button mSaveButton;
@@ -45,6 +48,9 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
         mKeyField.addTextChangedListener(this);
         mProjectIdField.addTextChangedListener(this);
         mSaveButton.setOnClickListener(this);
+
+        mKeyField.setText(mSettingsController.loadApiKey());
+        mProjectIdField.setText(mSettingsController.loadProjectId());
     }
 
     @Override
@@ -80,6 +86,13 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
     private void doSave() {
         Preconditions.checkState(enteredDataAreValid());
 
+        // Store settings data
+        String key = mKeyField.getText().toString();
+        String projectId = mProjectIdField.getText().toString();
+        mSettingsController.storeSettings(key, projectId);
+
+        // Inform user and go back
         Toasts.showLong(R.string.settings_saved_msg);
+        finish();
     }
 }
