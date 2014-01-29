@@ -11,5 +11,6 @@
     <string name="settings_key_hint">Please enter API key</string>
     <string name="settings_project_id">ID of current project</string>
     <string name="settings_project_id_hint">Please enter project ID</string>
+    <string name="settings_saved_msg">Settings saved</string>
 
 </resources>
