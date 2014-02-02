@@ -13,4 +13,7 @@
     <string name="settings_project_id_hint">Please enter project ID</string>
     <string name="settings_saved_msg">Settings saved</string>
 
+    <string name="scan_hint">Aim a code.</string>
+    <string name="scan_error">Error occurred while scanning.</string>
+
 </resources>
