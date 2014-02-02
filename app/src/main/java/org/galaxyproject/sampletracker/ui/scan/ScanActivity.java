@@ -10,6 +10,7 @@ import com.google.zxing.client.android.CaptureActivity;
 
 import org.galaxyproject.sampletracker.GalaxyApplication;
 import org.galaxyproject.sampletracker.R;
+import org.galaxyproject.sampletracker.ui.specimen.SpecimenDetailActivity;
 import org.galaxyproject.sampletracker.util.Toasts;
 
 import roboguice.util.Ln;
@@ -20,9 +21,6 @@ import roboguice.util.Ln;
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 public final class ScanActivity extends CaptureActivity {
-
-    /** Scanned data as a result for calling activity */
-    public static final String EXTRA_SCAN_DATA = "galaxy:scan_data";
 
     public static final Intent showIntent() {
         return new Intent(GalaxyApplication.get(), ScanActivity.class);
@@ -43,9 +41,7 @@ public final class ScanActivity extends CaptureActivity {
 
     @Override
     protected void onScanComplete(BarcodeFormat codeType, String codeData) {
-        Intent intent = new Intent();
-        intent.putExtra(EXTRA_SCAN_DATA, codeData);
-        Toasts.showShort(codeData);
+        startActivity(SpecimenDetailActivity.showIntent(codeData));
     }
 
     @Override
