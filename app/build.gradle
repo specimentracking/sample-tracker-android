@@ -46,6 +46,9 @@ android {
         apiary {
             flavorGroup "environment"
         }
+        samples {
+            flavorGroup "environment"
+        }
     }
 
     applicationVariants.all { variant ->
