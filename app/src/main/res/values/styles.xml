@@ -1,4 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="ContentFrame">
+        <item name="android:paddingTop">@dimen/content_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/content_vertical_margin</item>
+        <item name="android:paddingLeft">@dimen/content_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/content_horizontal_margin</item>
+    </style>
+
+    <style name="ContentFrame.Fill">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="ContentFrame.Fill.NoPadding">
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="ContentFrame.Fill.NoBottomPadding">
+        <item name="android:paddingBottom">0dp</item>
+    </style>
+
+    <style name="Separator">
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="Separator.Vertical">
+        <item name="android:layout_width">@dimen/separator_thickness</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="Separator.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/separator_thickness</item>
+    </style>
+
 </resources>
