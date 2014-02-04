@@ -17,9 +17,7 @@ public abstract class BaseActivity extends RoboActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent parentIntent = NavUtils.getParentActivityIntent(this);
-                parentIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                NavUtils.navigateUpTo(this, parentIntent);
+                upToParent();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -32,5 +30,14 @@ public abstract class BaseActivity extends RoboActivity {
     protected void showHomeButton() {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+    }
+
+    /**
+     * Navigates up to parent activity. Activities above parent will be cleared but parent instance will be kept.
+     */
+    protected void upToParent() {
+        Intent parentIntent = NavUtils.getParentActivityIntent(this);
+        parentIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        NavUtils.navigateUpTo(this, parentIntent);
     }
 }

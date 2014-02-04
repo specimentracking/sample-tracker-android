@@ -36,4 +36,9 @@ public final class SpecimenDetailActivity extends BaseActivity {
         view.setText(mBarcode);
         setContentView(view);
     }
+
+    @Override
+    public void onBackPressed() {
+        upToParent();
+    }
 }
