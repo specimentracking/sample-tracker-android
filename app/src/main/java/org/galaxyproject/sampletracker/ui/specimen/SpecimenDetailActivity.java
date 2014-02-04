@@ -2,11 +2,12 @@ package org.galaxyproject.sampletracker.ui.specimen;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import org.galaxyproject.sampletracker.GalaxyApplication;
+import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.ui.core.BaseActivity;
 
+import roboguice.inject.ContentView;
 import roboguice.inject.InjectExtra;
 
 /**
@@ -14,6 +15,7 @@ import roboguice.inject.InjectExtra;
  * 
  * @author Pavel Sveda <xsveda@gmail.com>
  */
+@ContentView(R.layout.act_specimen_detail)
 public final class SpecimenDetailActivity extends BaseActivity {
 
     /** Barcode value of the specimen */
@@ -31,10 +33,6 @@ public final class SpecimenDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showHomeButton();
-
-        TextView view = new TextView(this);
-        view.setText(mBarcode);
-        setContentView(view);
     }
 
     @Override
