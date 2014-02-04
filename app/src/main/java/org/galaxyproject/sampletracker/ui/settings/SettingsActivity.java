@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 
+import org.galaxyproject.sampletracker.BuildConfig;
 import org.galaxyproject.sampletracker.GalaxyApplication;
 import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.logic.settings.SettingsController;
@@ -51,6 +52,12 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
 
         mKeyField.setText(mSettingsController.loadApiKey());
         mProjectIdField.setText(mSettingsController.loadProjectId());
+
+        // TODO solve better - only if empty
+        if (BuildConfig.DEBUG) {
+            mKeyField.setText("b25cb96a82668561e861c3238305dc8a");
+            mProjectIdField.setText("1");
+        }
     }
 
     @Override

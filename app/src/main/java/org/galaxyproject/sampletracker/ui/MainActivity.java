@@ -24,6 +24,7 @@ public final class MainActivity extends BaseActivity {
                 startActivity(SettingsActivity.showIntent());
                 break;
             case R.id.scan:
+                // Check Project ID and API key is set
                 startActivity(ScanActivity.showIntent());
                 break;
             default:
