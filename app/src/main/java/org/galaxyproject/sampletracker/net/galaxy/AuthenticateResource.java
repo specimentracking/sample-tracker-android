@@ -1,6 +1,6 @@
 package org.galaxyproject.sampletracker.net.galaxy;
 
-import org.galaxyproject.sampletracker.model.galaxy.AuthenticateResponse;
+import org.galaxyproject.sampletracker.model.galaxy.authenticate.AuthenticateResponse;
 
 import retrofit.RestAdapter;
 import retrofit.http.Header;
