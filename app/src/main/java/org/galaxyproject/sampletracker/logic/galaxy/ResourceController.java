@@ -16,7 +16,6 @@ abstract class ResourceController<T> {
     @Inject private GalaxyRestAdapter mRestAdapter;
 
     private final Class<T> mClazz;
-    private T mResource;
 
     protected ResourceController(Class<T> clazz) {
         mClazz = clazz;
@@ -28,9 +27,6 @@ abstract class ResourceController<T> {
      * @return Instance of <T> resource
      */
     protected T resource() {
-        if (mResource == null) {
-            mResource = mRestAdapter.createResource(mClazz);
-        }
-        return mResource;
+        return mRestAdapter.createResource(mClazz);
     }
 }
