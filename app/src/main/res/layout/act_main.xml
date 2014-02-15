@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -23,5 +24,32 @@
         android:onClick="onClick"
         android:text="@string/glb_settings"
         />
+
+    <LinearLayout
+        android:id="@+id/debug_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
+
+        <EditText
+            android:id="@+id/simulated_barcode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="textVisiblePassword"
+            />
+
+        <Button
+            android:id="@+id/simulate_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Simulate scan"
+            tools:ignore="HardcodedText"
+            />
+    </LinearLayout>
 
 </RelativeLayout>
