@@ -1,5 +1,7 @@
 package org.galaxyproject.sampletracker.logic.settings;
 
+import android.text.TextUtils;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -54,9 +56,14 @@ public final class SettingsController {
 
     @Nullable
     public String loadServerUrl() {
+        String encryptedUrl = mPreferenceController.getString(GalaxyPreference.SERVER_URL, null);
+
         // URL from app config is default
-        String encryptedUrl = mPreferenceController.getString(GalaxyPreference.SERVER_URL, Environment.GALAXY_URL);
-        return encryptedUrl == null ? null : decrypt(encryptedUrl);
+        if (TextUtils.isEmpty(encryptedUrl)) {
+            return Environment.GALAXY_URL;
+        } else {
+            return decrypt(encryptedUrl);
+        }
     }
 
     public void storeSettings(String apiKey, String projectId, String serverUrl) {
