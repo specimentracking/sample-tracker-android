@@ -6,7 +6,6 @@ import com.google.inject.Singleton;
 
 import org.galaxyproject.sampletracker.model.galaxy.authenticate.AuthenticateResponse;
 import org.galaxyproject.sampletracker.net.galaxy.AuthenticateResource;
-import org.galaxyproject.sampletracker.net.galaxy.GalaxyRestAdapter;
 
 import roboguice.util.Ln;
 
@@ -19,18 +18,20 @@ import java.util.Locale;
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 @Singleton
-public final class AuthenticateResourceController {
+public final class AuthenticateResourceController extends ResourceController<AuthenticateResource> {
 
-    private final AuthenticateResource mResource = GalaxyRestAdapter.createResource(AuthenticateResource.class);
+    public AuthenticateResourceController() {
+        super(AuthenticateResource.class);
+    }
 
     public AuthenticateResponse authenticate(String username, String password) {
         String basicAuthentication = createBasicAuthentication(username, password);
-        return mResource.authenticate(basicAuthentication);
+        return resource().authenticate(basicAuthentication);
     }
 
     private String createBasicAuthentication(String username, String password) {
         try {
-            String plainValue = String.format(Locale.US, "Basic %s:%s", username, password);
+            String plainValue = String.format(Locale.US, "%s:%s", username, password);
             String encodedValue = Base64.encodeToString(plainValue.getBytes("UTF-8"), Base64.NO_WRAP);
             return String.format(Locale.US, "Basic %s", encodedValue);
         } catch (UnsupportedEncodingException e) {

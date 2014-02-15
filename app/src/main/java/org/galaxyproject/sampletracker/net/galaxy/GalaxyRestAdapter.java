@@ -1,7 +1,10 @@
 package org.galaxyproject.sampletracker.net.galaxy;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
 import org.galaxyproject.sampletracker.BuildConfig;
-import org.galaxyproject.sampletracker.Environment;
+import org.galaxyproject.sampletracker.logic.settings.SettingsController;
 
 import retrofit.RestAdapter;
 
@@ -10,21 +13,34 @@ import retrofit.RestAdapter;
  * 
  * @author Pavel Sveda <xsveda@gmail.com>
  */
+@Singleton
 public final class GalaxyRestAdapter {
 
-    private static final RestAdapter sAdapter = createAdapter();
+    @Inject private SettingsController mSettingsController;
+
+    private RestAdapter mAdapter;
 
     /**
      * Creates an API resource implementation defined by the specified interface.
      */
-    public static <T> T createResource(Class<T> service) {
-        return sAdapter.create(service);
+    public <T> T createResource(Class<T> service) {
+        if (mAdapter == null) {
+            mAdapter = createAdapter();
+        }
+        return mAdapter.create(service);
     }
 
-    private static RestAdapter createAdapter() {
+    /**
+     * Reset {@link GalaxyRestAdapter} so it is re-created with current settings.
+     */
+    public void reset() {
+        mAdapter = null;
+    }
+
+    private RestAdapter createAdapter() {
         RestAdapter.Builder builder = new RestAdapter.Builder();
 
-        builder.setServer(Environment.GALAXY_URL);
+        builder.setServer(mSettingsController.loadServerUrl());
         builder.setLogLevel(logLevel());
         builder.setClient(new GalaxyClient());
 

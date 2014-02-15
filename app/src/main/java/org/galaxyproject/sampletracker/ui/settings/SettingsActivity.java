@@ -17,6 +17,7 @@ import org.galaxyproject.sampletracker.BuildConfig;
 import org.galaxyproject.sampletracker.GalaxyApplication;
 import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.logic.settings.SettingsController;
+import org.galaxyproject.sampletracker.net.galaxy.GalaxyRestAdapter;
 import org.galaxyproject.sampletracker.ui.core.BaseActivity;
 import org.galaxyproject.sampletracker.util.Toasts;
 
@@ -37,6 +38,7 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
     }
 
     @Inject private SettingsController mSettingsController;
+    @Inject private GalaxyRestAdapter mGalaxyRestAdapter;
     @InjectView(R.id.key) private EditText mKeyField;
     @InjectView(R.id.project_id) private EditText mProjectIdField;
     @InjectView(R.id.server_url) private EditText mServerUrlField;
@@ -105,6 +107,9 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
         String projectId = mProjectIdField.getText().toString();
         String serverUrl = mServerUrlField.getText().toString();
         mSettingsController.storeSettings(key, projectId, serverUrl);
+
+        // Recreate rest adapter to reflect potential server URL change
+        mGalaxyRestAdapter.reset();
 
         // Inform user and go back
         Toasts.showLong(R.string.settings_saved_msg);
