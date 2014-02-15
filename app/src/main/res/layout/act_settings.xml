@@ -34,6 +34,22 @@
         android:inputType="textVisiblePassword"
         />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/settings_galaxy_server_url"
+        />
+
+    <EditText
+        android:id="@+id/server_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/settings_galaxy_server_url_hint"
+        android:inputType="textVisiblePassword"
+        />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -3,8 +3,9 @@ package org.galaxyproject.sampletracker.logic.settings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import org.galaxyproject.sampletracker.Environment;
+import org.galaxyproject.sampletracker.logic.preference.GalaxyPreference;
 import org.galaxyproject.sampletracker.logic.preference.PreferenceController;
-import org.galaxyproject.sampletracker.logic.preference.ProjectPreference;
 import org.galaxyproject.sampletracker.logic.preference.UserPreference;
 import org.galaxyproject.sampletracker.logic.security.Crypto;
 import org.galaxyproject.sampletracker.logic.security.CryptoException;
@@ -37,18 +38,31 @@ public final class SettingsController {
 
     public void storeProjectId(String projectId) {
         String encryptedProjectId = encrypt(projectId);
-        mPreferenceController.putString(ProjectPreference.PROJECT_ID, encryptedProjectId);
+        mPreferenceController.putString(GalaxyPreference.PROJECT_ID, encryptedProjectId);
     }
 
     @Nullable
     public String loadProjectId() {
-        String encryptedProjectId = mPreferenceController.getString(ProjectPreference.PROJECT_ID, null);
+        String encryptedProjectId = mPreferenceController.getString(GalaxyPreference.PROJECT_ID, null);
         return encryptedProjectId == null ? null : decrypt(encryptedProjectId);
     }
 
-    public void storeSettings(String apiKey, String projectId) {
+    public void storeServerUrl(String url) {
+        String encryptedUrl = encrypt(url);
+        mPreferenceController.putString(GalaxyPreference.SERVER_URL, encryptedUrl);
+    }
+
+    @Nullable
+    public String loadServerUrl() {
+        // URL from app config is default
+        String encryptedUrl = mPreferenceController.getString(GalaxyPreference.SERVER_URL, Environment.GALAXY_URL);
+        return encryptedUrl == null ? null : decrypt(encryptedUrl);
+    }
+
+    public void storeSettings(String apiKey, String projectId, String serverUrl) {
         storeApiKey(apiKey);
         storeProjectId(projectId);
+        storeServerUrl(serverUrl);
     }
 
     @Nullable

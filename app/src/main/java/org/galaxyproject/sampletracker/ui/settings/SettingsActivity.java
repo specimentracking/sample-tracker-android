@@ -39,6 +39,7 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
     @Inject private SettingsController mSettingsController;
     @InjectView(R.id.key) private EditText mKeyField;
     @InjectView(R.id.project_id) private EditText mProjectIdField;
+    @InjectView(R.id.server_url) private EditText mServerUrlField;
     @InjectView(R.id.save) private Button mSaveButton;
 
     @Override
@@ -48,15 +49,20 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
 
         mKeyField.addTextChangedListener(this);
         mProjectIdField.addTextChangedListener(this);
+        mServerUrlField.addTextChangedListener(this);
         mSaveButton.setOnClickListener(this);
 
         mKeyField.setText(mSettingsController.loadApiKey());
         mProjectIdField.setText(mSettingsController.loadProjectId());
+        mServerUrlField.setText(mSettingsController.loadServerUrl());
 
-        // TODO solve better - only if empty
         if (BuildConfig.DEBUG) {
-            mKeyField.setText("b25cb96a82668561e861c3238305dc8a");
-            mProjectIdField.setText("1");
+            if (TextUtils.isEmpty(mKeyField.getText())) {
+                mKeyField.setText("b25cb96a82668561e861c3238305dc8a");
+            }
+            if (TextUtils.isEmpty(mProjectIdField.getText())) {
+                mProjectIdField.setText("f2db41e1fa331b3e");
+            }
         }
     }
 
@@ -87,7 +93,8 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
     private boolean enteredDataAreValid() {
         boolean keyOk = !TextUtils.isEmpty(mKeyField.getText());
         boolean projectIdOk = !TextUtils.isEmpty(mProjectIdField.getText());
-        return keyOk && projectIdOk;
+        boolean serverUrlOk = !TextUtils.isEmpty(mServerUrlField.getText());
+        return keyOk && projectIdOk && serverUrlOk;
     }
 
     private void doSave() {
@@ -96,7 +103,8 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
         // Store settings data
         String key = mKeyField.getText().toString();
         String projectId = mProjectIdField.getText().toString();
-        mSettingsController.storeSettings(key, projectId);
+        String serverUrl = mServerUrlField.getText().toString();
+        mSettingsController.storeSettings(key, projectId, serverUrl);
 
         // Inform user and go back
         Toasts.showLong(R.string.settings_saved_msg);

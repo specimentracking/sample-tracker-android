@@ -11,6 +11,8 @@
     <string name="settings_key_hint">Please enter API key</string>
     <string name="settings_project_id">ID of current project</string>
     <string name="settings_project_id_hint">Please enter project ID</string>
+    <string name="settings_galaxy_server_url">Galaxy server</string>
+    <string name="settings_galaxy_server_url_hint">Please enter Galaxy URL</string>
     <string name="settings_saved_msg">Settings saved</string>
 
     <string name="scan_hint">Aim a code.</string>
