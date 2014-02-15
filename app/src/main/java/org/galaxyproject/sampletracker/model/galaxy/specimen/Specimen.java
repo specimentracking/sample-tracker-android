@@ -18,10 +18,10 @@ public final class Specimen extends AbstractResponse implements Parcelable {
         return specimen;
     }
 
-    public static final Specimen from(String parent, String barcode) {
+    public static final Specimen from(String barcode, String parentId) {
         Specimen specimen = new Specimen();
-        specimen.setParentId(parent);
         specimen.setBarcode(barcode);
+        specimen.setParentId(parentId);
         return specimen;
     }
 

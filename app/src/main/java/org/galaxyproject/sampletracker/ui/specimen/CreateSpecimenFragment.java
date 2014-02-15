@@ -13,21 +13,21 @@ import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 
 /**
- * Fragment for creating a completely new specimen based on scanned barcode.
+ * Fragment for creating a completely new specimen based on scanned barcode or a derivative based on parent specimen.
  * 
  * @author Pavel Sveda <xsveda@gmail.com>
  */
-public final class NewSpecimenFragment extends AbstractSpecimenFragment {
+public final class CreateSpecimenFragment extends AbstractSpecimenFragment {
 
-    public static final NewSpecimenFragment create(String barcode) {
+    public static AbstractSpecimenFragment createNew(String barcode) {
         Preconditions.checkArgument(!TextUtils.isEmpty(barcode));
+        return create(new CreateSpecimenFragment(), Specimen.from(barcode));
+    }
 
-        Bundle args = new Bundle(1);
-        args.putParcelable(EXTRA_SPECIMEN, Specimen.from(barcode));
-
-        NewSpecimenFragment fragment = new NewSpecimenFragment();
-        fragment.setArguments(args);
-        return fragment;
+    public static AbstractSpecimenFragment createDerivative(String barcode, String parentId) {
+        Preconditions.checkArgument(!TextUtils.isEmpty(barcode));
+        Preconditions.checkArgument(!TextUtils.isEmpty(parentId));
+        return create(new CreateSpecimenFragment(), Specimen.from(barcode, parentId));
     }
 
     @Override

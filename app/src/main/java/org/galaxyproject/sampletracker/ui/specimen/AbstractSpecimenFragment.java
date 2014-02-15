@@ -19,7 +19,17 @@ import roboguice.util.Ln;
  */
 abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickListener {
 
-    protected static final String EXTRA_SPECIMEN = "specimen";
+    private static final String EXTRA_SPECIMEN = "specimen";
+
+    protected static final AbstractSpecimenFragment create(AbstractSpecimenFragment fragment, Specimen specimen) {
+        Preconditions.checkNotNull(fragment);
+        Preconditions.checkNotNull(specimen);
+
+        Bundle args = new Bundle(1);
+        args.putParcelable(EXTRA_SPECIMEN, specimen);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     protected Specimen mSpecimen;
 

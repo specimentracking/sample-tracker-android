@@ -55,8 +55,7 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
 
     @Override
     public void success(Specimen specimen, Response response) {
-        // TODO
-        Toasts.showShort("Success " + specimen);
+        showContent(EditSpecimenFragment.create(specimen));
     }
 
     @Override
@@ -65,7 +64,7 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
         try {
             if (error.getBody() instanceof AbstractResponse) {
                 if (error.getResponse().getStatus() == 404) {
-                    showContent(NewSpecimenFragment.create(mBarcode));
+                    showContent(CreateSpecimenFragment.createNew(mBarcode));
                 } else {
                     Toasts.showLong(((AbstractResponse) error.getBody()).getErrorMessage());
                 }
