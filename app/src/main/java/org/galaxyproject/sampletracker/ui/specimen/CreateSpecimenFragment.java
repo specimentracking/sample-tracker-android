@@ -33,4 +33,15 @@ public final class CreateSpecimenFragment extends AbstractSpecimenFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.frg_specimen_create, container, false);
     }
+
+    @Override
+    protected boolean isModelValid(Specimen specimen) {
+        // TODO
+        return false;
+    }
+
+    @Override
+    protected void sendModel(Specimen specimen) {
+        // TODO
+    }
 }
