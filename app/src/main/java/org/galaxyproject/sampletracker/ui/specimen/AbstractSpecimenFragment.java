@@ -1,5 +1,7 @@
 package org.galaxyproject.sampletracker.ui.specimen;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -51,6 +53,19 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         Preconditions.checkArgument(getArguments() != null && getArguments().containsKey(EXTRA_SPECIMEN));
 
         mSpecimen = getArguments().getParcelable(EXTRA_SPECIMEN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case R.id.request_specimen_state:
+                if (resultCode == Activity.RESULT_OK) {
+                    setNewState(data.getStringExtra(StatePickerActivity.EXTRA_STATE));
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -114,7 +129,8 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                 // TODO
                 break;
             case R.id.set_state:
-                startActivity(StatePickerActivity.showIntent(mSpecimen.getSampleData().getState()));
+                Intent intent = StatePickerActivity.showIntent(mSpecimen.getSampleData().getState());
+                startActivityForResult(intent, R.id.request_specimen_state);
                 break;
             case R.id.send:
                 Preconditions.checkState(isModelValid(mSpecimen));

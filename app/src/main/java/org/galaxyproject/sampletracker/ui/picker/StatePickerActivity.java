@@ -25,18 +25,18 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.act_picker_state)
 public final class StatePickerActivity extends BaseActivity implements OnItemClickListener {
 
-    private static final String EXTRA_CURRENT_STATE = "current_state";
+    public static final String EXTRA_STATE = "state";
 
     public static Intent showIntent(String currentState) {
         Intent intent = new Intent(GalaxyApplication.get(), StatePickerActivity.class);
         if (!TextUtils.isEmpty(currentState)) {
-            intent.putExtra(EXTRA_CURRENT_STATE, currentState);
+            intent.putExtra(EXTRA_STATE, currentState);
         }
         return intent;
     }
 
     @InjectView(android.R.id.list) private ListView mList;
-    @InjectExtra(value = EXTRA_CURRENT_STATE, optional = true) private String mCurrentState;
+    @InjectExtra(value = EXTRA_STATE, optional = true) private String mCurrentState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,5 +57,10 @@ public final class StatePickerActivity extends BaseActivity implements OnItemCli
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String selectedState = (String) mList.getAdapter().getItem(position);
+        Intent data = new Intent();
+        data.putExtra(EXTRA_STATE, selectedState);
+        setResult(RESULT_OK, data);
+        finish();
     }
 }
