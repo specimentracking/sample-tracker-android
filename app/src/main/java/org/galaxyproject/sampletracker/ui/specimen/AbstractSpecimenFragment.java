@@ -114,7 +114,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                 // TODO
                 break;
             case R.id.set_state:
-                startActivity(StatePickerActivity.showIntent());
+                startActivity(StatePickerActivity.showIntent(mSpecimen.getSampleData().getState()));
                 break;
             case R.id.send:
                 Preconditions.checkState(isModelValid(mSpecimen));

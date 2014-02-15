@@ -55,6 +55,7 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
 
     @Override
     public void success(Specimen specimen, Response response) {
+        // TODO validate JSON
         showContent(EditSpecimenFragment.create(specimen));
     }
 
