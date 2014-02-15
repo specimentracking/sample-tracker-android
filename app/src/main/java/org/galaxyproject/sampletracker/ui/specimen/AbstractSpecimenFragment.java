@@ -1,6 +1,7 @@
 package org.galaxyproject.sampletracker.ui.specimen;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 import org.galaxyproject.sampletracker.ui.core.BaseFragment;
 
+import roboguice.inject.InjectResource;
 import roboguice.util.Ln;
 
 /**
@@ -32,6 +34,8 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         fragment.setArguments(args);
         return fragment;
     }
+
+    @InjectResource(R.string.glb_no_value) private String mNoValue;
 
     private TextView mLocationValue;
     private TextView mTypeValue;
@@ -63,9 +67,13 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     }
 
     private void bindModel(Specimen specimen) {
-        mLocationValue.setText(specimen.getSampleData().getLocation());
-        mTypeValue.setText(specimen.getSampleData().getType());
-        mStateValue.setText(specimen.getSampleData().getState());
+        write(mLocationValue, specimen.getSampleData().getLocation());
+        write(mTypeValue, specimen.getSampleData().getType());
+        write(mStateValue, specimen.getSampleData().getState());
+    }
+
+    private void write(TextView view, String value) {
+        view.setText(TextUtils.isEmpty(value) ? mNoValue : value);
     }
 
     protected void setNewLocation(String location) {
