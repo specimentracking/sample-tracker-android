@@ -15,6 +15,7 @@ import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 import org.galaxyproject.sampletracker.ui.core.BaseFragment;
 import org.galaxyproject.sampletracker.ui.picker.StatePickerActivity;
+import org.galaxyproject.sampletracker.ui.picker.TypePickerActivity;
 
 import roboguice.inject.InjectResource;
 import roboguice.util.Ln;
@@ -61,6 +62,11 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
             case R.id.request_specimen_state:
                 if (resultCode == Activity.RESULT_OK) {
                     setNewState(data.getStringExtra(StatePickerActivity.EXTRA_STATE));
+                }
+                break;
+            case R.id.request_specimen_type:
+                if (resultCode == Activity.RESULT_OK) {
+                    setNewType(data.getStringExtra(TypePickerActivity.EXTRA_TYPE));
                 }
                 break;
             default:
@@ -126,11 +132,12 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                 // TODO
                 break;
             case R.id.set_type:
-                // TODO
+                Intent typeIntent = TypePickerActivity.showIntent(mSpecimen.getSampleData().getType());
+                startActivityForResult(typeIntent, R.id.request_specimen_type);
                 break;
             case R.id.set_state:
-                Intent intent = StatePickerActivity.showIntent(mSpecimen.getSampleData().getState());
-                startActivityForResult(intent, R.id.request_specimen_state);
+                Intent stateIntent = StatePickerActivity.showIntent(mSpecimen.getSampleData().getState());
+                startActivityForResult(stateIntent, R.id.request_specimen_state);
                 break;
             case R.id.send:
                 Preconditions.checkState(isModelValid(mSpecimen));

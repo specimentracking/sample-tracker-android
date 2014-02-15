@@ -5,6 +5,7 @@
         <!-- Widget styles -->
         <item name="android:textViewStyle">@style/Widget.TextView</item>
         <item name="android:buttonStyle">@style/Widget.Button</item>
+        <item name="android:radioButtonStyle">@style/Widget.CompoundButton.RadioButton</item>
     </style>
 
     <!-- Theme without actionbar -->

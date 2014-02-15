@@ -20,7 +20,9 @@ import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
 /**
- * @author Pavel Sveda <pavel.sveda@cleverlance.com>
+ * Picker of specimen state.
+ * 
+ * @author Pavel Sveda <xsveda@gmail.com>
  */
 @ContentView(R.layout.act_picker_state)
 public final class StatePickerActivity extends BaseActivity implements OnItemClickListener {

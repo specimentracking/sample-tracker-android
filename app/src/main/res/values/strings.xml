@@ -41,4 +41,16 @@
         <item>lost</item>
         <item>discarded</item>
     </string-array>
+
+    <string-array name="specimen_type_material_values">
+        <item>blood</item>
+        <item>buccal</item>
+        <item>hair</item>
+        <item>breastmilk</item>
+        <item>stool</item>
+        <item>vaginal_swab</item>
+        <item>placenta</item>
+        <item>cord_blood</item>
+        <item>tissue</item>
+    </string-array>
 </resources>

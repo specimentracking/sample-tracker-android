@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ContentFrame.Fill"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <CheckedTextView
+                android:id="@+id/button_11"
+                style="@style/Widget.CompoundButton.RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+
+
+            <CheckedTextView
+                android:id="@+id/button_12"
+                style="@style/Widget.CompoundButton.RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+
+            <CheckedTextView
+                android:id="@+id/button_13"
+                style="@style/Widget.CompoundButton.RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <CheckedTextView
+                android:id="@+id/button_21"
+                style="@style/Widget.CompoundButton.RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+
+            <CheckedTextView
+                android:id="@+id/button_22"
+                style="@style/Widget.CompoundButton.RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+
+            <CheckedTextView
+                android:id="@+id/button_23"
+                style="@style/Widget.CompoundButton.RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <CheckedTextView
+                android:id="@+id/button_31"
+                style="@style/Widget.CompoundButton.RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+
+            <CheckedTextView
+                android:id="@+id/button_32"
+                style="@style/Widget.CompoundButton.RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+
+            <CheckedTextView
+                android:id="@+id/button_33"
+                style="@style/Widget.CompoundButton.RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
