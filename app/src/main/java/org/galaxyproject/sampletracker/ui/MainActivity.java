@@ -4,12 +4,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.inject.Inject;
+
 import org.galaxyproject.sampletracker.BuildConfig;
 import org.galaxyproject.sampletracker.R;
+import org.galaxyproject.sampletracker.logic.settings.SettingsController;
 import org.galaxyproject.sampletracker.ui.core.BaseActivity;
 import org.galaxyproject.sampletracker.ui.scan.ScanActivity;
 import org.galaxyproject.sampletracker.ui.settings.SettingsActivity;
 import org.galaxyproject.sampletracker.ui.specimen.SpecimenDetailActivity;
+import org.galaxyproject.sampletracker.util.Toasts;
 import org.galaxyproject.sampletracker.util.ViewUtils;
 
 import roboguice.inject.ContentView;
@@ -24,6 +28,7 @@ import roboguice.util.Ln;
 @ContentView(R.layout.act_main)
 public final class MainActivity extends BaseActivity {
 
+    @Inject private SettingsController mSettingsController;
     @InjectView(R.id.debug_panel) private View mDebugPanel;
     @InjectView(R.id.simulated_barcode) private EditText mSimulatedBarcodeField;
 
@@ -44,8 +49,11 @@ public final class MainActivity extends BaseActivity {
                 startActivity(SettingsActivity.showIntent());
                 break;
             case R.id.scan:
-                // TODO Check Project ID and API key is set
-                startActivity(ScanActivity.showIntent());
+                if (mSettingsController.settingsAreValid()) {
+                    startActivity(ScanActivity.showIntent());
+                } else {
+                    Toasts.showLong(R.string.scan_error_invalid_settings);
+                }
                 break;
             case R.id.simulate_scan:
                 startActivity(SpecimenDetailActivity.showIntent(mSimulatedBarcodeField.getText().toString()));

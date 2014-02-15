@@ -72,6 +72,13 @@ public final class SettingsController {
         storeServerUrl(serverUrl);
     }
 
+    public boolean settingsAreValid() {
+        boolean apiKeyOk = loadApiKey() != null;
+        boolean projectIdOk = loadProjectId() != null;
+        boolean serverUrlOk = loadServerUrl() != null;
+        return apiKeyOk && projectIdOk && serverUrlOk;
+    }
+
     @Nullable
     private String encrypt(String value) {
         try {

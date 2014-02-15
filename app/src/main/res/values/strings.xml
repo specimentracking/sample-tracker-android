@@ -16,6 +16,7 @@
     <string name="settings_saved_msg">Settings saved</string>
 
     <string name="scan_hint">Aim a code.</string>
+    <string name="scan_error_invalid_settings">Configuration is not valid.\nGo to Settings first!</string>
     <string name="scan_error">Error occurred while scanning.</string>
 
 </resources>
