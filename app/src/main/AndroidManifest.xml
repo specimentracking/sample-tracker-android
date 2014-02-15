@@ -51,6 +51,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
         </activity>
+        <activity
+            android:name=".ui.picker.StatePickerActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:parentActivityName=".ui.specimen.SpecimenDetailActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.specimen.SpecimenDetailActivity" />
+        </activity>
     </application>
 
 </manifest>

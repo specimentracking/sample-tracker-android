@@ -33,4 +33,12 @@
     <string name="specimen_state_set">Set State</string>
     <string name="specimen_state_change">Change State</string>
 
+    <string-array name="specimen_state_values">
+        <item>new</item>
+        <item>onroad</item>
+        <item>psu</item>
+        <item>depleted</item>
+        <item>lost</item>
+        <item>discarded</item>
+    </string-array>
 </resources>

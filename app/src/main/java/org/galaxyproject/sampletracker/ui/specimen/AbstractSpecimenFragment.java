@@ -12,6 +12,7 @@ import com.google.common.base.Preconditions;
 import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 import org.galaxyproject.sampletracker.ui.core.BaseFragment;
+import org.galaxyproject.sampletracker.ui.picker.StatePickerActivity;
 
 import roboguice.inject.InjectResource;
 import roboguice.util.Ln;
@@ -64,6 +65,11 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         mTypeValue = (TextView) view.findViewById(R.id.type);
         mStateValue = (TextView) view.findViewById(R.id.state);
         mSendButton = (Button) view.findViewById(R.id.send);
+
+        view.findViewById(R.id.set_location).setOnClickListener(this);
+        view.findViewById(R.id.set_type).setOnClickListener(this);
+        view.findViewById(R.id.set_state).setOnClickListener(this);
+        mSendButton.setOnClickListener(this);
     }
 
     private void bindModel(Specimen specimen) {
@@ -108,7 +114,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                 // TODO
                 break;
             case R.id.set_state:
-                // TODO
+                startActivity(StatePickerActivity.showIntent());
                 break;
             case R.id.send:
                 Preconditions.checkState(isModelValid(mSpecimen));
