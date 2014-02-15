@@ -3,6 +3,8 @@ package org.galaxyproject.sampletracker.model.galaxy.specimen;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.galaxyproject.sampletracker.model.galaxy.AbstractResponse;
 
 /**
@@ -15,27 +17,20 @@ public final class Specimen extends AbstractResponse implements Parcelable {
     public static final Specimen from(String barcode) {
         Specimen specimen = new Specimen();
         specimen.setBarcode(barcode);
+        specimen.setSampleData(SampleData.from(null));
         return specimen;
     }
 
     public static final Specimen from(String barcode, String parentId) {
         Specimen specimen = new Specimen();
         specimen.setBarcode(barcode);
-        specimen.setParentId(parentId);
+        specimen.setSampleData(SampleData.from(parentId));
         return specimen;
     }
 
-    private String id;
-    private String barcode;
-    private String parent_id;
-    private String state;
-    private String type;
-    private String location;
-    private boolean genotype_flag;
-    private boolean haplotype_flag;
-    private boolean sanger_seq_flag;
-    private boolean nqs_seg_flag;
-    private boolean dd_pcr_flag;
+    @SerializedName("id") private String id;
+    @SerializedName("bar_code") private String barcode;
+    @SerializedName("sample_data") private SampleData sampleData;
 
     public Specimen() {
     }
@@ -56,76 +51,12 @@ public final class Specimen extends AbstractResponse implements Parcelable {
         this.barcode = barcode;
     }
 
-    public String getParentId() {
-        return parent_id;
+    public SampleData getSampleData() {
+        return sampleData;
     }
 
-    public void setParentId(String parentId) {
-        this.parent_id = parentId;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public boolean isGenotype() {
-        return genotype_flag;
-    }
-
-    public void setGenotype(boolean genotype) {
-        this.genotype_flag = genotype;
-    }
-
-    public boolean isHaplotype() {
-        return haplotype_flag;
-    }
-
-    public void setHaplotype(boolean haplotype) {
-        this.haplotype_flag = haplotype;
-    }
-
-    public boolean isSangerSeq() {
-        return sanger_seq_flag;
-    }
-
-    public void setSangerSeq(boolean sangerSeq) {
-        this.sanger_seq_flag = sangerSeq;
-    }
-
-    public boolean isNqsSeg() {
-        return nqs_seg_flag;
-    }
-
-    public void setNqsSeg(boolean nqsSeg) {
-        this.nqs_seg_flag = nqsSeg;
-    }
-
-    public boolean isDdPcr() {
-        return dd_pcr_flag;
-    }
-
-    public void setDdPcr(boolean ddPcr) {
-        this.dd_pcr_flag = ddPcr;
+    public void setSampleData(SampleData sampleData) {
+        this.sampleData = sampleData;
     }
 
     @Override
@@ -137,29 +68,13 @@ public final class Specimen extends AbstractResponse implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.id);
         dest.writeString(this.barcode);
-        dest.writeString(this.parent_id);
-        dest.writeString(this.state);
-        dest.writeString(this.type);
-        dest.writeString(this.location);
-        dest.writeByte(genotype_flag ? (byte) 1 : (byte) 0);
-        dest.writeByte(haplotype_flag ? (byte) 1 : (byte) 0);
-        dest.writeByte(sanger_seq_flag ? (byte) 1 : (byte) 0);
-        dest.writeByte(nqs_seg_flag ? (byte) 1 : (byte) 0);
-        dest.writeByte(dd_pcr_flag ? (byte) 1 : (byte) 0);
+        dest.writeParcelable(this.sampleData, flags);
     }
 
     private Specimen(Parcel in) {
         this.id = in.readString();
         this.barcode = in.readString();
-        this.parent_id = in.readString();
-        this.state = in.readString();
-        this.type = in.readString();
-        this.location = in.readString();
-        this.genotype_flag = in.readByte() != 0;
-        this.haplotype_flag = in.readByte() != 0;
-        this.sanger_seq_flag = in.readByte() != 0;
-        this.nqs_seg_flag = in.readByte() != 0;
-        this.dd_pcr_flag = in.readByte() != 0;
+        this.sampleData = in.readParcelable(SampleData.class.getClassLoader());
     }
 
     public static final Creator<Specimen> CREATOR = new Creator<Specimen>() {
