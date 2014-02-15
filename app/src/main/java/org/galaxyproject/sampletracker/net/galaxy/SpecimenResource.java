@@ -1,6 +1,6 @@
 package org.galaxyproject.sampletracker.net.galaxy;
 
-import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenResponse;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -17,5 +17,5 @@ public interface SpecimenResource {
 
     @GET("/api/projects/{project_id}/check")
     public void check(@Query("key") String apiKey, @Path("project_id") String projectId,
-            @Query("barcode") String barcode, Callback<SpecimenResponse> callback);
+            @Query("barcode") String barcode, Callback<Specimen> callback);
 }

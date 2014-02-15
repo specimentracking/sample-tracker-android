@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import org.galaxyproject.sampletracker.logic.settings.SettingsController;
-import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenResponse;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 import org.galaxyproject.sampletracker.net.galaxy.SpecimenResource;
 
 import retrofit.Callback;
@@ -23,7 +23,7 @@ public final class SpecimenResourceController extends ResourceController<Specime
         super(SpecimenResource.class);
     }
 
-    public void check(String barcode, Callback<SpecimenResponse> callback) {
+    public void check(String barcode, Callback<Specimen> callback) {
         String apiKey = mSettingsController.loadApiKey();
         String projectId = mSettingsController.loadProjectId();
         resource().check(apiKey, projectId, barcode, callback);

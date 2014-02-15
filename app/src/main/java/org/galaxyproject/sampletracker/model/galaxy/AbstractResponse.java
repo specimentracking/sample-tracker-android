@@ -1,5 +1,7 @@
 package org.galaxyproject.sampletracker.model.galaxy;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Abstract response to all request that cover error states.
  * 
@@ -7,15 +9,14 @@ package org.galaxyproject.sampletracker.model.galaxy;
  */
 public abstract class AbstractResponse {
 
-    private String status;
+    @SerializedName("err_code") private String errorCode;
+    @SerializedName("err_msg") private String errorMessage;
 
-    private String desc;
-
-    public String getStatus() {
-        return status;
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }

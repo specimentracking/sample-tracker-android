@@ -112,7 +112,7 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
         mGalaxyRestAdapter.reset();
 
         // Inform user and go back
-        Toasts.showLong(R.string.settings_saved_msg);
+        Toasts.showShort(R.string.settings_saved_msg);
         finish();
     }
 }

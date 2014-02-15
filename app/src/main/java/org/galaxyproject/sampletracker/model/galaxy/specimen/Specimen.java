@@ -3,12 +3,14 @@ package org.galaxyproject.sampletracker.model.galaxy.specimen;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.galaxyproject.sampletracker.model.galaxy.AbstractResponse;
+
 /**
  * Model object of a single specimen.
  * 
  * @author Pavel Sveda <xsveda@gmail.com>
  */
-public final class Specimen implements Parcelable {
+public final class Specimen extends AbstractResponse implements Parcelable {
 
     public static final Specimen from(String barcode) {
         Specimen specimen = new Specimen();
