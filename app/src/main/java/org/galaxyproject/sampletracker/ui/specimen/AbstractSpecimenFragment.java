@@ -42,6 +42,16 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     }
 
     @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        bindViews();
+    }
+
+    private void bindViews() {
+
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.project_id: // TODO

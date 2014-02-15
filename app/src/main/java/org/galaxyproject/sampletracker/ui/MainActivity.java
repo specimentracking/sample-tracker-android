@@ -39,7 +39,7 @@ public final class MainActivity extends BaseActivity {
         // Barcode simulation panel for debug purposes
         ViewUtils.conditionalGone(BuildConfig.DEBUG, mDebugPanel);
         if (BuildConfig.DEBUG) {
-            mSimulatedBarcodeField.setText("450645064");
+            mSimulatedBarcodeField.setText("450645065");
         }
     }
 

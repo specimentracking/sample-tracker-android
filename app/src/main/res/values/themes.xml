@@ -3,6 +3,7 @@
 
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- Widget styles -->
+        <item name="android:textViewStyle">@style/Widget.TextView</item>
         <item name="android:buttonStyle">@style/Widget.Button</item>
     </style>
 

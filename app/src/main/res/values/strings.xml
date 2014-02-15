@@ -6,6 +6,9 @@
     <string name="glb_save">Save</string>
     <string name="glb_settings">Settings</string>
     <string name="glb_scan_barcode">Scan Barcode</string>
+    <string name="glb_create">Create</string>
+    <string name="glb_create_derivative">Create derivative specimen</string>
+    <string name="glb_no_value">NONE</string>
 
     <string name="net_error_unknown">Unknown error occurred</string>
 
@@ -20,5 +23,14 @@
     <string name="scan_hint">Aim a code.</string>
     <string name="scan_error_invalid_settings">Configuration is not valid.\nGo to Settings first!</string>
     <string name="scan_error">Error occurred while scanning.</string>
+
+    <string name="specimen_location">Location</string>
+    <string name="specimen_location_set">Set Location</string>
+    <string name="specimen_location_change">Change Location</string>
+    <string name="specimen_type">Type</string>
+    <string name="specimen_type_set">Set Type</string>
+    <string name="specimen_state">State</string>
+    <string name="specimen_state_set">Set State</string>
+    <string name="specimen_state_change">Change State</string>
 
 </resources>

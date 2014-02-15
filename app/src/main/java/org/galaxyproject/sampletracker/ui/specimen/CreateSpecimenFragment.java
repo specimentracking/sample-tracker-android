@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
 
@@ -32,9 +31,6 @@ public final class CreateSpecimenFragment extends AbstractSpecimenFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        TextView view = new TextView(getActivity());
-        view.setText(mSpecimen.getBarcode());
-        view.setBackgroundResource(R.color.result_points);
-        return view;
+        return inflater.inflate(R.layout.frg_specimen_create, container, false);
     }
 }

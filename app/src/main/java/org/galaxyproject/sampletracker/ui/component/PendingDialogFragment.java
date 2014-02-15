@@ -67,7 +67,7 @@ public class PendingDialogFragment extends DialogFragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_pending, container, false);
+        return inflater.inflate(R.layout.frg_pending, container, false);
     }
 
     /** The system calls this only when creating the layout in a dialog. */
