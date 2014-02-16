@@ -71,11 +71,13 @@ public final class LocationPickerActivity extends BaseActivity implements OnClic
         showHomeButton();
 
         // If no location set, use previously used one or empty location
-        String lastLocation = mPreferenceController.getString(UserPreference.LAST_LOCATION_USED, null);
-        if (lastLocation != null) {
-            mCurrentLocation = SpecimenLocation.parse(lastLocation);
-        } else {
-            mCurrentLocation = SpecimenLocation.create();
+        if (mCurrentLocation == null) {
+            String lastLocation = mPreferenceController.getString(UserPreference.LAST_LOCATION_USED, null);
+            if (lastLocation != null) {
+                mCurrentLocation = SpecimenLocation.parse(lastLocation);
+            } else {
+                mCurrentLocation = SpecimenLocation.create();
+            }
         }
 
         initField(mFridgeField, mCurrentLocation.getFridge());
