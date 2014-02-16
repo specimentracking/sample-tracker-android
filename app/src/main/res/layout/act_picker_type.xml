@@ -102,6 +102,7 @@
         </LinearLayout>
     </LinearLayout>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -115,7 +116,7 @@
             android:layout_centerInParent="true"
             android:enabled="false"
             android:minWidth="200dp"
-            android:text="@string/glb_save"
+            android:text="@string/glb_set"
             />
     </RelativeLayout>
 </LinearLayout>

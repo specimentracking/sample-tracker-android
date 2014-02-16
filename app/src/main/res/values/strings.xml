@@ -4,6 +4,7 @@
     <string name="app_name">Galaxy Specimen Tracker</string>
 
     <string name="glb_save">Save</string>
+    <string name="glb_set">Set</string>
     <string name="glb_settings">Settings</string>
     <string name="glb_scan_barcode">Scan Barcode</string>
     <string name="glb_create">Create</string>
