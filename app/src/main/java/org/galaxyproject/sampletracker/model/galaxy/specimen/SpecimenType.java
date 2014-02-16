@@ -25,6 +25,17 @@ public final class SpecimenType implements android.os.Parcelable {
     }
 
     /**
+     * Creates deep copy of {@link SpecimenType}.
+     */
+    public static SpecimenType from(SpecimenType type) {
+        if (type == null) {
+            return null;
+        } else {
+            return parse(type.format());
+        }
+    }
+
+    /**
      * Creates a {@link SpecimenType} based on formatted string parsing.
      * 
      * @param formatType Type value to parse
@@ -143,4 +154,31 @@ public final class SpecimenType implements android.os.Parcelable {
             return new SpecimenType[size];
         }
     };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || ((Object) this).getClass() != o.getClass())
+            return false;
+
+        SpecimenType that = (SpecimenType) o;
+
+        if (mAcidSubType != null ? !mAcidSubType.equals(that.mAcidSubType) : that.mAcidSubType != null)
+            return false;
+        if (mAcidType != null ? !mAcidType.equals(that.mAcidType) : that.mAcidType != null)
+            return false;
+        if (mMaterialType != null ? !mMaterialType.equals(that.mMaterialType) : that.mMaterialType != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mMaterialType != null ? mMaterialType.hashCode() : 0;
+        result = 31 * result + (mAcidType != null ? mAcidType.hashCode() : 0);
+        result = 31 * result + (mAcidSubType != null ? mAcidSubType.hashCode() : 0);
+        return result;
+    }
 }

@@ -3,6 +3,7 @@ package org.galaxyproject.sampletracker.model.galaxy.specimen;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.annotations.SerializedName;
 
 import org.galaxyproject.sampletracker.model.galaxy.AbstractResponse;
@@ -17,7 +18,7 @@ public final class Specimen extends AbstractResponse implements Parcelable {
     public static final Specimen from(String barcode) {
         Specimen specimen = new Specimen();
         specimen.setBarcode(barcode);
-        specimen.setSampleData(SampleData.from(null));
+        specimen.setSampleData(SampleData.from((String) null));
         return specimen;
     }
 
@@ -25,6 +26,16 @@ public final class Specimen extends AbstractResponse implements Parcelable {
         Specimen specimen = new Specimen();
         specimen.setBarcode(barcode);
         specimen.setSampleData(SampleData.from(parentId));
+        return specimen;
+    }
+
+    public static final Specimen from(Specimen original) {
+        Preconditions.checkNotNull(original);
+
+        Specimen specimen = new Specimen();
+        specimen.setId(original.getId());
+        specimen.setBarcode(original.getBarcode());
+        specimen.setSampleData(SampleData.from(original.getSampleData()));
         return specimen;
     }
 

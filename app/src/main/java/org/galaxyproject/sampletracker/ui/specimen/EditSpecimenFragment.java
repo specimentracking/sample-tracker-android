@@ -9,7 +9,9 @@ import com.google.inject.Inject;
 
 import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.logic.galaxy.SpecimenResourceController;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.SampleData;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenLocation;
 
 /**
  * Fragment for creating editing a specimen that already exists on server.
@@ -31,8 +33,20 @@ public final class EditSpecimenFragment extends AbstractSpecimenFragment {
 
     @Override
     protected boolean isModelValid(Specimen specimen) {
-        // TODO
-        return false;
+        // Only state or location may change
+        SampleData sampleData = specimen.getSampleData();
+        SpecimenLocation location = sampleData.getLocation();
+        String state = sampleData.getState();
+        if (location == null || state == null) {
+            return false;
+        }
+
+        // Values must change
+        SampleData originalSampleData = getOriginalSpecimen().getSampleData();
+        SpecimenLocation originalLocation = originalSampleData.getLocation();
+        String originalState = originalSampleData.getState();
+
+        return !location.equals(originalLocation) || !state.equals(originalState);
     }
 
     @Override

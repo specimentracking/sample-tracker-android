@@ -3,6 +3,7 @@ package org.galaxyproject.sampletracker.model.galaxy.specimen;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -15,6 +16,22 @@ public final class SampleData implements Parcelable {
     public static final SampleData from(String parentId) {
         SampleData data = new SampleData();
         data.setParentId(parentId);
+        return data;
+    }
+
+    public static SampleData from(SampleData original) {
+        Preconditions.checkNotNull(original);
+        
+        SampleData data = new SampleData();
+        data.setParentId(original.getParentId());
+        data.setState(original.getState());
+        data.setType(SpecimenType.from(original.getType()));
+        data.setLocation(SpecimenLocation.from(original.getLocation()));
+        data.setGenotypeFlag(original.isGenotypeFlag());
+        data.setHaplotypeFlag(original.isHaplotypeFlag());
+        data.setSangerSeqFlag(original.isSangerSeqFlag());
+        data.setNgsSegFlag(original.isNgsSegFlag());
+        data.setDdPcrFlag(original.isDdPcrFlag());
         return data;
     }
 

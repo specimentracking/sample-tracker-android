@@ -40,6 +40,17 @@ public final class SpecimenLocation implements Parcelable {
     }
 
     /**
+     * Creates deep copy of {@link SpecimenLocation}.
+     */
+    public static SpecimenLocation from(SpecimenLocation location) {
+        if (location == null) {
+            return null;
+        } else {
+            return parse(location.format());
+        }
+    }
+
+    /**
      * Creates a {@link SpecimenLocation} based on formatted string parsing.
      * 
      * @param formatLocation Type value to parse
@@ -197,4 +208,40 @@ public final class SpecimenLocation implements Parcelable {
             return new SpecimenLocation[size];
         }
     };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || ((Object) this).getClass() != o.getClass())
+            return false;
+
+        SpecimenLocation that = (SpecimenLocation) o;
+
+        if (mBox != null ? !mBox.equals(that.mBox) : that.mBox != null)
+            return false;
+        if (mFridge != null ? !mFridge.equals(that.mFridge) : that.mFridge != null)
+            return false;
+        if (mRack != null ? !mRack.equals(that.mRack) : that.mRack != null)
+            return false;
+        if (mShelf != null ? !mShelf.equals(that.mShelf) : that.mShelf != null)
+            return false;
+        if (mSpot1 != null ? !mSpot1.equals(that.mSpot1) : that.mSpot1 != null)
+            return false;
+        if (mSpot2 != null ? !mSpot2.equals(that.mSpot2) : that.mSpot2 != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mFridge != null ? mFridge.hashCode() : 0;
+        result = 31 * result + (mShelf != null ? mShelf.hashCode() : 0);
+        result = 31 * result + (mRack != null ? mRack.hashCode() : 0);
+        result = 31 * result + (mBox != null ? mBox.hashCode() : 0);
+        result = 31 * result + (mSpot1 != null ? mSpot1.hashCode() : 0);
+        result = 31 * result + (mSpot2 != null ? mSpot2.hashCode() : 0);
+        return result;
+    }
 }

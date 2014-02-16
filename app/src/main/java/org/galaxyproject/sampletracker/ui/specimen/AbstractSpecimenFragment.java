@@ -58,6 +58,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     private CheckedTextView mFlag5;
     private Button mSendButton;
 
+    private Specimen mOriginalSpecimen;
     private Specimen mSpecimen;
 
     @Override
@@ -66,6 +67,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         Preconditions.checkArgument(getArguments() != null && getArguments().containsKey(EXTRA_SPECIMEN));
 
         mSpecimen = getArguments().getParcelable(EXTRA_SPECIMEN);
+        mOriginalSpecimen = Specimen.from(mSpecimen);
     }
 
     @Override
@@ -149,6 +151,10 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
             flagView.setText(labelId);
             flagView.setChecked(value);
         }
+    }
+
+    protected Specimen getOriginalSpecimen() {
+        return mOriginalSpecimen;
     }
 
     protected void setNewLocation(SpecimenLocation location) {
