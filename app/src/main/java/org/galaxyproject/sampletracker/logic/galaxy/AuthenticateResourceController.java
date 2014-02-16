@@ -5,7 +5,7 @@ import android.util.Base64;
 import com.google.inject.Singleton;
 
 import org.galaxyproject.sampletracker.model.galaxy.authenticate.AuthenticateResponse;
-import org.galaxyproject.sampletracker.net.galaxy.AuthenticateResource;
+import org.galaxyproject.sampletracker.net.galaxy.resource.AuthenticateResource;
 
 import roboguice.util.Ln;
 

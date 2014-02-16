@@ -1,4 +1,4 @@
-package org.galaxyproject.sampletracker.net.galaxy;
+package org.galaxyproject.sampletracker.net.galaxy.resource;
 
 import org.galaxyproject.sampletracker.model.galaxy.authenticate.AuthenticateResponse;
 

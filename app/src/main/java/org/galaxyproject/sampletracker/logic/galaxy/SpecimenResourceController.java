@@ -5,7 +5,7 @@ import com.google.inject.Singleton;
 
 import org.galaxyproject.sampletracker.logic.settings.SettingsController;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
-import org.galaxyproject.sampletracker.net.galaxy.SpecimenResource;
+import org.galaxyproject.sampletracker.net.galaxy.resource.SpecimenResource;
 
 import retrofit.Callback;
 
