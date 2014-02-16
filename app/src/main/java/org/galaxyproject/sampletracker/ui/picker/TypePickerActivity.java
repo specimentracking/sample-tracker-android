@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CheckedTextView;
 
 import com.google.common.base.Preconditions;
@@ -17,6 +18,7 @@ import org.galaxyproject.sampletracker.ui.core.BaseActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
+import roboguice.util.Ln;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ import java.util.List;
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 @ContentView(R.layout.act_picker_type)
-public final class TypePickerActivity extends BaseActivity {
+public final class TypePickerActivity extends BaseActivity implements OnClickListener {
 
     public static final String EXTRA_TYPE = "type";
 
@@ -47,6 +49,7 @@ public final class TypePickerActivity extends BaseActivity {
     @InjectView(R.id.button_31) private CheckedTextView mButton31;
     @InjectView(R.id.button_32) private CheckedTextView mButton32;
     @InjectView(R.id.button_33) private CheckedTextView mButton33;
+    @InjectView(R.id.save) private Button mSaveButton;
 
     private final List<CheckedTextView> mMaterialButtons = Lists.newArrayList();
 
@@ -57,6 +60,8 @@ public final class TypePickerActivity extends BaseActivity {
 
         initMaterialGroup();
 
+        mSaveButton.setOnClickListener(this);
+        mSaveButton.setEnabled(mCurrentType.getMaterialType() != null);
     }
 
     private void initMaterialGroup() {
@@ -84,10 +89,19 @@ public final class TypePickerActivity extends BaseActivity {
             button.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // Un-check all buttons
                     for (CheckedTextView button : mMaterialButtons) {
                         button.setChecked(false);
                     }
+
+                    // Check current one
                     ((CheckedTextView) v).setChecked(true);
+
+                    // Set current value to model
+                    mCurrentType.setMaterialType(((CheckedTextView) v).getText().toString());
+
+                    // Enable SAVE button, setting a material type is sufficient
+                    mSaveButton.setEnabled(true);
                 }
             });
 
@@ -95,6 +109,20 @@ public final class TypePickerActivity extends BaseActivity {
             if (materialType.equals(mCurrentType.getMaterialType())) {
                 button.setChecked(true);
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.save:
+                Intent data = new Intent();
+                data.putExtra(EXTRA_TYPE, mCurrentType);
+                setResult(RESULT_OK, data);
+                finish();
+                break;
+            default:
+                Ln.w("Unknown view has been clicked");
         }
     }
 }

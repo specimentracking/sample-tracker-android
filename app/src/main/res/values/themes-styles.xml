@@ -14,8 +14,6 @@
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">@dimen/content_vertical_margin</item>
         <item name="android:paddingBottom">@dimen/content_vertical_margin</item>
-        <item name="android:paddingRight">@dimen/content_vertical_margin</item>
-        <item name="android:paddingLeft">@dimen/content_vertical_margin</item>
         <item name="android:background">@drawable/radio_selector</item>
     </style>
 
