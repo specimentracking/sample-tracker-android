@@ -15,11 +15,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 import org.galaxyproject.sampletracker.GalaxyApplication;
 import org.galaxyproject.sampletracker.R;
+import org.galaxyproject.sampletracker.logic.preference.PreferenceController;
+import org.galaxyproject.sampletracker.logic.preference.UserPreference;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenLocation;
 import org.galaxyproject.sampletracker.ui.component.AlphaNumericFilter;
 import org.galaxyproject.sampletracker.ui.component.EmptyTextWatcher;
@@ -33,6 +35,8 @@ import roboguice.util.Ln;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Nullable;
+
 /**
  * Picker of specimen location.
  * 
@@ -43,15 +47,16 @@ public final class LocationPickerActivity extends BaseActivity implements OnClic
 
     public static final String EXTRA_LOCATION = "location";
 
-    public static Intent showIntent(SpecimenLocation currentLocation) {
-        Preconditions.checkNotNull(currentLocation);
-
+    public static Intent showIntent(@Nullable SpecimenLocation currentLocation) {
         Intent intent = new Intent(GalaxyApplication.get(), LocationPickerActivity.class);
-        intent.putExtra(EXTRA_LOCATION, currentLocation);
+        if (currentLocation != null) {
+            intent.putExtra(EXTRA_LOCATION, currentLocation);
+        }
         return intent;
     }
 
-    @InjectExtra(EXTRA_LOCATION) private SpecimenLocation mCurrentLocation;
+    @Inject private PreferenceController mPreferenceController;
+    @InjectExtra(value = EXTRA_LOCATION, optional = true) private SpecimenLocation mCurrentLocation;
     @InjectView(R.id.fridge) private EditText mFridgeField;
     @InjectView(R.id.shelf) private EditText mShelfField;
     @InjectView(R.id.rack) private EditText mRackField;
@@ -64,6 +69,14 @@ public final class LocationPickerActivity extends BaseActivity implements OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showHomeButton();
+
+        // If no location set, use previously used one or empty location
+        String lastLocation = mPreferenceController.getString(UserPreference.LAST_LOCATION_USED, null);
+        if (lastLocation != null) {
+            mCurrentLocation = SpecimenLocation.parse(lastLocation);
+        } else {
+            mCurrentLocation = SpecimenLocation.create();
+        }
 
         initField(mFridgeField, mCurrentLocation.getFridge());
         initField(mShelfField, mCurrentLocation.getShelf());
@@ -144,6 +157,8 @@ public final class LocationPickerActivity extends BaseActivity implements OnClic
         switch (v.getId()) {
             case R.id.save:
                 updateModel();
+
+                mPreferenceController.putString(UserPreference.LAST_LOCATION_USED, mCurrentLocation.format());
 
                 Intent data = new Intent();
                 data.putExtra(EXTRA_LOCATION, mCurrentLocation);
