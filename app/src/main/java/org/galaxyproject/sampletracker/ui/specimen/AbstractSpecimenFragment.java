@@ -13,6 +13,7 @@ import com.google.common.base.Preconditions;
 
 import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenLocation;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenType;
 import org.galaxyproject.sampletracker.ui.core.BaseFragment;
 import org.galaxyproject.sampletracker.ui.picker.LocationPickerActivity;
@@ -71,6 +72,11 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                     setNewType((SpecimenType) data.getParcelableExtra(TypePickerActivity.EXTRA_TYPE));
                 }
                 break;
+            case R.id.request_specimen_location:
+                if (resultCode == Activity.RESULT_OK) {
+                    setNewLocation((SpecimenLocation) data.getParcelableExtra(LocationPickerActivity.EXTRA_LOCATION));
+                }
+                break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);
         }
@@ -96,7 +102,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     }
 
     private void bindModel(Specimen specimen) {
-        write(mLocationValue, specimen.getSampleData().getLocation());
+        write(mLocationValue, specimen.getSampleData().getLocation().format());
         write(mTypeValue, specimen.getSampleData().getType().format());
         write(mStateValue, specimen.getSampleData().getState());
     }
@@ -105,7 +111,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         view.setText(TextUtils.isEmpty(value) ? mNoValue : value);
     }
 
-    protected void setNewLocation(String location) {
+    protected void setNewLocation(SpecimenLocation location) {
         mSpecimen.getSampleData().setLocation(location);
         bindModel(mSpecimen);
         validateModel();

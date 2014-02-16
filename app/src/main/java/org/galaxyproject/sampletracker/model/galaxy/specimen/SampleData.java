@@ -21,7 +21,7 @@ public final class SampleData implements Parcelable {
     @SerializedName("parent_id") private String parentId;
     @SerializedName("state") private String state;
     @SerializedName("type") private SpecimenType type;
-    @SerializedName("location") private String location;
+    @SerializedName("location") private SpecimenLocation location;
     @SerializedName("genotype_flag") private boolean genotypeFlag;
     @SerializedName("haplotype_flag") private boolean haplotypeFlag;
     @SerializedName("sanger_seq_flag") private boolean sangerSeqFlag;
@@ -55,11 +55,11 @@ public final class SampleData implements Parcelable {
         this.type = type;
     }
 
-    public String getLocation() {
-        return location;
+    public SpecimenLocation getLocation() {
+        return location == null ? SpecimenLocation.create() : location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(SpecimenLocation location) {
         this.location = location;
     }
 
@@ -113,7 +113,7 @@ public final class SampleData implements Parcelable {
         dest.writeString(this.parentId);
         dest.writeString(this.state);
         dest.writeParcelable(this.type, flags);
-        dest.writeString(this.location);
+        dest.writeParcelable(this.location, flags);
         dest.writeByte(genotypeFlag ? (byte) 1 : (byte) 0);
         dest.writeByte(haplotypeFlag ? (byte) 1 : (byte) 0);
         dest.writeByte(sangerSeqFlag ? (byte) 1 : (byte) 0);
@@ -125,7 +125,7 @@ public final class SampleData implements Parcelable {
         this.parentId = in.readString();
         this.state = in.readString();
         this.type = in.readParcelable(SpecimenType.class.getClassLoader());
-        this.location = in.readString();
+        this.location = in.readParcelable(SpecimenLocation.class.getClassLoader());
         this.genotypeFlag = in.readByte() != 0;
         this.haplotypeFlag = in.readByte() != 0;
         this.sangerSeqFlag = in.readByte() != 0;

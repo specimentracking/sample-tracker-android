@@ -7,7 +7,9 @@ import com.google.inject.Singleton;
 
 import org.galaxyproject.sampletracker.BuildConfig;
 import org.galaxyproject.sampletracker.logic.settings.SettingsController;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenLocation;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenType;
+import org.galaxyproject.sampletracker.net.galaxy.adapter.SpecimenLocationDeserializer;
 import org.galaxyproject.sampletracker.net.galaxy.adapter.SpecimenTypeDeserializer;
 
 import retrofit.RestAdapter;
@@ -55,6 +57,7 @@ public final class GalaxyRestAdapter {
 
     private static Gson initGson() {
         return new GsonBuilder() //
+                .registerTypeAdapter(SpecimenLocation.class, new SpecimenLocationDeserializer()) //
                 .registerTypeAdapter(SpecimenType.class, new SpecimenTypeDeserializer()) //
                 .create();
     }
