@@ -11,6 +11,8 @@
     <string name="glb_create_derivative">Create derivative specimen</string>
     <string name="glb_no_value">NONE</string>
 
+    <string name="net_specimen_created">Specimen has been successfully created</string>
+    <string name="net_specimen_updated">Specimen has been successfully updated</string>
     <string name="net_error_unknown">Unknown error occurred</string>
 
     <string name="settings_key">API access key</string>

@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import org.galaxyproject.sampletracker.logic.settings.SettingsController;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.SampleData;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 import org.galaxyproject.sampletracker.net.galaxy.resource.SpecimenResource;
 
@@ -27,5 +28,13 @@ public final class SpecimenResourceController extends ResourceController<Specime
         String apiKey = mSettingsController.loadApiKey();
         String projectId = mSettingsController.loadProjectId();
         resource().check(apiKey, projectId, barcode, callback);
+    }
+
+    public void create(Specimen specimen, Callback<Specimen> callback) {
+        String apiKey = mSettingsController.loadApiKey();
+        String projectId = mSettingsController.loadProjectId();
+        SampleData sampleData = specimen.getSampleData();
+        resource().create(apiKey, projectId, specimen.getBarcode(), sampleData.getParentId(), sampleData.getState(),
+                sampleData.getType().format(), sampleData.getLocation().format(), callback);
     }
 }
