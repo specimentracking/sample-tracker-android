@@ -39,7 +39,7 @@ import java.util.Locale;
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 @ContentView(R.layout.act_picker_location)
-public final class LocationPickerActivity extends BaseActivity implements OnClickListener, OnItemClickListener {
+public final class LocationPickerActivity extends BaseActivity implements OnClickListener {
 
     public static final String EXTRA_LOCATION = "location";
 
@@ -90,7 +90,12 @@ public final class LocationPickerActivity extends BaseActivity implements OnClic
     private void initList(ListView list, int valuesResource, String initValue) {
         // Initialize list view
         list.setAdapter(ArrayAdapter.createFromResource(this, valuesResource, R.layout.list_item_location_spot));
-        list.setOnItemClickListener(this);
+        list.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                checkFormValidity();
+            }
+        });
 
         // Select current state if set
         if (!TextUtils.isEmpty(initValue)) {
@@ -107,21 +112,31 @@ public final class LocationPickerActivity extends BaseActivity implements OnClic
         boolean shelfOk = !TextUtils.isEmpty(mShelfField.getText());
         boolean rackOk = !TextUtils.isEmpty(mRackField.getText());
         boolean boxOk = !TextUtils.isEmpty(mBoxField.getText());
+        boolean spot1Ok = readList(mSpot1List) != null;
+        boolean spot2Ok = readList(mSpot2List) != null;
 
-        boolean allOk = fridgeOk && shelfOk && rackOk && boxOk;
-        mSaveButton.setEnabled(allOk);
+        mSaveButton.setEnabled(fridgeOk && shelfOk && rackOk && boxOk && spot1Ok && spot2Ok);
     }
 
     private void updateModel() {
-        mCurrentLocation.setFridge(mFridgeField.getText().toString().toLowerCase(Locale.US));
-        mCurrentLocation.setShelf(mShelfField.getText().toString().toLowerCase(Locale.US));
-        mCurrentLocation.setRack(mRackField.getText().toString().toLowerCase(Locale.US));
-        mCurrentLocation.setBox(mBoxField.getText().toString().toLowerCase(Locale.US));
+        mCurrentLocation.setFridge(readField(mFridgeField));
+        mCurrentLocation.setShelf(readField(mShelfField));
+        mCurrentLocation.setRack(readField(mRackField));
+        mCurrentLocation.setBox(readField(mBoxField));
+        mCurrentLocation.setSpot1(readList(mSpot1List));
+        mCurrentLocation.setSpot2(readList(mSpot2List));
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // String selectedState = (String) list.getAdapter().getItem(position);
+    private String readField(EditText field) {
+        return field.getText().toString().toLowerCase(Locale.US);
+    }
+
+    private String readList(ListView list) {
+        try {
+            return (String) list.getAdapter().getItem(list.getCheckedItemPosition());
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 
     @Override
