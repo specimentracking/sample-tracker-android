@@ -31,6 +31,7 @@
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/settings_title"
             android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -45,6 +46,7 @@
         <activity
             android:name=".ui.specimen.SpecimenDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/glb_loading"
             android:parentActivityName=".ui.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -54,6 +56,7 @@
         <activity
             android:name=".ui.specimen.SpecimenDerivativeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/specimen_title_derivative"
             android:parentActivityName=".ui.specimen.SpecimenDetailActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -63,6 +66,7 @@
         <activity
             android:name=".ui.picker.StatePickerActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/specimen_state_title"
             android:parentActivityName=".ui.specimen.SpecimenDetailActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -72,6 +76,7 @@
         <activity
             android:name=".ui.picker.TypePickerActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/specimen_type_title"
             android:parentActivityName=".ui.specimen.SpecimenDetailActivity"
             android:screenOrientation="portrait">
             <meta-data
@@ -81,6 +86,7 @@
         <activity
             android:name=".ui.picker.LocationPickerActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/specimen_location_title"
             android:parentActivityName=".ui.specimen.SpecimenDetailActivity"
             android:screenOrientation="portrait">
             <meta-data

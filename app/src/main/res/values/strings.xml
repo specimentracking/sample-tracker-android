@@ -11,11 +11,13 @@
     <string name="glb_create_derivative">Create derivative specimen</string>
     <string name="glb_update">Update</string>
     <string name="glb_no_value">NONE</string>
+    <string name="glb_loading">Loading…</string>
 
     <string name="net_specimen_created">Specimen has been successfully created</string>
     <string name="net_specimen_updated">Specimen has been successfully updated</string>
     <string name="net_error_unknown">Unknown error occurred</string>
 
+    <string name="settings_title">Settings</string>
     <string name="settings_key">API access key</string>
     <string name="settings_key_hint">Please enter API key</string>
     <string name="settings_project_id">ID of current project</string>
@@ -28,17 +30,23 @@
     <string name="scan_error_invalid_settings">Configuration is not valid.\nGo to Settings first!</string>
     <string name="scan_error">Error occurred while scanning.</string>
 
+    <string name="specimen_title_create">New specimen</string>
+    <string name="specimen_title_derivative">Derivative specimen</string>
+    <string name="specimen_title_update">Specimen</string>
     <string name="specimen_flag_ngs">NGS</string>
     <string name="specimen_flag_sgr">SGR</string>
     <string name="specimen_flag_gen">GEN</string>
     <string name="specimen_flag_hap">HAP</string>
     <string name="specimen_flag_pcr">PCR</string>
+    <string name="specimen_location_title">Set location</string>
     <string name="specimen_location">Location</string>
     <string name="specimen_location_set">Set Location</string>
     <string name="specimen_location_change">Change Location</string>
+    <string name="specimen_type_title">Choose type</string>
     <string name="specimen_type">Type</string>
     <string name="specimen_type_set">Set Type</string>
     <string name="specimen_type_change">Change Type</string>
+    <string name="specimen_state_title">Choose state</string>
     <string name="specimen_state">State</string>
     <string name="specimen_state_set">Set State</string>
     <string name="specimen_state_change">Change State</string>

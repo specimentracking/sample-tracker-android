@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.google.inject.Inject;
 
 import org.galaxyproject.sampletracker.GalaxyApplication;
+import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.logic.galaxy.SpecimenResourceController;
 import org.galaxyproject.sampletracker.model.galaxy.AbstractResponse;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
@@ -51,7 +52,7 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
     @Override
     public void success(Specimen specimen, Response response) {
         // TODO validate JSON
-        showContent(EditSpecimenFragment.create(specimen));
+        showContent(EditSpecimenFragment.create(specimen), R.string.specimen_title_update);
     }
 
     @Override
@@ -60,7 +61,7 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
         try {
             if (error.getBody() instanceof AbstractResponse) {
                 if (error.getResponse().getStatus() == 404) {
-                    showContent(CreateSpecimenFragment.createNew(mBarcode));
+                    showContent(CreateSpecimenFragment.createNew(mBarcode), R.string.specimen_title_create);
                 } else {
                     Toasts.showLong(((AbstractResponse) error.getBody()).getErrorMessage());
                 }
@@ -73,7 +74,8 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
         }
     }
 
-    private void showContent(Fragment fragment) {
+    private void showContent(Fragment fragment, int titleId) {
+        setTitle(titleId);
         getFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
     }
 }
