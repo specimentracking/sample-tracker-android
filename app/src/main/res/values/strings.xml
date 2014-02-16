@@ -28,6 +28,11 @@
     <string name="scan_error_invalid_settings">Configuration is not valid.\nGo to Settings first!</string>
     <string name="scan_error">Error occurred while scanning.</string>
 
+    <string name="specimen_flag_ngs">NGS</string>
+    <string name="specimen_flag_sgr">SGR</string>
+    <string name="specimen_flag_gen">GEN</string>
+    <string name="specimen_flag_hap">HAP</string>
+    <string name="specimen_flag_pcr">PCR</string>
     <string name="specimen_location">Location</string>
     <string name="specimen_location_set">Set Location</string>
     <string name="specimen_location_change">Change Location</string>

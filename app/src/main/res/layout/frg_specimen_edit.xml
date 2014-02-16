@@ -75,6 +75,49 @@
         android:text="@string/specimen_state_change"
         />
 
+    <LinearLayout style="@style/RowLabelValue">
+
+        <CheckedTextView
+            android:id="@+id/flag_1"
+            style="@style/Widget.CompoundButton.RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+        <CheckedTextView
+            android:id="@+id/flag_2"
+            style="@style/Widget.CompoundButton.RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+        <CheckedTextView
+            android:id="@+id/flag_3"
+            style="@style/Widget.CompoundButton.RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+        <CheckedTextView
+            android:id="@+id/flag_4"
+            style="@style/Widget.CompoundButton.RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+        <CheckedTextView
+            android:id="@+id/flag_5"
+            style="@style/Widget.CompoundButton.RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -96,7 +139,7 @@
         android:id="@+id/derivative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:text="@string/glb_create_derivative"
         />
 </LinearLayout>

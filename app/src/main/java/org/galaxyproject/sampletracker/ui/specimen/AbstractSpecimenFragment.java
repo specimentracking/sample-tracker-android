@@ -9,11 +9,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
 
 import org.galaxyproject.sampletracker.R;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.SampleData;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenLocation;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenType;
@@ -49,6 +51,11 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     private TextView mLocationValue;
     private TextView mTypeValue;
     private TextView mStateValue;
+    private CheckedTextView mFlag1;
+    private CheckedTextView mFlag2;
+    private CheckedTextView mFlag3;
+    private CheckedTextView mFlag4;
+    private CheckedTextView mFlag5;
     private Button mSendButton;
 
     private Specimen mSpecimen;
@@ -97,6 +104,12 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         mStateValue = (TextView) view.findViewById(R.id.state);
         mSendButton = (Button) view.findViewById(R.id.send);
 
+        mFlag1 = (CheckedTextView) view.findViewById(R.id.flag_1);
+        mFlag2 = (CheckedTextView) view.findViewById(R.id.flag_2);
+        mFlag3 = (CheckedTextView) view.findViewById(R.id.flag_3);
+        mFlag4 = (CheckedTextView) view.findViewById(R.id.flag_4);
+        mFlag5 = (CheckedTextView) view.findViewById(R.id.flag_5);
+
         bindOnClickListener(view, R.id.set_location);
         bindOnClickListener(view, R.id.set_type);
         bindOnClickListener(view, R.id.set_state);
@@ -112,15 +125,30 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     }
 
     private void bindModel(Specimen specimen) {
-        SpecimenLocation location = specimen.getSampleData().getLocation();
+        SampleData sampleData = specimen.getSampleData();
+        SpecimenLocation location = sampleData.getLocation();
+        SpecimenType type = sampleData.getType();
+
         write(mLocationValue, location == null ? null : location.format());
-        SpecimenType type = specimen.getSampleData().getType();
         write(mTypeValue, type == null ? null : type.format());
-        write(mStateValue, specimen.getSampleData().getState());
+        write(mStateValue, sampleData.getState());
+
+        writeFlag(mFlag1, R.string.specimen_flag_gen, sampleData.isGenotypeFlag());
+        writeFlag(mFlag2, R.string.specimen_flag_hap, sampleData.isHaplotypeFlag());
+        writeFlag(mFlag3, R.string.specimen_flag_sgr, sampleData.isSangerSeqFlag());
+        writeFlag(mFlag4, R.string.specimen_flag_ngs, sampleData.isNgsSegFlag());
+        writeFlag(mFlag5, R.string.specimen_flag_pcr, sampleData.isDdPcrFlag());
     }
 
     private void write(TextView view, String value) {
         view.setText(TextUtils.isEmpty(value) ? mNoValue : value);
+    }
+
+    private void writeFlag(CheckedTextView flagView, int labelId, boolean value) {
+        if (flagView != null) {
+            flagView.setText(labelId);
+            flagView.setChecked(value);
+        }
     }
 
     protected void setNewLocation(SpecimenLocation location) {
@@ -162,8 +190,8 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                 break;
             case R.id.derivative:
                 Fragment fragment = CreateSpecimenFragment.createDerivative(mSpecimen.getBarcode(), mSpecimen.getId());
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(android.R.id.content, fragment).addToBackStack(null).commit();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(android.R.id.content, fragment).addToBackStack(null).commit();
                 break;
             case R.id.send:
                 Preconditions.checkState(isModelValid(mSpecimen));
