@@ -42,7 +42,7 @@ public final class SpecimenResourceController extends ResourceController<Specime
         String apiKey = mSettingsController.loadApiKey();
         String projectId = mSettingsController.loadProjectId();
         SampleData sampleData = specimen.getSampleData();
-        resource().update(apiKey, projectId, specimen.getId(), sampleData.getState(), null,
+        resource().update(apiKey, projectId, specimen.getId(), sampleData.getState(), sampleData.getType().format(),
                 sampleData.getLocation().format(), callback);
     }
 }

@@ -38,6 +38,7 @@
     <string name="specimen_location_change">Change Location</string>
     <string name="specimen_type">Type</string>
     <string name="specimen_type_set">Set Type</string>
+    <string name="specimen_type_change">Change Type</string>
     <string name="specimen_state">State</string>
     <string name="specimen_state_set">Set State</string>
     <string name="specimen_state_change">Change State</string>

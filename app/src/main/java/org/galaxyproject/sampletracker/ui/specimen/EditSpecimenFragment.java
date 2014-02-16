@@ -14,6 +14,7 @@ import org.galaxyproject.sampletracker.model.galaxy.AbstractResponse;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SampleData;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenLocation;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenType;
 import org.galaxyproject.sampletracker.util.Toasts;
 
 import retrofit.Callback;
@@ -44,17 +45,19 @@ public final class EditSpecimenFragment extends AbstractSpecimenFragment impleme
         // Only state or location may change
         SampleData sampleData = specimen.getSampleData();
         SpecimenLocation location = sampleData.getLocation();
+        SpecimenType type = sampleData.getType();
         String state = sampleData.getState();
-        if (location == null || state == null) {
+        if (location == null || type == null || state == null) {
             return false;
         }
 
         // Values must change
         SampleData originalSampleData = getOriginalSpecimen().getSampleData();
         SpecimenLocation originalLocation = originalSampleData.getLocation();
+        SpecimenType originalType = originalSampleData.getType();
         String originalState = originalSampleData.getState();
 
-        return !location.equals(originalLocation) || !state.equals(originalState);
+        return !location.equals(originalLocation) || !type.equals(originalType) || !state.equals(originalState);
     }
 
     @Override
