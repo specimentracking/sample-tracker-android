@@ -15,6 +15,7 @@ import org.galaxyproject.sampletracker.model.galaxy.specimen.SampleData;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenLocation;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenType;
+import org.galaxyproject.sampletracker.ui.component.PendingDialogFragment;
 import org.galaxyproject.sampletracker.util.Toasts;
 
 import retrofit.Callback;
@@ -62,17 +63,20 @@ public final class EditSpecimenFragment extends AbstractSpecimenFragment impleme
 
     @Override
     protected void sendModel(Specimen specimen) {
+        PendingDialogFragment.showPendingDialog(getFragmentManager());
         mSpecimenController.update(specimen, this);
     }
 
     @Override
     public void success(Specimen specimen, Response response) {
+        PendingDialogFragment.hidePendingDialog(getFragmentManager());
         Toasts.showLong(R.string.net_specimen_updated);
         getActivity().onBackPressed();
     }
 
     @Override
     public void failure(RetrofitError error) {
+        PendingDialogFragment.hidePendingDialog(getFragmentManager());
         try {
             if (error.getBody() instanceof AbstractResponse) {
                 Toasts.showLong(((AbstractResponse) error.getBody()).getErrorMessage());

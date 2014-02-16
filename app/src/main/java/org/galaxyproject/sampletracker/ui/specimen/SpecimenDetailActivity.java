@@ -12,6 +12,7 @@ import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.logic.galaxy.SpecimenResourceController;
 import org.galaxyproject.sampletracker.model.galaxy.AbstractResponse;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
+import org.galaxyproject.sampletracker.ui.component.PendingDialogFragment;
 import org.galaxyproject.sampletracker.ui.core.BaseActivity;
 import org.galaxyproject.sampletracker.util.Toasts;
 
@@ -37,6 +38,8 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
         return intent;
     }
 
+    private static final int CONTENT = android.R.id.content;
+
     @InjectExtra(EXTRA_BARCODE) private String mBarcode;
     @Inject private SpecimenResourceController mSpecimenController;
 
@@ -46,12 +49,15 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
         showHomeButton();
 
         if (savedInstanceState == null) {
+            PendingDialogFragment.showPendingDialog(getFragmentManager(), CONTENT);
             mSpecimenController.check(mBarcode, this);
         }
     }
 
     @Override
     public void success(Specimen specimen, Response response) {
+        PendingDialogFragment.hidePendingDialog(getFragmentManager());
+
         // Validate response for required fields
         if (TextUtils.isEmpty(specimen.getId()) || TextUtils.isEmpty(specimen.getBarcode())) {
             Toasts.showLong(R.string.net_error_incomplete_response);
@@ -62,6 +68,8 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
 
     @Override
     public void failure(RetrofitError error) {
+        PendingDialogFragment.hidePendingDialog(getFragmentManager());
+
         // Check response content whether it is valid. HTTP 404 means non existing specimen, any other code means error.
         try {
             if (error.getBody() instanceof AbstractResponse) {
@@ -81,6 +89,6 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
 
     private void showContent(Fragment fragment, int titleId) {
         setTitle(titleId);
-        getFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+        getFragmentManager().beginTransaction().replace(CONTENT, fragment).commit();
     }
 }
