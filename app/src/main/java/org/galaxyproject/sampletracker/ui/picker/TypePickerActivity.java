@@ -2,7 +2,6 @@ package org.galaxyproject.sampletracker.ui.picker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckedTextView;
@@ -31,15 +30,14 @@ public final class TypePickerActivity extends BaseActivity {
 
     public static final String EXTRA_TYPE = "type";
 
-    public static Intent showIntent(String currentType) {
+    public static Intent showIntent(SpecimenType currentType) {
+        Preconditions.checkNotNull(currentType);
         Intent intent = new Intent(GalaxyApplication.get(), TypePickerActivity.class);
-        if (!TextUtils.isEmpty(currentType)) {
-            intent.putExtra(EXTRA_TYPE, currentType);
-        }
+        intent.putExtra(EXTRA_TYPE, currentType);
         return intent;
     }
 
-    @InjectExtra(value = EXTRA_TYPE, optional = true) private String mCurrentType;
+    @InjectExtra(EXTRA_TYPE) private SpecimenType mCurrentType;
     @InjectView(R.id.button_11) private CheckedTextView mButton11;
     @InjectView(R.id.button_12) private CheckedTextView mButton12;
     @InjectView(R.id.button_13) private CheckedTextView mButton13;
@@ -51,25 +49,17 @@ public final class TypePickerActivity extends BaseActivity {
     @InjectView(R.id.button_33) private CheckedTextView mButton33;
 
     private final List<CheckedTextView> mMaterialButtons = Lists.newArrayList();
-    private String mCurrentMaterialType;
-    private String mCurrentAcidType;
-    private String mCurrentAcidSubType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         showHomeButton();
 
-        String[] currentTypeValues = SpecimenType.parse(mCurrentType);
-        mCurrentMaterialType = currentTypeValues[0];
-        mCurrentAcidType = currentTypeValues[1];
-        mCurrentAcidSubType = currentTypeValues[2];
-
-        initMaterialGroup(mCurrentMaterialType);
+        initMaterialGroup();
 
     }
 
-    private void initMaterialGroup(String currentMaterialType) {
+    private void initMaterialGroup() {
         mMaterialButtons.add(mButton11);
         mMaterialButtons.add(mButton12);
         mMaterialButtons.add(mButton13);
@@ -86,7 +76,11 @@ public final class TypePickerActivity extends BaseActivity {
         for (int i = 0; i < mats.size(); i++) {
             CheckedTextView button = mMaterialButtons.get(i);
             String materialType = mats.get(i);
+
+            // Set button label
             button.setText(materialType);
+
+            // Ensure only one button may be checked
             button.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -97,7 +91,8 @@ public final class TypePickerActivity extends BaseActivity {
                 }
             });
 
-            if (materialType.equals(currentMaterialType)) {
+            // Check current selected material if any
+            if (materialType.equals(mCurrentType.getMaterialType())) {
                 button.setChecked(true);
             }
         }

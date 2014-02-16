@@ -13,6 +13,7 @@ import com.google.common.base.Preconditions;
 
 import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenType;
 import org.galaxyproject.sampletracker.ui.core.BaseFragment;
 import org.galaxyproject.sampletracker.ui.picker.StatePickerActivity;
 import org.galaxyproject.sampletracker.ui.picker.TypePickerActivity;
@@ -66,7 +67,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                 break;
             case R.id.request_specimen_type:
                 if (resultCode == Activity.RESULT_OK) {
-                    setNewType(data.getStringExtra(TypePickerActivity.EXTRA_TYPE));
+                    setNewType((SpecimenType) data.getParcelableExtra(TypePickerActivity.EXTRA_TYPE));
                 }
                 break;
             default:
@@ -95,7 +96,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
 
     private void bindModel(Specimen specimen) {
         write(mLocationValue, specimen.getSampleData().getLocation());
-        write(mTypeValue, specimen.getSampleData().getType());
+        write(mTypeValue, specimen.getSampleData().getType().format());
         write(mStateValue, specimen.getSampleData().getState());
     }
 
@@ -109,7 +110,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         validateModel();
     }
 
-    protected void setNewType(String type) {
+    protected void setNewType(SpecimenType type) {
         mSpecimen.getSampleData().setType(type);
         bindModel(mSpecimen);
         validateModel();

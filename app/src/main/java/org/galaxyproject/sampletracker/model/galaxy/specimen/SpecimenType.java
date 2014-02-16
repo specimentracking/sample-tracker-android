@@ -1,44 +1,146 @@
 package org.galaxyproject.sampletracker.model.galaxy.specimen;
 
+import android.os.Parcel;
 import android.text.TextUtils;
 
 import com.google.common.base.Splitter;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
- * Wraps a logic of specimen type format.
+ * Wraps a logic of specimen type format.<br>
+ * Supported format is 'material-acid-sub_acid', only first 'material' value is required.
  * 
  * @author Pavel Sveda <xsveda@gmail.com>
  */
-public final class SpecimenType {
+public final class SpecimenType implements android.os.Parcelable {
 
     /**
-     * Returns array of 3 items - type of material, acid and sub acid.
-     * 
-     * @param type Type value to parse
+     * Creates new/empty {@link SpecimenType}.
      */
-    @Nonnull
-    public static String[] parse(String type) {
-        String[] result = new String[3];
-        if (TextUtils.isEmpty(type)) {
-            return result;
+    public static SpecimenType create() {
+        return new SpecimenType(null, null, null);
+    }
+
+    /**
+     * Creates a {@link SpecimenType} based on formatted string parsing.
+     * 
+     * @param formatType Type value to parse
+     */
+    @Nullable
+    public static SpecimenType parse(String formatType) {
+        if (TextUtils.isEmpty(formatType)) {
+            return null;
         }
 
-        List<String> values = Splitter.on('-').splitToList(type);
+        // Split format string to values
+        List<String> values = Splitter.on('-').splitToList(formatType);
         int size = values.size();
+
+        // Check valid format
+        if (size > 3) {
+            throw new IllegalStateException("Invalid specimen type format: " + formatType);
+        }
+
+        // Fill single types based on order
+        String materialType = null;
+        String acidType = null;
+        String acidSubType = null;
+
+        // TODO checked correct values
         if (size >= 1) {
-            result[0] = values.get(0);
+            materialType = values.get(0);
         }
         if (size >= 2) {
-            result[1] = values.get(1);
+            acidType = values.get(1);
         }
         if (size >= 3) {
-            result[2] = values.get(2);
+            acidSubType = values.get(2);
         }
 
-        return result;
+        return new SpecimenType(materialType, acidType, acidSubType);
     }
+
+    private String mMaterialType;
+    private String mAcidType;
+    private String mAcidSubType;
+
+    private SpecimenType(String materialType, String acidType, String acidSubType) {
+        mMaterialType = materialType;
+        mAcidType = acidType;
+        mAcidSubType = acidSubType;
+    }
+
+    public String format() {
+        if (TextUtils.isEmpty(mMaterialType)) {
+            return null;
+        }
+
+        StringBuilder formatType = new StringBuilder(mMaterialType);
+        if (TextUtils.isEmpty(mAcidType)) {
+            return formatType.toString();
+        }
+
+        formatType.append('-').append(mAcidType);
+        if (TextUtils.isEmpty(mAcidSubType)) {
+            return formatType.toString();
+        }
+
+        formatType.append('-').append(mAcidSubType);
+        return formatType.toString();
+    }
+
+    public String getMaterialType() {
+        return mMaterialType;
+    }
+
+    public void setMaterialType(String materialType) {
+        mMaterialType = materialType;
+    }
+
+    public String getAcidType() {
+        return mAcidType;
+    }
+
+    public void setAcidType(String acidType) {
+        mAcidType = acidType;
+    }
+
+    public String getAcidSubType() {
+        return mAcidSubType;
+    }
+
+    public void setAcidSubType(String acidSubType) {
+        mAcidSubType = acidSubType;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.mMaterialType);
+        dest.writeString(this.mAcidType);
+        dest.writeString(this.mAcidSubType);
+    }
+
+    private SpecimenType(Parcel in) {
+        this.mMaterialType = in.readString();
+        this.mAcidType = in.readString();
+        this.mAcidSubType = in.readString();
+    }
+
+    public static final Creator<SpecimenType> CREATOR = new Creator<SpecimenType>() {
+        public SpecimenType createFromParcel(Parcel source) {
+            return new SpecimenType(source);
+        }
+
+        public SpecimenType[] newArray(int size) {
+            return new SpecimenType[size];
+        }
+    };
 }

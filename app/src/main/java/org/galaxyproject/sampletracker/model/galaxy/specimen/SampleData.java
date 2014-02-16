@@ -20,7 +20,7 @@ public final class SampleData implements Parcelable {
 
     @SerializedName("parent_id") private String parentId;
     @SerializedName("state") private String state;
-    @SerializedName("type") private String type;
+    @SerializedName("type") private SpecimenType type;
     @SerializedName("location") private String location;
     @SerializedName("genotype_flag") private boolean genotypeFlag;
     @SerializedName("haplotype_flag") private boolean haplotypeFlag;
@@ -47,11 +47,11 @@ public final class SampleData implements Parcelable {
         this.state = state;
     }
 
-    public String getType() {
-        return type;
+    public SpecimenType getType() {
+        return type == null ? SpecimenType.create() : type;
     }
 
-    public void setType(String type) {
+    public void setType(SpecimenType type) {
         this.type = type;
     }
 
@@ -112,7 +112,7 @@ public final class SampleData implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.parentId);
         dest.writeString(this.state);
-        dest.writeString(this.type);
+        dest.writeParcelable(this.type, flags);
         dest.writeString(this.location);
         dest.writeByte(genotypeFlag ? (byte) 1 : (byte) 0);
         dest.writeByte(haplotypeFlag ? (byte) 1 : (byte) 0);
@@ -124,7 +124,7 @@ public final class SampleData implements Parcelable {
     private SampleData(Parcel in) {
         this.parentId = in.readString();
         this.state = in.readString();
-        this.type = in.readString();
+        this.type = in.readParcelable(SpecimenType.class.getClassLoader());
         this.location = in.readString();
         this.genotypeFlag = in.readByte() != 0;
         this.haplotypeFlag = in.readByte() != 0;

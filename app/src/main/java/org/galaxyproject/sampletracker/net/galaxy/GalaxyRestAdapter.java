@@ -1,10 +1,14 @@
 package org.galaxyproject.sampletracker.net.galaxy;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import org.galaxyproject.sampletracker.BuildConfig;
 import org.galaxyproject.sampletracker.logic.settings.SettingsController;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenType;
+import org.galaxyproject.sampletracker.net.galaxy.adapter.SpecimenTypeDeserializer;
 
 import retrofit.RestAdapter;
 
@@ -45,6 +49,12 @@ public final class GalaxyRestAdapter {
         builder.setClient(new GalaxyClient());
 
         return builder.build();
+    }
+
+    private static Gson initGson() {
+        return new GsonBuilder() //
+                .registerTypeAdapter(SpecimenType.class, new SpecimenTypeDeserializer()) //
+                .create();
     }
 
     private static RestAdapter.LogLevel logLevel() {
