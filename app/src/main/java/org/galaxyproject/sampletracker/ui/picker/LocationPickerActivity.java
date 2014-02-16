@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
@@ -54,6 +56,8 @@ public final class LocationPickerActivity extends BaseActivity implements OnClic
     @InjectView(R.id.shelf) private EditText mShelfField;
     @InjectView(R.id.rack) private EditText mRackField;
     @InjectView(R.id.box) private EditText mBoxField;
+    @InjectView(R.id.spot_1) private ListView mSpot1List;
+    @InjectView(R.id.spot_2) private ListView mSpot2List;
     @InjectView(R.id.save) private Button mSaveButton;
 
     @Override
@@ -65,18 +69,8 @@ public final class LocationPickerActivity extends BaseActivity implements OnClic
         initField(mShelfField, mCurrentLocation.getShelf());
         initField(mRackField, mCurrentLocation.getRack());
         initField(mBoxField, mCurrentLocation.getBox());
-
-        // // Initialize list view
-        // int valuesResource = R.array.specimen_state_values;
-        // mList.setAdapter(ArrayAdapter.createFromResource(this, valuesResource, R.layout.list_item));
-        // mList.setOnItemClickListener(this);
-        //
-        // // Select current state if set
-        // int currentIndex =
-        // Lists.newArrayList(getResources().getStringArray(valuesResource)).indexOf(mCurrentLocation);
-        // if (currentIndex >= 0) {
-        // mList.setItemChecked(currentIndex, true);
-        // }
+        initList(mSpot1List, R.array.specimen_location_spot1_values, mCurrentLocation.getSpot1());
+        initList(mSpot2List, R.array.specimen_location_spot2_values, mCurrentLocation.getSpot2());
 
         mSaveButton.setOnClickListener(this);
         checkFormValidity();
@@ -91,6 +85,21 @@ public final class LocationPickerActivity extends BaseActivity implements OnClic
                 checkFormValidity();
             }
         });
+    }
+
+    private void initList(ListView list, int valuesResource, String initValue) {
+        // Initialize list view
+        list.setAdapter(ArrayAdapter.createFromResource(this, valuesResource, R.layout.list_item_location_spot));
+        list.setOnItemClickListener(this);
+
+        // Select current state if set
+        if (!TextUtils.isEmpty(initValue)) {
+            initValue = initValue.toUpperCase(Locale.US);
+            int currentIndex = Lists.newArrayList(getResources().getStringArray(valuesResource)).indexOf(initValue);
+            if (currentIndex >= 0) {
+                list.setItemChecked(currentIndex, true);
+            }
+        }
     }
 
     private void checkFormValidity() {
@@ -112,7 +121,7 @@ public final class LocationPickerActivity extends BaseActivity implements OnClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // String selectedState = (String) mList.getAdapter().getItem(position);
+        // String selectedState = (String) list.getAdapter().getItem(position);
     }
 
     @Override

@@ -7,7 +7,6 @@
     <LinearLayout
         style="@style/RowLabelValue"
         android:layout_marginTop="0dp"
-        android:weightSum="4"
         >
 
         <TextView
@@ -19,19 +18,15 @@
         <EditText
             android:id="@+id/fridge"
             style="@style/Widget.EditText.Value"
+            android:layout_marginRight="@dimen/content_horizontal_margin"
             android:layout_weight="1"
             android:inputType="textVisiblePassword"
             android:maxLength="3"
             />
-    </LinearLayout>
-
-    <LinearLayout
-        style="@style/RowLabelValue"
-        android:weightSum="4"
-        >
 
         <TextView
             style="@style/Widget.TextView.Label"
+            android:layout_marginLeft="@dimen/content_horizontal_margin"
             android:text="@string/specimen_location_shelf"
             />
 
@@ -45,10 +40,7 @@
             />
     </LinearLayout>
 
-    <LinearLayout
-        style="@style/RowLabelValue"
-        android:weightSum="4"
-        >
+    <LinearLayout style="@style/RowLabelValue">
 
         <TextView
             style="@style/Widget.TextView.Label"
@@ -59,19 +51,15 @@
         <EditText
             android:id="@+id/rack"
             style="@style/Widget.EditText.Value"
+            android:layout_marginRight="@dimen/content_horizontal_margin"
             android:layout_weight="1"
             android:inputType="textVisiblePassword"
             android:maxLength="3"
             />
-    </LinearLayout>
-
-    <LinearLayout
-        style="@style/RowLabelValue"
-        android:weightSum="4"
-        >
 
         <TextView
             style="@style/Widget.TextView.Label"
+            android:layout_marginLeft="@dimen/content_horizontal_margin"
             android:text="@string/specimen_location_box"
             />
 
@@ -106,6 +94,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:choiceMode="singleChoice"
             />
 
         <ListView
@@ -113,6 +102,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:choiceMode="singleChoice"
             />
     </LinearLayout>
 

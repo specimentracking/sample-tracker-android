@@ -7,6 +7,7 @@
         <item name="android:editTextStyle">@style/Widget.EditText</item>
         <item name="android:buttonStyle">@style/Widget.Button</item>
         <item name="android:radioButtonStyle">@style/Widget.CompoundButton.RadioButton</item>
+        <item name="android:listViewStyle">@style/Widget.ListView</item>
     </style>
 
     <!-- Theme without actionbar -->

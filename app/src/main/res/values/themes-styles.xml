@@ -19,4 +19,9 @@
         <item name="android:background">@drawable/radio_selector</item>
     </style>
 
+    <style name="Widget.ListView" parent="@android:style/Widget.Holo.ListView">
+        <item name="android:scrollbars">none</item>
+        <item name="android:overScrollMode">never</item>
+    </style>
+
 </resources>

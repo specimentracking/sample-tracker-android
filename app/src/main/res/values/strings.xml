@@ -62,4 +62,26 @@
     <string name="specimen_location_rack">Rack</string>
     <string name="specimen_location_box">Box</string>
     <string name="specimen_location_spot">Spot</string>
+    <string-array name="specimen_location_spot1_values">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>G</item>
+        <item>H</item>
+        <item>I</item>
+    </string-array>
+    <string-array name="specimen_location_spot2_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
 </resources>
