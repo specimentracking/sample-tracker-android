@@ -10,17 +10,18 @@ import com.google.zxing.client.android.CaptureActivity;
 
 import org.galaxyproject.sampletracker.GalaxyApplication;
 import org.galaxyproject.sampletracker.R;
-import org.galaxyproject.sampletracker.ui.specimen.SpecimenDetailActivity;
 import org.galaxyproject.sampletracker.util.Toasts;
 
 import roboguice.util.Ln;
 
 /**
- * Activity for scanning Aztec code.
+ * Activity for scanning specimen code. Scanned data will be returned as activity result.
  * 
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 public final class ScanActivity extends CaptureActivity {
+
+    public static final String EXTRA_SCAN_DATA = "scan_data";
 
     public static final Intent showIntent() {
         return new Intent(GalaxyApplication.get(), ScanActivity.class);
@@ -41,7 +42,10 @@ public final class ScanActivity extends CaptureActivity {
 
     @Override
     protected void onScanComplete(BarcodeFormat codeType, String codeData) {
-        startActivity(SpecimenDetailActivity.showIntent(codeData));
+        Intent data = new Intent();
+        data.putExtra(EXTRA_SCAN_DATA, codeData);
+        setResult(RESULT_OK, data);
+        finish();
     }
 
     @Override

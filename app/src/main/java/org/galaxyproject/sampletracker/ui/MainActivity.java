@@ -1,5 +1,7 @@
 package org.galaxyproject.sampletracker.ui;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -43,6 +45,19 @@ public final class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case R.id.request_scan:
+                if (resultCode == Activity.RESULT_OK) {
+                    startActivity(SpecimenDetailActivity.showIntent(data.getStringExtra(ScanActivity.EXTRA_SCAN_DATA)));
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.settings:
@@ -50,7 +65,7 @@ public final class MainActivity extends BaseActivity {
                 break;
             case R.id.scan:
                 if (mSettingsController.settingsAreValid()) {
-                    startActivity(ScanActivity.showIntent());
+                    startActivityForResult(ScanActivity.showIntent(), R.id.request_scan);
                 } else {
                     Toasts.showLong(R.string.scan_error_invalid_settings);
                 }

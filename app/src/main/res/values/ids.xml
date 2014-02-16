@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <item name="request_scan" type="id" />
     <item name="request_specimen_location" type="id" />
     <item name="request_specimen_type" type="id" />
     <item name="request_specimen_state" type="id" />

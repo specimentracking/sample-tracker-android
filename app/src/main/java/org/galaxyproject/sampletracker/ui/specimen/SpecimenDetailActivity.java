@@ -20,7 +20,7 @@ import roboguice.inject.InjectExtra;
 import roboguice.util.Ln;
 
 /**
- * Detail of single specimen, either existing, new or derivative.
+ * Detail of single specimen, either existing or new.
  * 
  * @author Pavel Sveda <xsveda@gmail.com>
  */
@@ -45,15 +45,6 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
 
         if (savedInstanceState == null) {
             mSpecimenController.check(mBarcode, this);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
-        } else {
-            upToParent();
         }
     }
 

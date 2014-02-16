@@ -1,8 +1,6 @@
 package org.galaxyproject.sampletracker.ui.specimen;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,6 +21,7 @@ import org.galaxyproject.sampletracker.ui.core.BaseFragment;
 import org.galaxyproject.sampletracker.ui.picker.LocationPickerActivity;
 import org.galaxyproject.sampletracker.ui.picker.StatePickerActivity;
 import org.galaxyproject.sampletracker.ui.picker.TypePickerActivity;
+import org.galaxyproject.sampletracker.ui.scan.ScanActivity;
 
 import roboguice.inject.InjectResource;
 import roboguice.util.Ln;
@@ -86,6 +85,13 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
             case R.id.request_specimen_location:
                 if (resultCode == Activity.RESULT_OK) {
                     setNewLocation((SpecimenLocation) data.getParcelableExtra(LocationPickerActivity.EXTRA_LOCATION));
+                }
+                break;
+            case R.id.request_scan:
+                if (resultCode == Activity.RESULT_OK) {
+                    String derivativeBarcode = data.getStringExtra(ScanActivity.EXTRA_SCAN_DATA);
+                    String parentId = mSpecimen.getId();
+                    startActivity(SpecimenDerivativeActivity.showIntent(derivativeBarcode, parentId));
                 }
                 break;
             default:
@@ -195,9 +201,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                 startActivityForResult(stateIntent, R.id.request_specimen_state);
                 break;
             case R.id.derivative:
-                Fragment fragment = CreateSpecimenFragment.createDerivative(mSpecimen.getBarcode(), mSpecimen.getId());
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(android.R.id.content, fragment).addToBackStack(null).commit();
+                startActivityForResult(ScanActivity.showIntent(), R.id.request_scan);
                 break;
             case R.id.send:
                 Preconditions.checkState(isModelValid(mSpecimen));
