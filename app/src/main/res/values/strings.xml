@@ -9,6 +9,7 @@
     <string name="glb_scan_barcode">Scan Barcode</string>
     <string name="glb_create">Create</string>
     <string name="glb_create_derivative">Create derivative specimen</string>
+    <string name="glb_update">Update</string>
     <string name="glb_no_value">NONE</string>
 
     <string name="net_specimen_created">Specimen has been successfully created</string>

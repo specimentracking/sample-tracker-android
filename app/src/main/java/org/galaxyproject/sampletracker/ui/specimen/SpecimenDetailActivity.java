@@ -50,7 +50,11 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
 
     @Override
     public void onBackPressed() {
-        upToParent();
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            upToParent();
+        }
     }
 
     @Override

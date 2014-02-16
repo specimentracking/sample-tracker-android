@@ -1,6 +1,8 @@
 package org.galaxyproject.sampletracker.ui.specimen;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -95,10 +97,18 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         mStateValue = (TextView) view.findViewById(R.id.state);
         mSendButton = (Button) view.findViewById(R.id.send);
 
-        view.findViewById(R.id.set_location).setOnClickListener(this);
-        view.findViewById(R.id.set_type).setOnClickListener(this);
-        view.findViewById(R.id.set_state).setOnClickListener(this);
+        bindOnClickListener(view, R.id.set_location);
+        bindOnClickListener(view, R.id.set_type);
+        bindOnClickListener(view, R.id.set_state);
+        bindOnClickListener(view, R.id.derivative);
         mSendButton.setOnClickListener(this);
+    }
+
+    private void bindOnClickListener(View view, int buttonId) {
+        View button = view.findViewById(buttonId);
+        if (button != null) {
+            button.setOnClickListener(this);
+        }
     }
 
     private void bindModel(Specimen specimen) {
@@ -149,6 +159,11 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
             case R.id.set_state:
                 Intent stateIntent = StatePickerActivity.showIntent(mSpecimen.getSampleData().getState());
                 startActivityForResult(stateIntent, R.id.request_specimen_state);
+                break;
+            case R.id.derivative:
+                Fragment fragment = CreateSpecimenFragment.createDerivative(mSpecimen.getBarcode(), mSpecimen.getId());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(android.R.id.content, fragment).addToBackStack(null).commit();
                 break;
             case R.id.send:
                 Preconditions.checkState(isModelValid(mSpecimen));
