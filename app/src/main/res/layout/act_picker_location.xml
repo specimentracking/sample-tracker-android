@@ -7,6 +7,7 @@
     <LinearLayout
         style="@style/RowLabelValue"
         android:layout_marginTop="0dp"
+        android:weightSum="4"
         >
 
         <TextView
@@ -18,10 +19,16 @@
         <EditText
             android:id="@+id/fridge"
             style="@style/Widget.EditText.Value"
+            android:layout_weight="1"
+            android:inputType="textVisiblePassword"
+            android:maxLength="3"
             />
     </LinearLayout>
 
-    <LinearLayout style="@style/RowLabelValue">
+    <LinearLayout
+        style="@style/RowLabelValue"
+        android:weightSum="4"
+        >
 
         <TextView
             style="@style/Widget.TextView.Label"
@@ -32,10 +39,16 @@
         <EditText
             android:id="@+id/shelf"
             style="@style/Widget.EditText.Value"
+            android:layout_weight="1"
+            android:inputType="textVisiblePassword"
+            android:maxLength="3"
             />
     </LinearLayout>
 
-    <LinearLayout style="@style/RowLabelValue">
+    <LinearLayout
+        style="@style/RowLabelValue"
+        android:weightSum="4"
+        >
 
         <TextView
             style="@style/Widget.TextView.Label"
@@ -46,10 +59,16 @@
         <EditText
             android:id="@+id/rack"
             style="@style/Widget.EditText.Value"
+            android:layout_weight="1"
+            android:inputType="textVisiblePassword"
+            android:maxLength="3"
             />
     </LinearLayout>
 
-    <LinearLayout style="@style/RowLabelValue">
+    <LinearLayout
+        style="@style/RowLabelValue"
+        android:weightSum="4"
+        >
 
         <TextView
             style="@style/Widget.TextView.Label"
@@ -60,6 +79,9 @@
         <EditText
             android:id="@+id/box"
             style="@style/Widget.EditText.Value"
+            android:layout_weight="1"
+            android:inputType="textVisiblePassword"
+            android:maxLength="3"
             />
     </LinearLayout>
 
