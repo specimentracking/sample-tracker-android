@@ -30,8 +30,7 @@ public interface SpecimenResource {
             @Field("type") String type, @Field("location") String location, Callback<Specimen> callback);
 
     @PATCH("/api/projects/{project_id}/specimens/{id}")
-    @FormUrlEncoded
     public void update(@Query("key") String apiKey, @Path("project_id") String projectId, @Path("id") String id,
-            @Field("state") String state, @Field("type") String type, @Field("location") String location,
+            @Query("state") String state, @Query("type") String type, @Query("location") String location,
             Callback<Specimen> callback);
 }
