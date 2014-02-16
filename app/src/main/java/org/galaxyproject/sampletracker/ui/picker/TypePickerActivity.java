@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckedTextView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
@@ -39,6 +42,8 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
         return intent;
     }
 
+    // TODO create a custom component for radios
+    // TODO allow acid types to un-check
     @InjectExtra(EXTRA_TYPE) private SpecimenType mCurrentType;
     @InjectView(R.id.button_11) private CheckedTextView mButton11;
     @InjectView(R.id.button_12) private CheckedTextView mButton12;
@@ -49,6 +54,8 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
     @InjectView(R.id.button_31) private CheckedTextView mButton31;
     @InjectView(R.id.button_32) private CheckedTextView mButton32;
     @InjectView(R.id.button_33) private CheckedTextView mButton33;
+    @InjectView(R.id.acid_type) private RadioGroup mAcidTypeGroup;
+    @InjectView(R.id.acid_sub_type) private RadioGroup mAcidSubTypeGroup;
     @InjectView(R.id.save) private Button mSaveButton;
 
     private final List<CheckedTextView> mMaterialButtons = Lists.newArrayList();
@@ -59,9 +66,12 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
         showHomeButton();
 
         initMaterialGroup();
+        initAcidGroup();
+        initAcidSubGroup();
 
         mSaveButton.setOnClickListener(this);
-        mSaveButton.setEnabled(mCurrentType.getMaterialType() != null);
+
+        updateComponentAvailability();
     }
 
     private void initMaterialGroup() {
@@ -100,8 +110,8 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
                     // Set current value to model
                     mCurrentType.setMaterialType(((CheckedTextView) v).getText().toString());
 
-                    // Enable SAVE button, setting a material type is sufficient
-                    mSaveButton.setEnabled(true);
+                    // Enable elements based on material type set
+                    updateComponentAvailability();
                 }
             });
 
@@ -110,6 +120,48 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
                 button.setChecked(true);
             }
         }
+    }
+
+    private void initAcidGroup() {
+        if (mCurrentType.getAcidType() != null) {
+            findButtonWithText(mAcidTypeGroup, mCurrentType.getAcidType()).setChecked(true);
+        }
+        mAcidTypeGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedButton = (RadioButton) group.findViewById(checkedId);
+
+                // Set current value to model
+                mCurrentType.setAcidType(checkedButton.getText().toString());
+
+                // Enable elements based on acid type set
+                updateComponentAvailability();
+            }
+        });
+    }
+
+    private void initAcidSubGroup() {
+        if (mCurrentType.getAcidSubType() != null) {
+            findButtonWithText(mAcidSubTypeGroup, mCurrentType.getAcidSubType()).setChecked(true);
+        }
+        mAcidSubTypeGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedButton = (RadioButton) group.findViewById(checkedId);
+
+                // Set current value to model
+                mCurrentType.setAcidSubType(checkedButton.getText().toString());
+
+                // Enable elements based on acid type set
+                updateComponentAvailability();
+            }
+        });
+    }
+
+    private void updateComponentAvailability() {
+        enableGroup(mAcidTypeGroup, mCurrentType.getMaterialType() != null); // Material type must be set
+        enableGroup(mAcidSubTypeGroup, mCurrentType.getAcidType() != null); // Material type must be set
+        mSaveButton.setEnabled(mCurrentType.getMaterialType() != null); // Material type must be set
     }
 
     @Override
@@ -124,5 +176,24 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
             default:
                 Ln.w("Unknown view has been clicked");
         }
+    }
+
+    private void enableGroup(RadioGroup group, boolean enabled) {
+        for (int i = 0; i < group.getChildCount(); i++) {
+            ((RadioButton) group.getChildAt(i)).setEnabled(enabled);
+        }
+    }
+
+    private RadioButton findButtonWithText(RadioGroup group, String text) {
+        Preconditions.checkNotNull(text);
+
+        for (int i = 0; i < group.getChildCount(); i++) {
+            RadioButton button = (RadioButton) group.getChildAt(i);
+            if (text.equals(button.getText())) {
+                return button;
+            }
+        }
+
+        throw new IllegalStateException("No button with text '" + text + "' found");
     }
 }

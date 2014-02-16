@@ -33,7 +33,6 @@
     <string name="specimen_state">State</string>
     <string name="specimen_state_set">Set State</string>
     <string name="specimen_state_change">Change State</string>
-
     <string-array name="specimen_state_values">
         <item>new</item>
         <item>onroad</item>
@@ -42,7 +41,6 @@
         <item>lost</item>
         <item>discarded</item>
     </string-array>
-
     <string-array name="specimen_type_material_values">
         <item>blood</item>
         <item>buccal</item>
@@ -54,4 +52,9 @@
         <item>cord_blood</item>
         <item>tissue</item>
     </string-array>
+    <string name="specimen_type_acid_dna">dna</string>
+    <string name="specimen_type_acid_rna">rna</string>
+    <string name="specimen_type_acid_sub_amplicon">amplicon</string>
+    <string name="specimen_type_acid_sub_library">library</string>
+    <string name="specimen_type_acid_sub_enrichedmtdna">enriched_mtdna</string>
 </resources>

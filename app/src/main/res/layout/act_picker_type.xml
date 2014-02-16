@@ -102,6 +102,58 @@
         </LinearLayout>
     </LinearLayout>
 
+    <RadioGroup
+        android:id="@+id/acid_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_vertical_margin"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/specimen_type_acid_dna"
+            />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/specimen_type_acid_rna"
+            />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/acid_sub_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/content_vertical_margin"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/specimen_type_acid_sub_amplicon"
+            />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/specimen_type_acid_sub_library"
+            />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/specimen_type_acid_sub_enrichedmtdna"
+            />
+    </RadioGroup>
 
     <RelativeLayout
         android:layout_width="match_parent"

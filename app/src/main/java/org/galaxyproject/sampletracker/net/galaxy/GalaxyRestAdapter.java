@@ -11,6 +11,7 @@ import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenType;
 import org.galaxyproject.sampletracker.net.galaxy.adapter.SpecimenTypeDeserializer;
 
 import retrofit.RestAdapter;
+import retrofit.converter.GsonConverter;
 
 /**
  * Wrapper around Retrofit {@link RestAdapter} that handles Galaxy specific configuration.
@@ -47,6 +48,7 @@ public final class GalaxyRestAdapter {
         builder.setServer(mSettingsController.loadServerUrl());
         builder.setLogLevel(logLevel());
         builder.setClient(new GalaxyClient());
+        builder.setConverter(new GsonConverter(initGson()));
 
         return builder.build();
     }
