@@ -34,7 +34,7 @@ android {
         release {
             buildConfigField "int", "LOG_LEVEL", "2" // Log.VERBOSE
             buildConfigField "boolean", "LOG_NETWORK", "true" // RestAdapter.LogLevel.FULL
-            runProguard true
+            runProguard false
             zipAlign true
             signingConfig signingConfigs.production
         }
