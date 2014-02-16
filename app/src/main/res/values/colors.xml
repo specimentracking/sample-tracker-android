@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="grey_light">#ededed</color>
+
+    <color name="galaxy_violet">#2b3143</color>
+    <color name="galaxy_violet_semi">#bb2b3143</color>
+    <color name="galaxy_grey">#9c9c9c</color>
+    <color name="galaxy_yellow">#f0ed00</color>
+
     <!-- code scan-->
     <color name="result_image_border">#ffffffff</color>
     <color name="result_points">#c0639ec7</color>

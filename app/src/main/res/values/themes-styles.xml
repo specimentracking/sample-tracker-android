@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Widget styles -->
-    <style name="Widget.TextView" parent="@android:style/Widget.Holo.TextView"></style>
+    <!-- ActionBar styles -->
+    <style name="Widget.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/galaxy_violet</item>
+    </style>
 
-    <style name="Widget.EditText" parent="@android:style/Widget.Holo.EditText"></style>
+    <!-- Widget styles -->
+    <style name="Widget.TextView" parent="@android:style/Widget.Holo.TextView">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Widget.EditText" parent="@android:style/Widget.Holo.EditText">
+        <item name="android:textColor">@color/black</item>
+    </style>
 
     <style name="Widget.Button" parent="@android:style/Widget.Holo.Button">
         <item name="android:minWidth">200dp</item>
-        <item name="android:minHeight">50dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/button_selector</item>
     </style>
 
     <style name="Widget.CompoundButton.RadioButton" parent="@android:style/Widget.Holo.CompoundButton.RadioButton">
@@ -17,6 +28,7 @@
         <item name="android:paddingTop">@dimen/content_vertical_margin</item>
         <item name="android:paddingBottom">@dimen/content_vertical_margin</item>
         <item name="android:background">@drawable/radio_selector</item>
+        <item name="android:textColor">@drawable/radio_text_selector</item>
     </style>
 
     <style name="Widget.ListView" parent="@android:style/Widget.Holo.ListView">

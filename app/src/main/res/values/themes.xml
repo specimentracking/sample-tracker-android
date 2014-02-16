@@ -2,6 +2,10 @@
 <resources>
 
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+
+        <item name="android:windowBackground">@color/grey_light</item>
+        <item name="android:actionBarStyle">@style/Widget.ActionBar</item>
+
         <!-- Widget styles -->
         <item name="android:textViewStyle">@style/Widget.TextView</item>
         <item name="android:editTextStyle">@style/Widget.EditText</item>
