@@ -57,4 +57,9 @@
     <string name="specimen_type_acid_sub_amplicon">amplicon</string>
     <string name="specimen_type_acid_sub_library">library</string>
     <string name="specimen_type_acid_sub_enrichedmtdna">enriched_mtdna</string>
+    <string name="specimen_location_fridge">Fridge</string>
+    <string name="specimen_location_shelf">Shelf</string>
+    <string name="specimen_location_rack">Rack</string>
+    <string name="specimen_location_box">Box</string>
+    <string name="specimen_location_spot">Spot</string>
 </resources>

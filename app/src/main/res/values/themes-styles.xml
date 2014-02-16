@@ -4,6 +4,8 @@
     <!-- Widget styles -->
     <style name="Widget.TextView" parent="@android:style/Widget.Holo.TextView"></style>
 
+    <style name="Widget.EditText" parent="@android:style/Widget.Holo.EditText"></style>
+
     <style name="Widget.Button" parent="@android:style/Widget.Holo.Button">
         <item name="android:minWidth">200dp</item>
         <item name="android:minHeight">50dp</item>

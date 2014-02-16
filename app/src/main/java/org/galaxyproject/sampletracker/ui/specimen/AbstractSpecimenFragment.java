@@ -15,6 +15,7 @@ import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenType;
 import org.galaxyproject.sampletracker.ui.core.BaseFragment;
+import org.galaxyproject.sampletracker.ui.picker.LocationPickerActivity;
 import org.galaxyproject.sampletracker.ui.picker.StatePickerActivity;
 import org.galaxyproject.sampletracker.ui.picker.TypePickerActivity;
 
@@ -130,7 +131,8 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.set_location:
-                // TODO
+                Intent locationIntent = LocationPickerActivity.showIntent(mSpecimen.getSampleData().getLocation());
+                startActivityForResult(locationIntent, R.id.request_specimen_location);
                 break;
             case R.id.set_type:
                 Intent typeIntent = TypePickerActivity.showIntent(mSpecimen.getSampleData().getType());
