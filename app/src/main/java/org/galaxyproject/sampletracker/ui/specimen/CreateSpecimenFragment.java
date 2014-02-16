@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.google.common.base.Preconditions;
 
 import org.galaxyproject.sampletracker.R;
+import org.galaxyproject.sampletracker.model.galaxy.specimen.SampleData;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 
 /**
@@ -36,8 +37,8 @@ public final class CreateSpecimenFragment extends AbstractSpecimenFragment {
 
     @Override
     protected boolean isModelValid(Specimen specimen) {
-        // TODO
-        return false;
+        SampleData sampleData = specimen.getSampleData();
+        return sampleData.getLocation() != null && sampleData.getType() != null && sampleData.getState() != null;
     }
 
     @Override
