@@ -3,6 +3,7 @@ package org.galaxyproject.sampletracker.ui.specimen;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.google.inject.Inject;
 
@@ -51,8 +52,12 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
 
     @Override
     public void success(Specimen specimen, Response response) {
-        // TODO validate JSON
-        showContent(EditSpecimenFragment.create(specimen), R.string.specimen_title_update);
+        // Validate response for required fields
+        if (TextUtils.isEmpty(specimen.getId()) || TextUtils.isEmpty(specimen.getBarcode())) {
+            Toasts.showLong(R.string.net_error_incomplete_response);
+        } else {
+            showContent(EditSpecimenFragment.create(specimen), R.string.specimen_title_update);
+        }
     }
 
     @Override

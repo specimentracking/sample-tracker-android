@@ -15,6 +15,7 @@
 
     <string name="net_specimen_created">Specimen has been successfully created</string>
     <string name="net_specimen_updated">Specimen has been successfully updated</string>
+    <string name="net_error_incomplete_response">Response is incomplete</string>
     <string name="net_error_unknown">Unknown error occurred</string>
 
     <string name="settings_title">Settings</string>
