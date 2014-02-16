@@ -19,6 +19,8 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectExtra;
 import roboguice.inject.InjectView;
 
+import javax.annotation.Nullable;
+
 /**
  * Picker of specimen state.
  * 
@@ -29,7 +31,7 @@ public final class StatePickerActivity extends BaseActivity implements OnItemCli
 
     public static final String EXTRA_STATE = "state";
 
-    public static Intent showIntent(String currentState) {
+    public static Intent showIntent(@Nullable String currentState) {
         Intent intent = new Intent(GalaxyApplication.get(), StatePickerActivity.class);
         if (!TextUtils.isEmpty(currentState)) {
             intent.putExtra(EXTRA_STATE, currentState);

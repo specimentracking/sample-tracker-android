@@ -25,6 +25,8 @@ import roboguice.util.Ln;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 /**
  * Picker of specimen type divided to material type, acid type and acid sub type.
  * 
@@ -35,8 +37,11 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
 
     public static final String EXTRA_TYPE = "type";
 
-    public static Intent showIntent(SpecimenType currentType) {
-        Preconditions.checkNotNull(currentType);
+    public static Intent showIntent(@Nullable SpecimenType currentType) {
+        if (currentType == null) {
+            currentType = SpecimenType.create();
+        }
+
         Intent intent = new Intent(GalaxyApplication.get(), TypePickerActivity.class);
         intent.putExtra(EXTRA_TYPE, currentType);
         return intent;

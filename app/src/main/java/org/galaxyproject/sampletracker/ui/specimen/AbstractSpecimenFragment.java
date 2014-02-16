@@ -102,8 +102,10 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     }
 
     private void bindModel(Specimen specimen) {
-        write(mLocationValue, specimen.getSampleData().getLocation().format());
-        write(mTypeValue, specimen.getSampleData().getType().format());
+        SpecimenLocation location = specimen.getSampleData().getLocation();
+        write(mLocationValue, location == null ? null : location.format());
+        SpecimenType type = specimen.getSampleData().getType();
+        write(mTypeValue, type == null ? null : type.format());
         write(mStateValue, specimen.getSampleData().getState());
     }
 

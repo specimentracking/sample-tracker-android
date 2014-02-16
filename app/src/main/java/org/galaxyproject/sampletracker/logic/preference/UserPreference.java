@@ -7,6 +7,7 @@ package org.galaxyproject.sampletracker.logic.preference;
  */
 public enum UserPreference implements PreferenceEnum {
 
+    LAST_LOCATION_USED,
     TOKEN;
 
     @Override

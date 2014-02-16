@@ -48,7 +48,7 @@ public final class SampleData implements Parcelable {
     }
 
     public SpecimenType getType() {
-        return type == null ? SpecimenType.create() : type;
+        return type;
     }
 
     public void setType(SpecimenType type) {
@@ -56,7 +56,7 @@ public final class SampleData implements Parcelable {
     }
 
     public SpecimenLocation getLocation() {
-        return location == null ? SpecimenLocation.create() : location;
+        return location;
     }
 
     public void setLocation(SpecimenLocation location) {
