@@ -8,6 +8,8 @@ import com.google.gson.annotations.SerializedName;
 
 import org.galaxyproject.sampletracker.model.galaxy.AbstractResponse;
 
+import java.util.Date;
+
 /**
  * Model object of a single specimen.
  * 
@@ -35,12 +37,16 @@ public final class Specimen extends AbstractResponse implements Parcelable {
         Specimen specimen = new Specimen();
         specimen.setId(original.getId());
         specimen.setBarcode(original.getBarcode());
+        specimen.setCreateTime(original.getCreateTime());
+        specimen.setUpdateTime(original.getUpdateTime());
         specimen.setSampleData(SampleData.from(original.getSampleData()));
         return specimen;
     }
 
     @SerializedName("id") private String id;
     @SerializedName("bar_code") private String barcode;
+    @SerializedName("create_time") private Date createTime;
+    @SerializedName("update_time") private Date updateTime;
     @SerializedName("sample_data") private SampleData sampleData;
 
     public Specimen() {
@@ -62,6 +68,22 @@ public final class Specimen extends AbstractResponse implements Parcelable {
         this.barcode = barcode;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
     public SampleData getSampleData() {
         return sampleData;
     }
@@ -79,12 +101,18 @@ public final class Specimen extends AbstractResponse implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.id);
         dest.writeString(this.barcode);
+        dest.writeLong(createTime != null ? createTime.getTime() : -1);
+        dest.writeLong(updateTime != null ? updateTime.getTime() : -1);
         dest.writeParcelable(this.sampleData, flags);
     }
 
     private Specimen(Parcel in) {
         this.id = in.readString();
         this.barcode = in.readString();
+        long tmpCreateTime = in.readLong();
+        this.createTime = tmpCreateTime == -1 ? null : new Date(tmpCreateTime);
+        long tmpUpdateTime = in.readLong();
+        this.updateTime = tmpUpdateTime == -1 ? null : new Date(tmpUpdateTime);
         this.sampleData = in.readParcelable(SampleData.class.getClassLoader());
     }
 

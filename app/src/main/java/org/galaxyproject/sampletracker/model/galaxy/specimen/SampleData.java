@@ -32,6 +32,14 @@ public final class SampleData implements Parcelable {
         data.setSangerSeqFlag(original.isSangerSeqFlag());
         data.setNgsSegFlag(original.isNgsSegFlag());
         data.setDdPcrFlag(original.isDdPcrFlag());
+
+        data.setFamily(original.getFamily());
+        data.setSex(original.getSex());
+        data.setParticipantRelationship(original.getParticipantRelationship());
+        data.setParticipantDob(original.getParticipantDob());
+        data.setSentDate(original.getSentDate());
+        data.setCollectionDate(original.getCollectionDate());
+        data.setNote(original.getNote());
         return data;
     }
 
@@ -44,6 +52,14 @@ public final class SampleData implements Parcelable {
     @SerializedName("sanger_seq_flag") private boolean sangerSeqFlag;
     @SerializedName("ngs_seg_flag") private boolean ngsSegFlag;
     @SerializedName("dd_pcr_flag") private boolean ddPcrFlag;
+
+    @SerializedName("family") private String family;
+    @SerializedName("sex") private String sex;
+    @SerializedName("participant_relationship") private String participantRelationship;
+    @SerializedName("participant_dob") private String participantDob;
+    @SerializedName("date_sent") private String sentDate;
+    @SerializedName("date_of_collection") private String collectionDate;
+    @SerializedName("note") private String note;
 
     public SampleData() {
     }
@@ -128,6 +144,62 @@ public final class SampleData implements Parcelable {
         this.ddPcrFlag = ddPcrFlag;
     }
 
+    public String getFamily() {
+        return family;
+    }
+
+    public void setFamily(String family) {
+        this.family = family;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getParticipantRelationship() {
+        return participantRelationship;
+    }
+
+    public void setParticipantRelationship(String participantRelationship) {
+        this.participantRelationship = participantRelationship;
+    }
+
+    public String getParticipantDob() {
+        return participantDob;
+    }
+
+    public void setParticipantDob(String participantDob) {
+        this.participantDob = participantDob;
+    }
+
+    public String getSentDate() {
+        return sentDate;
+    }
+
+    public void setSentDate(String sentDate) {
+        this.sentDate = sentDate;
+    }
+
+    public String getCollectionDate() {
+        return collectionDate;
+    }
+
+    public void setCollectionDate(String collectionDate) {
+        this.collectionDate = collectionDate;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -144,6 +216,13 @@ public final class SampleData implements Parcelable {
         dest.writeByte(sangerSeqFlag ? (byte) 1 : (byte) 0);
         dest.writeByte(ngsSegFlag ? (byte) 1 : (byte) 0);
         dest.writeByte(ddPcrFlag ? (byte) 1 : (byte) 0);
+        dest.writeString(this.family);
+        dest.writeString(this.sex);
+        dest.writeString(this.participantRelationship);
+        dest.writeString(this.participantDob);
+        dest.writeString(this.sentDate);
+        dest.writeString(this.collectionDate);
+        dest.writeString(this.note);
     }
 
     private SampleData(Parcel in) {
@@ -156,6 +235,13 @@ public final class SampleData implements Parcelable {
         this.sangerSeqFlag = in.readByte() != 0;
         this.ngsSegFlag = in.readByte() != 0;
         this.ddPcrFlag = in.readByte() != 0;
+        this.family = in.readString();
+        this.sex = in.readString();
+        this.participantRelationship = in.readString();
+        this.participantDob = in.readString();
+        this.sentDate = in.readString();
+        this.collectionDate = in.readString();
+        this.note = in.readString();
     }
 
     public static final Creator<SampleData> CREATOR = new Creator<SampleData>() {
