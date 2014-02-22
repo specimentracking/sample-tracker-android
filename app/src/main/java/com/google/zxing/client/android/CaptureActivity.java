@@ -51,7 +51,7 @@ import java.util.EnumSet;
  */
 public abstract class CaptureActivity extends Activity implements SurfaceHolder.Callback {
 
-    private static final Collection<BarcodeFormat> CODE_FORMATS = EnumSet.of(BarcodeFormat.AZTEC);
+    private static final Collection<BarcodeFormat> CODE_FORMATS = EnumSet.of(BarcodeFormat.QR_CODE);
 
     private static final String TAG = CaptureActivity.class.getSimpleName();
 
