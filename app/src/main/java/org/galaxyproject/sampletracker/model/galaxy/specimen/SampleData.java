@@ -21,7 +21,7 @@ public final class SampleData implements Parcelable {
 
     public static SampleData from(SampleData original) {
         Preconditions.checkNotNull(original);
-        
+
         SampleData data = new SampleData();
         data.setParentId(original.getParentId());
         data.setState(original.getState());
@@ -46,6 +46,14 @@ public final class SampleData implements Parcelable {
     @SerializedName("dd_pcr_flag") private boolean ddPcrFlag;
 
     public SampleData() {
+    }
+
+    public String getTypeFormatted() {
+        return type == null ? null : type.format();
+    }
+
+    public String getLocationFormatted() {
+        return location == null ? null : location.format();
     }
 
     public String getParentId() {

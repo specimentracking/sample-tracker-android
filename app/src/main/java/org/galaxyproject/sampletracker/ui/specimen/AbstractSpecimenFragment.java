@@ -134,11 +134,9 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
 
     private void bindModel(Specimen specimen) {
         SampleData sampleData = specimen.getSampleData();
-        SpecimenLocation location = sampleData.getLocation();
-        SpecimenType type = sampleData.getType();
 
-        write(mLocationValue, location == null ? null : location.format());
-        write(mTypeValue, type == null ? null : type.format());
+        write(mLocationValue, sampleData.getLocationFormatted());
+        write(mTypeValue, sampleData.getTypeFormatted());
         write(mStateValue, sampleData.getState());
 
         writeFlag(mFlag1, R.string.specimen_flag_gen, sampleData.isGenotypeFlag());

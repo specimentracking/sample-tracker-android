@@ -48,8 +48,8 @@ public final class EditSpecimenFragment extends AbstractSpecimenFragment impleme
         SpecimenLocation location = sampleData.getLocation();
         SpecimenType type = sampleData.getType();
         String state = sampleData.getState();
-        if (location == null || type == null || state == null) {
-            return false;
+        if (state == null) {
+            return false; // State is required
         }
 
         // Values must change
@@ -58,7 +58,7 @@ public final class EditSpecimenFragment extends AbstractSpecimenFragment impleme
         SpecimenType originalType = originalSampleData.getType();
         String originalState = originalSampleData.getState();
 
-        return !location.equals(originalLocation) || !type.equals(originalType) || !state.equals(originalState);
+        return !nullEq(location, originalLocation) || !nullEq(type, originalType) || !state.equals(originalState);
     }
 
     @Override
@@ -91,6 +91,14 @@ public final class EditSpecimenFragment extends AbstractSpecimenFragment impleme
             } else {
                 Toasts.showLong(msg);
             }
+        }
+    }
+
+    private boolean nullEq(Object o1, Object o2) {
+        if (o1 == null) {
+            return o2 == null;
+        } else {
+            return o1.equals(o2);
         }
     }
 }

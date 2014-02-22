@@ -50,7 +50,7 @@ public final class CreateSpecimenFragment extends AbstractSpecimenFragment imple
     @Override
     protected boolean isModelValid(Specimen specimen) {
         SampleData sampleData = specimen.getSampleData();
-        return sampleData.getLocation() != null && sampleData.getType() != null && sampleData.getState() != null;
+        return sampleData.getState() != null;
     }
 
     @Override

@@ -35,14 +35,14 @@ public final class SpecimenResourceController extends ResourceController<Specime
         String projectId = mSettingsController.loadProjectId();
         SampleData sampleData = specimen.getSampleData();
         resource().create(apiKey, projectId, specimen.getBarcode(), sampleData.getParentId(), sampleData.getState(),
-                sampleData.getType().format(), sampleData.getLocation().format(), callback);
+                sampleData.getTypeFormatted(), sampleData.getLocationFormatted(), callback);
     }
 
     public void update(Specimen specimen, Callback<Specimen> callback) {
         String apiKey = mSettingsController.loadApiKey();
         String projectId = mSettingsController.loadProjectId();
         SampleData sampleData = specimen.getSampleData();
-        resource().update(apiKey, projectId, specimen.getId(), sampleData.getState(), sampleData.getType().format(),
-                sampleData.getLocation().format(), callback);
+        resource().update(apiKey, projectId, specimen.getId(), sampleData.getState(), sampleData.getTypeFormatted(),
+                sampleData.getLocationFormatted(), callback);
     }
 }
