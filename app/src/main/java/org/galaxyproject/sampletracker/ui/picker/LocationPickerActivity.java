@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -94,6 +95,8 @@ public final class LocationPickerActivity extends BaseActivity implements OnClic
     private void initField(EditText field, String initValue) {
         addInputFilter(field, new AlphaNumericFilter());
         field.setText(initValue);
+        field.setRawInputType(InputType.TYPE_CLASS_NUMBER); // Use numeric keyboard but allow to switch (not work 100%)
+        field.setSelection(field.getText().length()); // Move caret to the end of text
         field.addTextChangedListener(new EmptyTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {

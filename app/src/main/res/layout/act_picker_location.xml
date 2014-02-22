@@ -22,6 +22,7 @@
             android:layout_weight="1"
             android:inputType="textVisiblePassword"
             android:maxLength="3"
+            android:nextFocusDown="@+id/shelf"
             />
 
         <TextView
@@ -37,6 +38,8 @@
             android:layout_weight="1"
             android:inputType="textVisiblePassword"
             android:maxLength="3"
+            android:nextFocusDown="@+id/rack"
+            android:nextFocusUp="@+id/fridge"
             />
     </LinearLayout>
 
@@ -55,6 +58,8 @@
             android:layout_weight="1"
             android:inputType="textVisiblePassword"
             android:maxLength="3"
+            android:nextFocusDown="@+id/box"
+            android:nextFocusUp="@+id/shelf"
             />
 
         <TextView
@@ -70,6 +75,7 @@
             android:layout_weight="1"
             android:inputType="textVisiblePassword"
             android:maxLength="3"
+            android:nextFocusUp="@+id/rack"
             />
     </LinearLayout>
 
