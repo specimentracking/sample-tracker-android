@@ -1,8 +1,12 @@
 package org.galaxyproject.sampletracker.ui.specimen;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -38,7 +42,28 @@ public final class EditSpecimenFragment extends AbstractSpecimenFragment impleme
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.frg_specimen_edit, container, false);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.add(Menu.NONE, R.id.menu_details, Menu.NONE, R.string.specimen_details).setShowAsAction(
+                MenuItem.SHOW_AS_ACTION_ALWAYS);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_details:
+                SpecimenDetailsFragment fragment = SpecimenDetailsFragment.create(getOriginalSpecimen());
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(android.R.id.content, fragment).addToBackStack(null).commit();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

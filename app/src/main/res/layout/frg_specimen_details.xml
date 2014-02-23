@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ContentFrame.Fill"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/Widget.TextView.Label"
+            android:text="@string/specimen_family"
+            />
+
+        <TextView
+            android:id="@+id/family"
+            style="@style/Widget.TextView.Value"
+            />
+    </LinearLayout>
+</LinearLayout>

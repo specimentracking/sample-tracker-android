@@ -10,6 +10,7 @@
     <string name="glb_create">Create</string>
     <string name="glb_create_derivative">Create derivative specimen</string>
     <string name="glb_update">Update</string>
+    <string name="glb_close">Close</string>
     <string name="glb_no_value">NONE</string>
     <string name="glb_loading">Loading…</string>
 
@@ -34,6 +35,8 @@
     <string name="specimen_title_create">New specimen</string>
     <string name="specimen_title_derivative">Derivative specimen</string>
     <string name="specimen_title_update">Specimen</string>
+    <string name="specimen_details">Details</string>
+    <string name="specimen_family">Family</string>
     <string name="specimen_flag_ngs">NGS</string>
     <string name="specimen_flag_sgr">SGR</string>
     <string name="specimen_flag_gen">GEN</string>
