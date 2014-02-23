@@ -5,6 +5,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="grey_light">#ededed</color>
+    <color name="grey_light_semi">#bbededed</color>
 
     <color name="galaxy_violet">#2b3143</color>
     <color name="galaxy_violet_semi">#bb2b3143</color>

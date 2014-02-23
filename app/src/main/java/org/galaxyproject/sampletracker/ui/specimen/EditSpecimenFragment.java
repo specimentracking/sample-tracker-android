@@ -19,6 +19,7 @@ import org.galaxyproject.sampletracker.model.galaxy.specimen.SampleData;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenLocation;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenType;
+import org.galaxyproject.sampletracker.ui.component.DimFragment;
 import org.galaxyproject.sampletracker.ui.component.PendingDialogFragment;
 import org.galaxyproject.sampletracker.util.Toasts;
 
@@ -57,10 +58,15 @@ public final class EditSpecimenFragment extends AbstractSpecimenFragment impleme
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_details:
-                SpecimenDetailsFragment fragment = SpecimenDetailsFragment.create(getOriginalSpecimen());
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+                ft.setCustomAnimations(android.R.animator.fade_in, 0, 0, android.R.animator.fade_out);
+                ft.add(android.R.id.content, DimFragment.create()).addToBackStack(null);
+
+                SpecimenDetailsFragment fragment = SpecimenDetailsFragment.create(getOriginalSpecimen());
                 ft.setCustomAnimations(R.animator.slide_in_right, 0, 0, R.animator.slide_out_right);
-                ft.add(android.R.id.content, fragment).addToBackStack(null).commit();
+                ft.add(android.R.id.content, fragment).commit();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
