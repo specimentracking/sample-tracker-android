@@ -12,6 +12,8 @@
     <string name="glb_update">Update</string>
     <string name="glb_close">Close</string>
     <string name="glb_no_value">NONE</string>
+    <string name="glb_yes">Yes</string>
+    <string name="glb_no">No</string>
     <string name="glb_loading">Loading…</string>
 
     <string name="net_specimen_created">Specimen has been successfully created</string>
@@ -37,6 +39,15 @@
     <string name="specimen_title_update">Specimen</string>
     <string name="specimen_details">Details</string>
     <string name="specimen_family">Family</string>
+    <string name="specimen_sex">Sex</string>
+    <string name="specimen_derivative">Derivative</string>
+    <string name="specimen_participant_relationship">Relationship</string>
+    <string name="specimen_participant_dob">Participant dob</string>
+    <string name="specimen_note">Note</string>
+    <string name="specimen_create_time">Create time</string>
+    <string name="specimen_update_time">Update time</string>
+    <string name="specimen_collection_date">Date of collection</string>
+    <string name="specimen_sent_date">Date sent</string>
     <string name="specimen_flag_ngs">NGS</string>
     <string name="specimen_flag_sgr">SGR</string>
     <string name="specimen_flag_gen">GEN</string>
