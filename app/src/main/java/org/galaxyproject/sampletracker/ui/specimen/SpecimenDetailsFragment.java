@@ -57,7 +57,7 @@ public final class SpecimenDetailsFragment extends BaseFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
         menu.add(Menu.NONE, R.id.menu_close, Menu.NONE, R.string.glb_close).setShowAsAction(
                 MenuItem.SHOW_AS_ACTION_ALWAYS);
     }

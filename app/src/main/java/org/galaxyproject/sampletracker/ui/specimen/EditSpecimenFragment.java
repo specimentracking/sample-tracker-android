@@ -59,7 +59,8 @@ public final class EditSpecimenFragment extends AbstractSpecimenFragment impleme
             case R.id.menu_details:
                 SpecimenDetailsFragment fragment = SpecimenDetailsFragment.create(getOriginalSpecimen());
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(android.R.id.content, fragment).addToBackStack(null).commit();
+                ft.setCustomAnimations(R.animator.slide_in_right, 0, 0, R.animator.slide_out_right);
+                ft.add(android.R.id.content, fragment).addToBackStack(null).commit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
