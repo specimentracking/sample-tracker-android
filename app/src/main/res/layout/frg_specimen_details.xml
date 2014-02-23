@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <org.galaxyproject.sampletracker.ui.component.FractionalFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content"
-    style="@style/ContentFrame.Fill.NoPadding"
+    style="@style/ContentFrame.Fill.NoBottomPadding"
+    android:paddingTop="0dp"
     >
 
     <LinearLayout

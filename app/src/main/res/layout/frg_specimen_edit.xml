@@ -19,6 +19,7 @@
         <TextView
             android:id="@+id/location"
             style="@style/Widget.TextView.Value"
+            android:layout_weight="3"
             />
     </LinearLayout>
 
@@ -45,6 +46,7 @@
         <TextView
             android:id="@+id/type"
             style="@style/Widget.TextView.Value"
+            android:layout_weight="3"
             />
     </LinearLayout>
 
@@ -71,6 +73,7 @@
         <TextView
             android:id="@+id/state"
             style="@style/Widget.TextView.Value"
+            android:layout_weight="3"
             />
     </LinearLayout>
 
