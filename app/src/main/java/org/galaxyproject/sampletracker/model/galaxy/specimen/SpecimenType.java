@@ -111,6 +111,10 @@ public final class SpecimenType implements android.os.Parcelable {
         mMaterialType = materialType;
     }
 
+    public void clearMaterialType() {
+        mMaterialType = null;
+    }
+
     public String getAcidType() {
         return mAcidType;
     }
@@ -119,12 +123,20 @@ public final class SpecimenType implements android.os.Parcelable {
         mAcidType = acidType;
     }
 
+    public void clearAcidType() {
+        mAcidType = null;
+    }
+
     public String getAcidSubType() {
         return mAcidSubType;
     }
 
     public void setAcidSubType(String acidSubType) {
         mAcidSubType = acidSubType;
+    }
+
+    public void clearAcidSubType() {
+        mAcidSubType = null;
     }
 
     @Override
