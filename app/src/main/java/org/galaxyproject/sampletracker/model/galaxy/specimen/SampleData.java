@@ -16,6 +16,7 @@ public final class SampleData implements Parcelable {
     public static final SampleData from(String parentId) {
         SampleData data = new SampleData();
         data.setParentId(parentId);
+        data.setState("new"); // NEW is set by default
         return data;
     }
 

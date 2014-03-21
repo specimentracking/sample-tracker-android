@@ -104,6 +104,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         super.onViewCreated(view, savedInstanceState);
         bindViews(view);
         bindModel(mSpecimen);
+        validateModel();
     }
 
     private void bindViews(View view) {
