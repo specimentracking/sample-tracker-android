@@ -232,7 +232,6 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
     private void updateComponentState() {
         enableGroup(mAcidTypeGroup, mCurrentType.getMaterialType() != null); // Material type must be set
         enableGroup(mAcidSubTypeGroup, mCurrentType.getAcidType() != null); // Acid type must be set
-        mSaveButton.setEnabled(mCurrentType.getMaterialType() != null); // At least material type must be set
     }
 
     @Override
