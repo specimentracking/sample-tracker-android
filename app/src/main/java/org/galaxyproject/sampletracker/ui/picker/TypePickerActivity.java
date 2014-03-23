@@ -112,8 +112,10 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
                     }
 
                     if (hasBeenChecked) {
-                        // Clear current model value
+                        // Clear current model values
                         mCurrentType.clearMaterialType();
+                        mCurrentType.clearAcidType();
+                        mCurrentType.clearAcidSubType();
                     } else {
                         // Check current one
                         clicked.setChecked(true);
@@ -158,8 +160,9 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
                     clearCheck(mAcidTypeGroup);
 
                     if (hasBeenChecked) {
-                        // Clear current model value
+                        // Clear current model values
                         mCurrentType.clearAcidType();
+                        mCurrentType.clearAcidSubType();
                     } else {
                         // Check current one
                         clicked.setChecked(true);
@@ -204,7 +207,7 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
                     clearCheck(mAcidSubTypeGroup);
 
                     if (hasBeenChecked) {
-                        // Clear current model value
+                        // Clear current model values
                         mCurrentType.clearAcidSubType();
                     } else {
                         // Check current one
