@@ -6,9 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckedTextView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.LinearLayout;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
@@ -48,7 +46,6 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
     }
 
     // TODO create a custom component for radios
-    // TODO allow acid types to un-check
     @InjectExtra(EXTRA_TYPE) private SpecimenType mCurrentType;
     @InjectView(R.id.button_11) private CheckedTextView mButton11;
     @InjectView(R.id.button_12) private CheckedTextView mButton12;
@@ -59,8 +56,8 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
     @InjectView(R.id.button_31) private CheckedTextView mButton31;
     @InjectView(R.id.button_32) private CheckedTextView mButton32;
     @InjectView(R.id.button_33) private CheckedTextView mButton33;
-    @InjectView(R.id.acid_type) private RadioGroup mAcidTypeGroup;
-    @InjectView(R.id.acid_sub_type) private RadioGroup mAcidSubTypeGroup;
+    @InjectView(R.id.acid_type) private LinearLayout mAcidTypeGroup;
+    @InjectView(R.id.acid_sub_type) private LinearLayout mAcidSubTypeGroup;
     @InjectView(R.id.save) private Button mSaveButton;
 
     private final List<CheckedTextView> mMaterialButtons = Lists.newArrayList();
@@ -138,52 +135,95 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
     }
 
     private void initAcidGroup() {
-        if (mCurrentType.getAcidType() != null) {
-            findButtonWithText(mAcidTypeGroup, mCurrentType.getAcidType()).setChecked(true);
-        }
-        mAcidTypeGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == View.NO_ID) {
-                    return;
-                }
+        List<String> acids = Lists.newArrayList(getResources().getStringArray(R.array.specimen_type_acid_values));
+        Preconditions.checkState(mAcidTypeGroup.getChildCount() == acids.size());
 
-                RadioButton button = (RadioButton) group.findViewById(checkedId);
-                if (button.isChecked()) {
-                    mCurrentType.setAcidType(button.getText().toString());
-                } else {
-                    mCurrentType.clearAcidType();
-                }
+        for (int i = 0; i < acids.size(); i++) {
+            CheckedTextView button = (CheckedTextView) mAcidTypeGroup.getChildAt(i);
+            String acidType = acids.get(i);
 
-                // Enable elements based on acid type set
-                updateComponentState();
+            // Set button label
+            button.setText(acidType);
+
+            // Ensure only one button may be checked
+            button.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckedTextView clicked = (CheckedTextView) v;
+
+                    // Save previous button state
+                    boolean hasBeenChecked = clicked.isChecked();
+
+                    // Un-check all buttons
+                    clearCheck(mAcidTypeGroup);
+
+                    if (hasBeenChecked) {
+                        // Clear current model value
+                        mCurrentType.clearAcidType();
+                    } else {
+                        // Check current one
+                        clicked.setChecked(true);
+
+                        // Set current value to model
+                        mCurrentType.setAcidType(clicked.getText().toString());
+                    }
+
+                    // Enable elements based on material type set
+                    updateComponentState();
+                }
+            });
+
+            // Check current selected acid if any
+            if (acidType.equals(mCurrentType.getAcidType())) {
+                button.setChecked(true);
             }
-        });
+        }
     }
 
     private void initAcidSubGroup() {
-        if (mCurrentType.getAcidSubType() != null) {
-            findButtonWithText(mAcidSubTypeGroup, mCurrentType.getAcidSubType()).setChecked(true);
-        }
-        mAcidSubTypeGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == View.NO_ID) {
-                    return;
-                }
+        List<String> subs = Lists.newArrayList(getResources().getStringArray(R.array.specimen_type_acid_sub_values));
+        Preconditions.checkState(mAcidSubTypeGroup.getChildCount() == subs.size());
 
-                RadioButton button = (RadioButton) group.findViewById(checkedId);
-                // Set current value to model
-                if (button.isChecked()) {
-                    mCurrentType.setAcidSubType(button.getText().toString());
-                } else {
-                    mCurrentType.clearAcidSubType();
-                }
+        for (int i = 0; i < subs.size(); i++) {
+            CheckedTextView button = (CheckedTextView) mAcidSubTypeGroup.getChildAt(i);
+            String acidSubType = subs.get(i);
 
-                // Enable elements based on acid type set
-                updateComponentState();
+            // Set button label
+            button.setText(acidSubType);
+
+            // Ensure only one button may be checked
+            button.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckedTextView clicked = (CheckedTextView) v;
+
+                    // Save previous button state
+                    boolean hasBeenChecked = clicked.isChecked();
+
+                    // Un-check all buttons
+                    clearCheck(mAcidSubTypeGroup);
+
+                    if (hasBeenChecked) {
+                        // Clear current model value
+                        mCurrentType.clearAcidSubType();
+                    } else {
+                        // Check current one
+                        clicked.setChecked(true);
+
+                        // Set current value to model
+                        mCurrentType.setAcidSubType(clicked.getText().toString());
+                    }
+
+                    // Enable elements based on material type set
+                    updateComponentState();
+                }
+            });
+
+            // Check current selected acid if any
+            if (acidSubType.equals(mCurrentType.getAcidSubType())) {
+                button.setChecked(true);
             }
-        });
+        }
     }
 
     private void updateComponentState() {
@@ -206,25 +246,21 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
         }
     }
 
-    private void enableGroup(RadioGroup group, boolean enabled) {
+    private void enableGroup(LinearLayout group, boolean enabled) {
         for (int i = 0; i < group.getChildCount(); i++) {
             group.getChildAt(i).setEnabled(enabled);
         }
         if (!enabled) {
-            group.clearCheck(); // Reset check state if not enabled
+            clearCheck(group); // Reset check state if not enabled
         }
     }
 
-    private RadioButton findButtonWithText(RadioGroup group, String text) {
-        Preconditions.checkNotNull(text);
-
-        for (int i = 0; i < group.getChildCount(); i++) {
-            RadioButton button = (RadioButton) group.getChildAt(i);
-            if (text.equals(button.getText())) {
-                return button;
+    private void clearCheck(LinearLayout layout) {
+        for (int j = 0; j < layout.getChildCount(); j++) {
+            View child = layout.getChildAt(j);
+            if (child instanceof CheckedTextView) {
+                ((CheckedTextView) child).setChecked(false);
             }
         }
-
-        throw new IllegalStateException("No button with text '" + text + "' found");
     }
 }

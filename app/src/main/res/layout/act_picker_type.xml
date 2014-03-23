@@ -102,7 +102,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <RadioGroup
+    <LinearLayout
         android:id="@+id/acid_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -110,22 +110,22 @@
         android:orientation="horizontal"
         >
 
-        <RadioButton
+        <CheckedTextView
+            style="@style/Widget.CompoundButton.RadioButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/specimen_type_acid_dna"
             />
 
-        <RadioButton
+        <CheckedTextView
+            style="@style/Widget.CompoundButton.RadioButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/specimen_type_acid_rna"
             />
-    </RadioGroup>
+    </LinearLayout>
 
-    <RadioGroup
+    <LinearLayout
         android:id="@+id/acid_sub_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -133,27 +133,27 @@
         android:orientation="horizontal"
         >
 
-        <RadioButton
+        <CheckedTextView
+            style="@style/Widget.CompoundButton.RadioButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/specimen_type_acid_sub_amplicon"
             />
 
-        <RadioButton
+        <CheckedTextView
+            style="@style/Widget.CompoundButton.RadioButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/specimen_type_acid_sub_library"
             />
 
-        <RadioButton
+        <CheckedTextView
+            style="@style/Widget.CompoundButton.RadioButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/specimen_type_acid_sub_enrichedmtdna"
             />
-    </RadioGroup>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
