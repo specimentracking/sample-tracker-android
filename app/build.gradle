@@ -40,14 +40,14 @@ android {
         }
     }
 
-    flavorGroups "environment"
+    flavorDimensions "environment"
 
     productFlavors {
         apiary {
-            flavorGroup "environment"
+            flavorDimension "environment"
         }
         samples {
-            flavorGroup "environment"
+            flavorDimension "environment"
         }
     }
 
