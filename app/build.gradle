@@ -17,9 +17,9 @@ android {
     signingConfigs {
         production {
             storeFile file("prod.keystore")
-            storePassword "g4l4xy"
+            storePassword galaxyStorePassword
             keyAlias "galaxy"
-            keyPassword "g4l4xy"
+            keyPassword galaxyKeyPassword
         }
     }
 
