@@ -12,7 +12,7 @@ import retrofit.Callback;
 
 /**
  * Handles specimen data.
- * 
+ *
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 @Singleton
@@ -22,6 +22,11 @@ public final class SpecimenResourceController extends ResourceController<Specime
 
     public SpecimenResourceController() {
         super(SpecimenResource.class);
+    }
+
+    public void get(String specimenId, Callback<Specimen> callback) {
+        String apiKey = mSettingsController.loadApiKey();
+        resource().get(apiKey, specimenId, callback);
     }
 
     public void check(String barcode, Callback<Specimen> callback) {
