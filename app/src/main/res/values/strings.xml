@@ -37,6 +37,7 @@
     <string name="specimen_title_create">New specimen</string>
     <string name="specimen_title_derivative">Derivative specimen</string>
     <string name="specimen_title_update">Specimen</string>
+    <string name="specimen_ancestor">Ancestor</string>
     <string name="specimen_details">Details</string>
     <string name="specimen_family">Family</string>
     <string name="specimen_sex">Sex</string>

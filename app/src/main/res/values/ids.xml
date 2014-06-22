@@ -6,6 +6,7 @@
     <item name="request_specimen_type" type="id" />
     <item name="request_specimen_state" type="id" />
 
+    <item name="menu_parent" type="id" />
     <item name="menu_details" type="id" />
     <item name="menu_close" type="id" />
 

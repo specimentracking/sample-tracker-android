@@ -30,7 +30,7 @@ import roboguice.util.Ln;
 
 /**
  * Fragment for creating editing a specimen that already exists on server.
- * 
+ *
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 public final class EditSpecimenFragment extends AbstractSpecimenFragment implements Callback<Specimen> {
@@ -50,6 +50,13 @@ public final class EditSpecimenFragment extends AbstractSpecimenFragment impleme
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+
+        // Go to parent button only for specimens with an ancestor
+        String parentId = getOriginalSpecimen().getSampleData().getParentId();
+        menu.add(Menu.NONE, R.id.menu_parent, Menu.NONE, R.string.specimen_ancestor).setShowAsActionFlags(
+                MenuItem.SHOW_AS_ACTION_ALWAYS).setVisible(!TextUtils.isEmpty(parentId));
+
+        // Specimen details panel
         menu.add(Menu.NONE, R.id.menu_details, Menu.NONE, R.string.specimen_details).setShowAsAction(
                 MenuItem.SHOW_AS_ACTION_ALWAYS);
     }
@@ -67,6 +74,10 @@ public final class EditSpecimenFragment extends AbstractSpecimenFragment impleme
                 ft.setCustomAnimations(R.animator.slide_in_right, 0, 0, R.animator.slide_out_right);
                 ft.add(android.R.id.content, fragment).commit();
 
+                return true;
+            case R.id.menu_parent:
+                String parentId = getOriginalSpecimen().getSampleData().getParentId();
+                startActivity(SpecimenDetailActivity.queryIdIntent(parentId));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
