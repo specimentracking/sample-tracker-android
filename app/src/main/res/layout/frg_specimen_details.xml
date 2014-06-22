@@ -1,144 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <org.galaxyproject.sampletracker.ui.component.FractionalFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/ContentFrame.Fill.NoBottomPadding"
+    style="@style/ContentFrame.Fill.NoPadding"
     android:paddingTop="0dp"
     >
 
-    <LinearLayout
-        style="@style/ContentFrame.Fill"
+    <ScrollView
+        style="@style/ContentFrame.Fill.NoPadding"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay"
         android:layout_marginLeft="70dp"
         android:background="@color/grey_light"
-        android:orientation="vertical"
         >
 
-        <LinearLayout style="@style/RowLabelValue">
+        <LinearLayout
+            style="@style/ContentFrame.Fill"
+            android:orientation="vertical"
+            >
 
-            <TextView
-                style="@style/Widget.TextView.Label"
-                android:text="@string/specimen_family"
-                />
+            <LinearLayout style="@style/RowLabelValue">
 
-            <TextView
-                android:id="@+id/family"
-                style="@style/Widget.TextView.Value"
-                />
+                <TextView
+                    style="@style/Widget.TextView.Label"
+                    android:text="@string/specimen_family"
+                    />
+
+                <TextView
+                    android:id="@+id/family"
+                    style="@style/Widget.TextView.Value"
+                    />
+            </LinearLayout>
+
+            <LinearLayout style="@style/RowLabelValue">
+
+                <TextView
+                    style="@style/Widget.TextView.Label"
+                    android:text="@string/specimen_sex"
+                    />
+
+                <TextView
+                    android:id="@+id/sex"
+                    style="@style/Widget.TextView.Value"
+                    />
+            </LinearLayout>
+
+            <LinearLayout style="@style/RowLabelValue">
+
+                <TextView
+                    style="@style/Widget.TextView.Label"
+                    android:text="@string/specimen_derivative"
+                    />
+
+                <TextView
+                    android:id="@+id/derivative"
+                    style="@style/Widget.TextView.Value"
+                    />
+            </LinearLayout>
+
+            <LinearLayout style="@style/RowLabelValue">
+
+                <TextView
+                    style="@style/Widget.TextView.Label"
+                    android:text="@string/specimen_participant_relationship"
+                    />
+
+                <TextView
+                    android:id="@+id/participant_relationship"
+                    style="@style/Widget.TextView.Value"
+                    />
+            </LinearLayout>
+
+            <LinearLayout style="@style/RowLabelValue">
+
+                <TextView
+                    style="@style/Widget.TextView.Label"
+                    android:text="@string/specimen_participant_dob"
+                    />
+
+                <TextView
+                    android:id="@+id/participant_dob"
+                    style="@style/Widget.TextView.Value"
+                    />
+            </LinearLayout>
+
+            <LinearLayout style="@style/RowLabelValue">
+
+                <TextView
+                    style="@style/Widget.TextView.Label"
+                    android:text="@string/specimen_create_time"
+                    />
+
+                <TextView
+                    android:id="@+id/create_time"
+                    style="@style/Widget.TextView.Value"
+                    />
+            </LinearLayout>
+
+            <LinearLayout style="@style/RowLabelValue">
+
+                <TextView
+                    style="@style/Widget.TextView.Label"
+                    android:text="@string/specimen_update_time"
+                    />
+
+                <TextView
+                    android:id="@+id/update_time"
+                    style="@style/Widget.TextView.Value"
+                    />
+            </LinearLayout>
+
+            <LinearLayout style="@style/RowLabelValue">
+
+                <TextView
+                    style="@style/Widget.TextView.Label"
+                    android:text="@string/specimen_sent_date"
+                    />
+
+                <TextView
+                    android:id="@+id/sent_date"
+                    style="@style/Widget.TextView.Value"
+                    />
+            </LinearLayout>
+
+            <LinearLayout style="@style/RowLabelValue">
+
+                <TextView
+                    style="@style/Widget.TextView.Label"
+                    android:text="@string/specimen_collection_date"
+                    />
+
+                <TextView
+                    android:id="@+id/collection_date"
+                    style="@style/Widget.TextView.Value"
+                    />
+            </LinearLayout>
+
+            <LinearLayout style="@style/RowLabelValue">
+
+                <TextView
+                    style="@style/Widget.TextView.Label"
+                    android:text="@string/specimen_note"
+                    />
+
+                <TextView
+                    android:id="@+id/note"
+                    style="@style/Widget.TextView.Value"
+                    />
+            </LinearLayout>
         </LinearLayout>
-
-        <LinearLayout style="@style/RowLabelValue">
-
-            <TextView
-                style="@style/Widget.TextView.Label"
-                android:text="@string/specimen_sex"
-                />
-
-            <TextView
-                android:id="@+id/sex"
-                style="@style/Widget.TextView.Value"
-                />
-        </LinearLayout>
-
-        <LinearLayout style="@style/RowLabelValue">
-
-            <TextView
-                style="@style/Widget.TextView.Label"
-                android:text="@string/specimen_derivative"
-                />
-
-            <TextView
-                android:id="@+id/derivative"
-                style="@style/Widget.TextView.Value"
-                />
-        </LinearLayout>
-
-        <LinearLayout style="@style/RowLabelValue">
-
-            <TextView
-                style="@style/Widget.TextView.Label"
-                android:text="@string/specimen_participant_relationship"
-                />
-
-            <TextView
-                android:id="@+id/participant_relationship"
-                style="@style/Widget.TextView.Value"
-                />
-        </LinearLayout>
-
-        <LinearLayout style="@style/RowLabelValue">
-
-            <TextView
-                style="@style/Widget.TextView.Label"
-                android:text="@string/specimen_participant_dob"
-                />
-
-            <TextView
-                android:id="@+id/participant_dob"
-                style="@style/Widget.TextView.Value"
-                />
-        </LinearLayout>
-
-        <LinearLayout style="@style/RowLabelValue">
-
-            <TextView
-                style="@style/Widget.TextView.Label"
-                android:text="@string/specimen_create_time"
-                />
-
-            <TextView
-                android:id="@+id/create_time"
-                style="@style/Widget.TextView.Value"
-                />
-        </LinearLayout>
-
-        <LinearLayout style="@style/RowLabelValue">
-
-            <TextView
-                style="@style/Widget.TextView.Label"
-                android:text="@string/specimen_update_time"
-                />
-
-            <TextView
-                android:id="@+id/update_time"
-                style="@style/Widget.TextView.Value"
-                />
-        </LinearLayout>
-
-        <LinearLayout style="@style/RowLabelValue">
-
-            <TextView
-                style="@style/Widget.TextView.Label"
-                android:text="@string/specimen_sent_date"
-                />
-
-            <TextView
-                android:id="@+id/sent_date"
-                style="@style/Widget.TextView.Value"
-                />
-        </LinearLayout>
-
-        <LinearLayout style="@style/RowLabelValue">
-
-            <TextView
-                style="@style/Widget.TextView.Label"
-                android:text="@string/specimen_collection_date"
-                />
-
-            <TextView
-                android:id="@+id/collection_date"
-                style="@style/Widget.TextView.Value"
-                />
-        </LinearLayout>
-
-        <LinearLayout style="@style/RowLabelValue">
-
-            <TextView
-                style="@style/Widget.TextView.Label"
-                android:text="@string/specimen_note"
-                />
-
-            <TextView
-                android:id="@+id/note"
-                style="@style/Widget.TextView.Value"
-                />
-        </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </org.galaxyproject.sampletracker.ui.component.FractionalFrameLayout>
