@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 
 import org.galaxyproject.sampletracker.GalaxyApplication;
@@ -24,15 +25,24 @@ import roboguice.util.Ln;
 
 /**
  * Detail of single specimen, either existing or new.
- * 
+ *
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 public final class SpecimenDetailActivity extends BaseActivity implements Callback<Specimen> {
 
-    /** Barcode value of the specimen */
+    /** Unique ID value of the specimen for query - has priority before barcode */
+    private static final String EXTRA_ID = "specimen_id";
+
+    /** Barcode value of the specimen for query */
     private static final String EXTRA_BARCODE = "barcode";
 
-    public static final Intent showIntent(String barcode) {
+    public static final Intent queryIdIntent(String specimenId) {
+        Intent intent = new Intent(GalaxyApplication.get(), SpecimenDetailActivity.class);
+        intent.putExtra(EXTRA_ID, specimenId);
+        return intent;
+    }
+
+    public static final Intent queryBarcodeIntent(String barcode) {
         Intent intent = new Intent(GalaxyApplication.get(), SpecimenDetailActivity.class);
         intent.putExtra(EXTRA_BARCODE, barcode);
         return intent;
@@ -40,7 +50,8 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
 
     private static final int CONTENT = android.R.id.content;
 
-    @InjectExtra(EXTRA_BARCODE) private String mBarcode;
+    @InjectExtra(value = EXTRA_BARCODE, optional = true) private String mBarcode;
+    @InjectExtra(value = EXTRA_ID, optional = true) private String mId;
     @Inject private SpecimenResourceController mSpecimenController;
 
     @Override
@@ -48,9 +59,17 @@ public final class SpecimenDetailActivity extends BaseActivity implements Callba
         super.onCreate(savedInstanceState);
         showHomeButton();
 
+        Preconditions.checkArgument(!TextUtils.isEmpty(mId) || !TextUtils.isEmpty(mBarcode), "ID or barcode must be set");
+
         if (savedInstanceState == null) {
             PendingDialogFragment.showPendingDialog(getFragmentManager(), CONTENT);
-            mSpecimenController.check(mBarcode, this);
+
+            // Query based on ID has priority before barcode check
+            if (!TextUtils.isEmpty(mId)) {
+                mSpecimenController.get(mId, this);
+            } else {
+                mSpecimenController.check(mBarcode, this);
+            }
         }
     }
 

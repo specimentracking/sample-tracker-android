@@ -24,7 +24,7 @@ import roboguice.util.Ln;
 
 /**
  * Landing activity with main menu.
- * 
+ *
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 @ContentView(R.layout.act_main)
@@ -50,7 +50,7 @@ public final class MainActivity extends BaseActivity {
         switch (requestCode) {
             case R.id.request_scan:
                 if (resultCode == Activity.RESULT_OK) {
-                    startActivity(SpecimenDetailActivity.showIntent(data.getStringExtra(ScanActivity.EXTRA_SCAN_DATA)));
+                    startActivity(SpecimenDetailActivity.queryBarcodeIntent(data.getStringExtra(ScanActivity.EXTRA_SCAN_DATA)));
                 }
                 break;
             default:
@@ -71,7 +71,7 @@ public final class MainActivity extends BaseActivity {
                 }
                 break;
             case R.id.simulate_scan:
-                startActivity(SpecimenDetailActivity.showIntent(mSimulatedBarcodeField.getText().toString()));
+                startActivity(SpecimenDetailActivity.queryBarcodeIntent(mSimulatedBarcodeField.getText().toString()));
                 break;
             default:
                 Ln.w("Unknown view has been clicked");
