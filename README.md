@@ -2,6 +2,9 @@
 
 Welcome to the Galaxy Android specimen tracking application.
 
+### Other parts ###
+The specimen tracking galaxy repo is available here: https://bitbucket.org/martenson/galaxy-central-sample-tracking
+The iOS application (mirror of this one) is available here: https://bitbucket.org/galaxyproject/sample-tracker-ios
 ### What is this repository for? ###
 
 * Quick summary
