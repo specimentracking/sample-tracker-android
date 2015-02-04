@@ -56,6 +56,8 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
     @InjectView(R.id.button_31) private CheckedTextView mButton31;
     @InjectView(R.id.button_32) private CheckedTextView mButton32;
     @InjectView(R.id.button_33) private CheckedTextView mButton33;
+    @InjectView(R.id.button_41) private CheckedTextView mButton41;
+    @InjectView(R.id.button_42) private CheckedTextView mButton42;
     @InjectView(R.id.acid_type) private LinearLayout mAcidTypeGroup;
     @InjectView(R.id.acid_sub_type) private LinearLayout mAcidSubTypeGroup;
     @InjectView(R.id.save) private Button mSaveButton;
@@ -86,6 +88,8 @@ public final class TypePickerActivity extends BaseActivity implements OnClickLis
         mMaterialButtons.add(mButton31);
         mMaterialButtons.add(mButton32);
         mMaterialButtons.add(mButton33);
+        mMaterialButtons.add(mButton41);
+        mMaterialButtons.add(mButton42);
 
         List<String> mats = Lists.newArrayList(getResources().getStringArray(R.array.specimen_type_material_values));
         Preconditions.checkState(mMaterialButtons.size() == mats.size());

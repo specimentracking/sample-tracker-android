@@ -84,6 +84,8 @@
         <item>placenta</item>
         <item>cord_blood</item>
         <item>tissue</item>
+        <item>rectal_swab</item>
+        <item>skin_swab</item>
     </string-array>
     <string-array name="specimen_type_acid_values">
         <item>dna</item>
