@@ -1,4 +1,4 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 19
@@ -27,15 +27,15 @@ android {
         debug {
             buildConfigField "int", "LOG_LEVEL", "2" // Log.VERBOSE
             buildConfigField "boolean", "LOG_NETWORK", "true" // RestAdapter.LogLevel.FULL
-            runProguard false
-            zipAlign true
+            minifyEnabled false
+            zipAlignEnabled true
             signingConfig signingConfigs.production
         }
         release {
             buildConfigField "int", "LOG_LEVEL", "2" // Log.VERBOSE
             buildConfigField "boolean", "LOG_NETWORK", "true" // RestAdapter.LogLevel.FULL
-            runProguard false
-            zipAlign true
+            minifyEnabled false
+            zipAlignEnabled true
             signingConfig signingConfigs.production
         }
     }
@@ -53,11 +53,11 @@ android {
 
     applicationVariants.all { variant ->
         // Rename output APK file
-        def file = variant.outputFile
+        def file = variant.outputs.get(0).getOutputFile()
         def apkName = file.name
         apkName = apkName.replace("app-", "tracker-")
         apkName = apkName.replace(".apk", "-" + defaultConfig.versionName + ".apk")
-        variant.outputFile = new File(file.parent, apkName)
+        variant.outputs.get(0).setOutputFile(new File(file.parent, apkName))
     }
 }
 
