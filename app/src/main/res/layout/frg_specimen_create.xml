@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/location"
-            style="@style/Widget.TextView.Value"
+            style="@style/Widget.TextView.Value.SingleLine"
             />
     </LinearLayout>
 
@@ -46,7 +46,7 @@
 
         <TextView
             android:id="@+id/type"
-            style="@style/Widget.TextView.Value"
+            style="@style/Widget.TextView.Value.SingleLine"
             />
     </LinearLayout>
 
@@ -72,7 +72,7 @@
 
         <TextView
             android:id="@+id/state"
-            style="@style/Widget.TextView.Value"
+            style="@style/Widget.TextView.Value.SingleLine"
             />
     </LinearLayout>
 
@@ -98,7 +98,7 @@
 
         <TextView
             android:id="@+id/family"
-            style="@style/Widget.TextView.Value"
+            style="@style/Widget.TextView.Value.SingleLine"
             />
     </LinearLayout>
 
@@ -124,7 +124,7 @@
 
         <TextView
             android:id="@+id/participant_relationship"
-            style="@style/Widget.TextView.Value"
+            style="@style/Widget.TextView.Value.SingleLine"
             />
     </LinearLayout>
 
@@ -150,7 +150,7 @@
 
         <TextView
             android:id="@+id/note"
-            style="@style/Widget.TextView.Value"
+            style="@style/Widget.TextView.Value.SingleLine"
             />
     </LinearLayout>
 
