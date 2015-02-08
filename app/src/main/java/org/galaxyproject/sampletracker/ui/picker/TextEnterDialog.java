@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.google.common.base.Preconditions;
@@ -52,9 +53,13 @@ public final class TextEnterDialog extends DialogFragment implements DialogInter
         mField = new EditText(getActivity());
         mField.setInputType(getArguments().getInt(ARG_INPUT_TYPE));
         mField.setText(getArguments().getString(ARG_DEFAULT_VALUE));
+        mField.setSelection(mField.length());
+        mField.selectAll();
         builder.setView(mField);
 
-        return builder.create();
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        return dialog;
     }
 
     @Override
