@@ -6,19 +6,23 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
 
 import org.galaxyproject.sampletracker.R;
+import org.galaxyproject.sampletracker.util.DeviceUtils;
 
 /**
  * Dialog for getting text inputs of defined format.
  *
  * @author Pavel Sveda <xsveda@gmail.com>
  */
-public final class TextEnterDialog extends DialogFragment implements DialogInterface.OnClickListener {
+public final class TextEnterDialog extends DialogFragment implements DialogInterface.OnClickListener, TextView.OnEditorActionListener {
 
     public interface OnTextEnteredListener {
         public void onTextEntered(int requestCode, CharSequence enteredText);
@@ -55,6 +59,8 @@ public final class TextEnterDialog extends DialogFragment implements DialogInter
         mField.setText(getArguments().getString(ARG_DEFAULT_VALUE));
         mField.setSelection(mField.length());
         mField.selectAll();
+        mField.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        mField.setOnEditorActionListener(this);
         builder.setView(mField);
 
         AlertDialog dialog = builder.create();
@@ -64,6 +70,21 @@ public final class TextEnterDialog extends DialogFragment implements DialogInter
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
+        returnFieldDataAsResult();
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (DeviceUtils.actionsEquals(EditorInfo.IME_ACTION_DONE, actionId)) {
+            returnFieldDataAsResult();
+            dismiss();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void returnFieldDataAsResult() {
         ((OnTextEnteredListener) getTargetFragment()).onTextEntered(getTargetRequestCode(), mField.getText());
     }
 }
