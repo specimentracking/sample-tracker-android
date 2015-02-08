@@ -31,7 +31,7 @@ public interface SpecimenResource {
     public void create(@Query("key") String apiKey, @Path("project_id") String projectId,
             @Field("barcode") String barcode, @Field("parent_id") String parentId, @Field("state") String state,
             @Field("type") String type, @Field("location") String location, @Field("family") String family,
-            @Query("participant_relationship") String participantRelationship, Callback<Specimen> callback);
+            @Query("participant_relationship") String participantRelationship, @Query("note") String note, Callback<Specimen> callback);
 
     @PATCH("/api/projects/{project_id}/specimens/{id}")
     public void update(@Query("key") String apiKey, @Path("project_id") String projectId, @Path("id") String id,

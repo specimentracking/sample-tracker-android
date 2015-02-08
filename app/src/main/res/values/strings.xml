@@ -42,7 +42,6 @@
     <string name="specimen_sex">Sex</string>
     <string name="specimen_derivative">Derivative</string>
     <string name="specimen_participant_dob">Participant dob</string>
-    <string name="specimen_note">Note</string>
     <string name="specimen_create_time">Create time</string>
     <string name="specimen_update_time">Update time</string>
     <string name="specimen_collection_date">Date of collection</string>
@@ -70,6 +69,9 @@
     <string name="specimen_participant_relationship">Relationship</string>
     <string name="specimen_participant_relationship_set">Set Participant relationship</string>
     <string name="specimen_participant_relationship_title">Choose participant relationship</string>
+    <string name="specimen_note">Note</string>
+    <string name="specimen_note_set">Set Note</string>
+    <string name="specimen_note_title">Enter Note</string>
     <string-array name="specimen_state_values">
         <item>new</item>
         <item>onroad</item>

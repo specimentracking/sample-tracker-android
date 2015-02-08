@@ -1,6 +1,7 @@
 package org.galaxyproject.sampletracker.ui.specimen;
 
 import static android.text.InputType.TYPE_CLASS_NUMBER;
+import static android.text.InputType.TYPE_CLASS_TEXT;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -60,6 +61,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     private TextView mStateValue;
     private TextView mFamilyValue;
     private TextView mParticipantRelationshipValue;
+    private TextView mNoteValue;
     private CheckedTextView mFlag1;
     private CheckedTextView mFlag2;
     private CheckedTextView mFlag3;
@@ -122,6 +124,9 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                 mPreferenceController.putString(UserPreference.LAST_FAMILY_USED, enteredString);
                 setNewFamily(enteredString);
                 break;
+            case R.id.request_note:
+                setNewNote(enteredString);
+                break;
             default:
                 throw new IllegalStateException("Unknown request code");
         }
@@ -141,6 +146,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         mStateValue = (TextView) view.findViewById(R.id.state);
         mFamilyValue = (TextView) view.findViewById(R.id.family);
         mParticipantRelationshipValue = (TextView) view.findViewById(R.id.participant_relationship);
+        mNoteValue = (TextView) view.findViewById(R.id.note);
         mSendButton = (Button) view.findViewById(R.id.send);
 
         mFlag1 = (CheckedTextView) view.findViewById(R.id.flag_1);
@@ -154,6 +160,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         bindOnClickListener(view, R.id.set_state);
         bindOnClickListener(view, R.id.set_family);
         bindOnClickListener(view, R.id.set_participant_relationship);
+        bindOnClickListener(view, R.id.set_note);
         bindOnClickListener(view, R.id.derivative);
         mSendButton.setOnClickListener(this);
     }
@@ -173,6 +180,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         write(mStateValue, sampleData.getState());
         write(mFamilyValue, sampleData.getFamily());
         write(mParticipantRelationshipValue, sampleData.getParticipantRelationship());
+        write(mNoteValue, sampleData.getNote());
 
         writeFlag(mFlag1, R.string.specimen_flag_gen, sampleData.isGenotypeFlag());
         writeFlag(mFlag2, R.string.specimen_flag_hap, sampleData.isHaplotypeFlag());
@@ -228,6 +236,12 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         validateModel();
     }
 
+    protected void setNewNote(String note) {
+        mSpecimen.getSampleData().setNote(note);
+        bindModel(mSpecimen);
+        validateModel();
+    }
+
     private void validateModel() {
         mSendButton.setEnabled(isModelValid(mSpecimen));
     }
@@ -256,6 +270,11 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
             case R.id.set_participant_relationship:
                 Intent relIntent = ParticipantRelationshipPickerActivity.showIntent(mSpecimen.getSampleData().getParticipantRelationship());
                 startActivityForResult(relIntent, R.id.request_participant_relationship);
+                break;
+            case R.id.set_note:
+                TextEnterDialog noteDialog = TextEnterDialog.create(this, R.id.request_note,
+                        getResources().getString(R.string.specimen_note), TYPE_CLASS_TEXT, null);
+                noteDialog.show(getFragmentManager(), TextEnterDialog.TAG);
                 break;
             case R.id.derivative:
                 startActivityForResult(ScanActivity.showIntent(), R.id.request_scan);

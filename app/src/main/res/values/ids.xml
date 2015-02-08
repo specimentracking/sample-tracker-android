@@ -7,6 +7,7 @@
     <item name="request_specimen_state" type="id" />
     <item name="request_specimen_family" type="id" />
     <item name="request_participant_relationship" type="id" />
+    <item name="request_note" type="id" />
 
     <item name="menu_parent" type="id" />
     <item name="menu_details" type="id" />
