@@ -39,7 +39,6 @@
     <string name="specimen_title_update">Specimen</string>
     <string name="specimen_ancestor">Ancestor</string>
     <string name="specimen_details">Details</string>
-    <string name="specimen_family">Family</string>
     <string name="specimen_sex">Sex</string>
     <string name="specimen_derivative">Derivative</string>
     <string name="specimen_participant_dob">Participant dob</string>
@@ -65,6 +64,9 @@
     <string name="specimen_state">State</string>
     <string name="specimen_state_set">Set State</string>
     <string name="specimen_state_change">Change State</string>
+    <string name="specimen_family">Family</string>
+    <string name="specimen_family_set">Set Family</string>
+    <string name="specimen_family_title">Enter Family number</string>
     <string name="specimen_participant_relationship">Relationship</string>
     <string name="specimen_participant_relationship_set">Set Participant relationship</string>
     <string name="specimen_participant_relationship_title">Choose participant relationship</string>

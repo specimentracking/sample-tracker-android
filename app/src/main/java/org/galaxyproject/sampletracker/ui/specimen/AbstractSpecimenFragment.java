@@ -1,5 +1,7 @@
 package org.galaxyproject.sampletracker.ui.specimen;
 
+import static android.text.InputType.TYPE_CLASS_NUMBER;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import org.galaxyproject.sampletracker.ui.core.BaseFragment;
 import org.galaxyproject.sampletracker.ui.picker.LocationPickerActivity;
 import org.galaxyproject.sampletracker.ui.picker.ParticipantRelationshipPickerActivity;
 import org.galaxyproject.sampletracker.ui.picker.StatePickerActivity;
+import org.galaxyproject.sampletracker.ui.picker.TextEnterDialog;
 import org.galaxyproject.sampletracker.ui.picker.TypePickerActivity;
 import org.galaxyproject.sampletracker.ui.scan.ScanActivity;
 
@@ -32,7 +35,7 @@ import roboguice.util.Ln;
  *
  * @author Pavel Sveda <xsveda@gmail.com>
  */
-abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickListener {
+abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickListener, TextEnterDialog.OnTextEnteredListener {
 
     private static final String EXTRA_SPECIMEN = "specimen";
 
@@ -51,6 +54,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     private TextView mLocationValue;
     private TextView mTypeValue;
     private TextView mStateValue;
+    private TextView mFamilyValue;
     private TextView mParticipantRelationshipValue;
     private CheckedTextView mFlag1;
     private CheckedTextView mFlag2;
@@ -107,6 +111,17 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     }
 
     @Override
+    public void onTextEntered(int requestCode, CharSequence enteredText) {
+        switch (requestCode) {
+            case R.id.request_specimen_family:
+                setNewFamily(enteredText.toString());
+                break;
+            default:
+                throw new IllegalStateException("Unknown request code");
+        }
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         bindViews(view);
@@ -118,6 +133,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         mLocationValue = (TextView) view.findViewById(R.id.location);
         mTypeValue = (TextView) view.findViewById(R.id.type);
         mStateValue = (TextView) view.findViewById(R.id.state);
+        mFamilyValue = (TextView) view.findViewById(R.id.family);
         mParticipantRelationshipValue = (TextView) view.findViewById(R.id.participant_relationship);
         mSendButton = (Button) view.findViewById(R.id.send);
 
@@ -130,6 +146,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         bindOnClickListener(view, R.id.set_location);
         bindOnClickListener(view, R.id.set_type);
         bindOnClickListener(view, R.id.set_state);
+        bindOnClickListener(view, R.id.set_family);
         bindOnClickListener(view, R.id.set_participant_relationship);
         bindOnClickListener(view, R.id.derivative);
         mSendButton.setOnClickListener(this);
@@ -148,6 +165,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         write(mLocationValue, sampleData.getLocationFormatted());
         write(mTypeValue, sampleData.getTypeFormatted());
         write(mStateValue, sampleData.getState());
+        write(mFamilyValue, sampleData.getFamily());
         write(mParticipantRelationshipValue, sampleData.getParticipantRelationship());
 
         writeFlag(mFlag1, R.string.specimen_flag_gen, sampleData.isGenotypeFlag());
@@ -192,6 +210,11 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         validateModel();
     }
 
+    protected void setNewFamily(String family) {
+        mSpecimen.getSampleData().setFamily(family);
+        bindModel(mSpecimen);
+        validateModel();
+    }
 
     protected void setNewParticipantRelationship(String relationship) {
         mSpecimen.getSampleData().setParticipantRelationship(relationship);
@@ -217,6 +240,11 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
             case R.id.set_state:
                 Intent stateIntent = StatePickerActivity.showIntent(mSpecimen.getSampleData().getState());
                 startActivityForResult(stateIntent, R.id.request_specimen_state);
+                break;
+            case R.id.set_family:
+                TextEnterDialog familyDialog = TextEnterDialog.create(this, R.id.request_specimen_family,
+                        getResources().getString(R.string.specimen_family_title), TYPE_CLASS_NUMBER, null);
+                familyDialog.show(getFragmentManager(), TextEnterDialog.TAG);
                 break;
             case R.id.set_participant_relationship:
                 Intent relIntent = ParticipantRelationshipPickerActivity.showIntent(mSpecimen.getSampleData().getParticipantRelationship());

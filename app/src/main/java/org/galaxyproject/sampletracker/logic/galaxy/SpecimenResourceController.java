@@ -40,7 +40,8 @@ public final class SpecimenResourceController extends ResourceController<Specime
         String projectId = mSettingsController.loadProjectId();
         SampleData sampleData = specimen.getSampleData();
         resource().create(apiKey, projectId, specimen.getBarcode(), sampleData.getParentId(), sampleData.getState(),
-                sampleData.getTypeFormatted(), sampleData.getLocationFormatted(), sampleData.getParticipantRelationship(), callback);
+                sampleData.getTypeFormatted(), sampleData.getLocationFormatted(), sampleData.getFamily(),
+                sampleData.getParticipantRelationship(), callback);
     }
 
     public void update(Specimen specimen, Callback<Specimen> callback) {
