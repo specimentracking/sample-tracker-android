@@ -13,8 +13,11 @@ import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import com.google.common.base.Preconditions;
+import com.google.inject.Inject;
 
 import org.galaxyproject.sampletracker.R;
+import org.galaxyproject.sampletracker.logic.preference.PreferenceController;
+import org.galaxyproject.sampletracker.logic.preference.UserPreference;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SampleData;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.Specimen;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenLocation;
@@ -49,6 +52,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         return fragment;
     }
 
+    @Inject private PreferenceController mPreferenceController;
     @InjectResource(R.string.glb_no_value) private String mNoValue;
 
     private TextView mLocationValue;
@@ -112,9 +116,11 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
 
     @Override
     public void onTextEntered(int requestCode, CharSequence enteredText) {
+        String enteredString = enteredText.toString();
         switch (requestCode) {
             case R.id.request_specimen_family:
-                setNewFamily(enteredText.toString());
+                mPreferenceController.putString(UserPreference.LAST_FAMILY_USED, enteredString);
+                setNewFamily(enteredString);
                 break;
             default:
                 throw new IllegalStateException("Unknown request code");
@@ -242,8 +248,9 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                 startActivityForResult(stateIntent, R.id.request_specimen_state);
                 break;
             case R.id.set_family:
+                String lastFamilyValue = mPreferenceController.getString(UserPreference.LAST_FAMILY_USED, null);
                 TextEnterDialog familyDialog = TextEnterDialog.create(this, R.id.request_specimen_family,
-                        getResources().getString(R.string.specimen_family_title), TYPE_CLASS_NUMBER, null);
+                        getResources().getString(R.string.specimen_family_title), TYPE_CLASS_NUMBER, lastFamilyValue);
                 familyDialog.show(getFragmentManager(), TextEnterDialog.TAG);
                 break;
             case R.id.set_participant_relationship:
