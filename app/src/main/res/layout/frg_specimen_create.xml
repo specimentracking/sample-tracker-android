@@ -32,7 +32,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/content_vertical_margin"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         >
 
@@ -58,7 +58,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/content_vertical_margin"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         >
 
@@ -79,6 +79,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/specimen_state_set"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/Widget.TextView.Label"
+            android:text="@string/specimen_participant_relationship"
+            />
+
+
+        <TextView
+            android:id="@+id/participant_relationship"
+            style="@style/Widget.TextView.Value"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/set_participant_relationship"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/specimen_participant_relationship_set"
         />
 
     <RelativeLayout

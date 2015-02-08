@@ -42,7 +42,6 @@
     <string name="specimen_family">Family</string>
     <string name="specimen_sex">Sex</string>
     <string name="specimen_derivative">Derivative</string>
-    <string name="specimen_participant_relationship">Relationship</string>
     <string name="specimen_participant_dob">Participant dob</string>
     <string name="specimen_note">Note</string>
     <string name="specimen_create_time">Create time</string>
@@ -66,6 +65,9 @@
     <string name="specimen_state">State</string>
     <string name="specimen_state_set">Set State</string>
     <string name="specimen_state_change">Change State</string>
+    <string name="specimen_participant_relationship">Relationship</string>
+    <string name="specimen_participant_relationship_set">Set Participant relationship</string>
+    <string name="specimen_participant_relationship_title">Choose participant relationship</string>
     <string-array name="specimen_state_values">
         <item>new</item>
         <item>onroad</item>
@@ -122,5 +124,18 @@
         <item>7</item>
         <item>8</item>
         <item>9</item>
+    </string-array>
+    <string-array name="specimen_participant_relationship_values">
+        <item>M</item>
+        <item>D</item>
+        <item>C1</item>
+        <item>C2</item>
+        <item>C3</item>
+        <item>C4</item>
+        <item>C5</item>
+        <item>C6</item>
+        <item>C7</item>
+        <item>C8</item>
+        <item>C9</item>
     </string-array>
 </resources>

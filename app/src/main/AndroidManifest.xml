@@ -94,6 +94,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.specimen.SpecimenDetailActivity" />
         </activity>
+        <activity
+            android:name=".ui.picker.ParticipantRelationshipPickerActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/specimen_participant_relationship_title"
+            android:parentActivityName=".ui.specimen.SpecimenDetailActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.specimen.SpecimenDetailActivity" />
+        </activity>
     </application>
 
 </manifest>

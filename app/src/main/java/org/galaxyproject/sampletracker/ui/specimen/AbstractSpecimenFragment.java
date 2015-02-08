@@ -19,6 +19,7 @@ import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenLocation;
 import org.galaxyproject.sampletracker.model.galaxy.specimen.SpecimenType;
 import org.galaxyproject.sampletracker.ui.core.BaseFragment;
 import org.galaxyproject.sampletracker.ui.picker.LocationPickerActivity;
+import org.galaxyproject.sampletracker.ui.picker.ParticipantRelationshipPickerActivity;
 import org.galaxyproject.sampletracker.ui.picker.StatePickerActivity;
 import org.galaxyproject.sampletracker.ui.picker.TypePickerActivity;
 import org.galaxyproject.sampletracker.ui.scan.ScanActivity;
@@ -28,7 +29,7 @@ import roboguice.util.Ln;
 
 /**
  * Common logic for all specimen fragments - new, existing, derivative.
- * 
+ *
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickListener {
@@ -50,6 +51,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     private TextView mLocationValue;
     private TextView mTypeValue;
     private TextView mStateValue;
+    private TextView mParticipantRelationshipValue;
     private CheckedTextView mFlag1;
     private CheckedTextView mFlag2;
     private CheckedTextView mFlag3;
@@ -87,6 +89,11 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                     setNewLocation((SpecimenLocation) data.getParcelableExtra(LocationPickerActivity.EXTRA_LOCATION));
                 }
                 break;
+            case R.id.request_participant_relationship:
+                if (resultCode == Activity.RESULT_OK) {
+                    setNewParticipantRelationship(data.getStringExtra(ParticipantRelationshipPickerActivity.EXTRA_RELATIONSHIP));
+                }
+                break;
             case R.id.request_scan:
                 if (resultCode == Activity.RESULT_OK) {
                     String derivativeBarcode = data.getStringExtra(ScanActivity.EXTRA_SCAN_DATA);
@@ -111,6 +118,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         mLocationValue = (TextView) view.findViewById(R.id.location);
         mTypeValue = (TextView) view.findViewById(R.id.type);
         mStateValue = (TextView) view.findViewById(R.id.state);
+        mParticipantRelationshipValue = (TextView) view.findViewById(R.id.participant_relationship);
         mSendButton = (Button) view.findViewById(R.id.send);
 
         mFlag1 = (CheckedTextView) view.findViewById(R.id.flag_1);
@@ -122,6 +130,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         bindOnClickListener(view, R.id.set_location);
         bindOnClickListener(view, R.id.set_type);
         bindOnClickListener(view, R.id.set_state);
+        bindOnClickListener(view, R.id.set_participant_relationship);
         bindOnClickListener(view, R.id.derivative);
         mSendButton.setOnClickListener(this);
     }
@@ -139,6 +148,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         write(mLocationValue, sampleData.getLocationFormatted());
         write(mTypeValue, sampleData.getTypeFormatted());
         write(mStateValue, sampleData.getState());
+        write(mParticipantRelationshipValue, sampleData.getParticipantRelationship());
 
         writeFlag(mFlag1, R.string.specimen_flag_gen, sampleData.isGenotypeFlag());
         writeFlag(mFlag2, R.string.specimen_flag_hap, sampleData.isHaplotypeFlag());
@@ -148,7 +158,9 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
     }
 
     private void write(TextView view, String value) {
-        view.setText(TextUtils.isEmpty(value) ? mNoValue : value);
+        if (view != null) {
+            view.setText(TextUtils.isEmpty(value) ? mNoValue : value);
+        }
     }
 
     private void writeFlag(CheckedTextView flagView, int labelId, boolean value) {
@@ -180,6 +192,13 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
         validateModel();
     }
 
+
+    protected void setNewParticipantRelationship(String relationship) {
+        mSpecimen.getSampleData().setParticipantRelationship(relationship);
+        bindModel(mSpecimen);
+        validateModel();
+    }
+
     private void validateModel() {
         mSendButton.setEnabled(isModelValid(mSpecimen));
     }
@@ -199,6 +218,10 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                 Intent stateIntent = StatePickerActivity.showIntent(mSpecimen.getSampleData().getState());
                 startActivityForResult(stateIntent, R.id.request_specimen_state);
                 break;
+            case R.id.set_participant_relationship:
+                Intent relIntent = ParticipantRelationshipPickerActivity.showIntent(mSpecimen.getSampleData().getParticipantRelationship());
+                startActivityForResult(relIntent, R.id.request_participant_relationship);
+                break;
             case R.id.derivative:
                 startActivityForResult(ScanActivity.showIntent(), R.id.request_scan);
                 break;
@@ -213,14 +236,14 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
 
     /**
      * Check whether model is valid and can be sent.
-     * 
+     *
      * @param specimen Model to check
      */
     protected abstract boolean isModelValid(Specimen specimen);
 
     /**
      * Send valid model to Galaxy server.
-     * 
+     *
      * @param specimen Model to send
      */
     protected abstract void sendModel(Specimen specimen);
