@@ -2,6 +2,8 @@ package org.galaxyproject.sampletracker.ui.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +14,7 @@ import org.galaxyproject.sampletracker.GalaxyApplication;
 import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.logic.galaxy.AuthenticateResourceController;
 import org.galaxyproject.sampletracker.model.galaxy.authenticate.AuthenticateResponse;
+import org.galaxyproject.sampletracker.ui.component.EmptyTextWatcher;
 import org.galaxyproject.sampletracker.ui.component.PendingDialogFragment;
 import org.galaxyproject.sampletracker.ui.core.BaseActivity;
 
@@ -46,6 +49,23 @@ public final class ApiKeyFetchActivity extends BaseActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         showHomeButton();
         mFetchButton.setOnClickListener(this);
+        mUsernameField.addTextChangedListener(validatingTextWatcher());
+        mPasswordField.addTextChangedListener(validatingTextWatcher());
+    }
+
+    private EmptyTextWatcher validatingTextWatcher() {
+        return new EmptyTextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                checkFormValidity();
+            }
+        };
+    }
+
+    private void checkFormValidity() {
+        boolean usernameOk = !TextUtils.isEmpty(mUsernameField.getText());
+        boolean passwordOk = !TextUtils.isEmpty(mPasswordField.getText());
+        mFetchButton.setEnabled(usernameOk && passwordOk);
     }
 
     @Override
