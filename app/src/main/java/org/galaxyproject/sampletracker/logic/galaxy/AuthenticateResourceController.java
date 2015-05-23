@@ -7,6 +7,7 @@ import com.google.inject.Singleton;
 import org.galaxyproject.sampletracker.model.galaxy.authenticate.AuthenticateResponse;
 import org.galaxyproject.sampletracker.net.galaxy.resource.AuthenticateResource;
 
+import retrofit.Callback;
 import roboguice.util.Ln;
 
 import java.io.UnsupportedEncodingException;
@@ -14,7 +15,7 @@ import java.util.Locale;
 
 /**
  * Handles user authentication process.
- * 
+ *
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 @Singleton
@@ -24,9 +25,9 @@ public final class AuthenticateResourceController extends ResourceController<Aut
         super(AuthenticateResource.class);
     }
 
-    public AuthenticateResponse authenticate(String username, String password) {
+    public void authenticate(String username, String password, Callback<AuthenticateResponse> callback) {
         String basicAuthentication = createBasicAuthentication(username, password);
-        return resource().authenticate(basicAuthentication);
+        resource().authenticate(basicAuthentication, callback);
     }
 
     private String createBasicAuthentication(String username, String password) {
