@@ -273,7 +273,7 @@ abstract class AbstractSpecimenFragment extends BaseFragment implements OnClickL
                 break;
             case R.id.set_note:
                 TextEnterDialog noteDialog = TextEnterDialog.create(this, R.id.request_note,
-                        getResources().getString(R.string.specimen_note), TYPE_CLASS_TEXT, null);
+                        getResources().getString(R.string.specimen_note_title), TYPE_CLASS_TEXT, null);
                 noteDialog.show(getFragmentManager(), TextEnterDialog.TAG);
                 break;
             case R.id.derivative:
