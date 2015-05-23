@@ -15,5 +15,5 @@ import retrofit.http.POST;
 public interface AuthenticateResource {
 
     @POST("/api/authenticate/baseauth")
-    public AuthenticateResponse authenticate(@Header("Authorization") String authorization, Callback<AuthenticateResponse> callback);
+    void authenticate(@Header("Authorization") String authorization, Callback<AuthenticateResponse> callback);
 }
