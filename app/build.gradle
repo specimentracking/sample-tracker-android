@@ -41,14 +41,9 @@ android {
     }
 
     flavorDimensions "environment"
-
     productFlavors {
-        apiary {
-            flavorDimension "environment"
-        }
-        samples {
-            flavorDimension "environment"
-        }
+        apiary { dimension "environment" }
+        samples { dimension "environment" }
     }
 
     applicationVariants.all { variant ->
