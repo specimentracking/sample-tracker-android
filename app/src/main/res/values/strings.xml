@@ -33,7 +33,9 @@
     <string name="api_key_title">Fetch API key</string>
     <string name="api_key_info">Enter your username and password to Galaxy portal to fetch your personal API key:</string>
     <string name="api_key_username">Username</string>
+    <string name="api_key_username_hint">Enter your username</string>
     <string name="api_key_password">Password</string>
+    <string name="api_key_password_hint">Enter your password</string>
     <string name="api_key_fetch">Fetch</string>
 
     <string name="scan_hint">Aim a code.</string>
