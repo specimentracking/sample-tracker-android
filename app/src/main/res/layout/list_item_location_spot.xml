@@ -5,7 +5,7 @@
     android:background="@drawable/list_selector"
     android:gravity="center"
     android:minHeight="28dp"
-    android:paddingEnd="@dimen/content_horizontal_margin"
-    android:paddingStart="@dimen/content_horizontal_margin"
+    android:paddingLeft="@dimen/content_horizontal_margin"
+    android:paddingRight="@dimen/content_horizontal_margin"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
     />
