@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.galaxyproject.sampletracker"
+<manifest package="org.galaxyproject.sampletracker"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:installLocation="auto">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -37,6 +37,16 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.settings.ApiKeyFetchActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/api_key_title"
+            android:parentActivityName=".ui.settings.SettingsActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.settings.SettingsActivity" />
         </activity>
         <activity
             android:name=".ui.scan.ScanActivity"

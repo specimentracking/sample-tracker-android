@@ -30,6 +30,12 @@
     <string name="settings_galaxy_server_url_hint">Please enter Galaxy URL</string>
     <string name="settings_saved_msg">Settings saved</string>
 
+    <string name="api_key_title">Fetch API key</string>
+    <string name="api_key_info">Enter your username and password to Galaxy portal to fetch your personal API key:</string>
+    <string name="api_key_username">Username</string>
+    <string name="api_key_password">Password</string>
+    <string name="api_key_fetch">Fetch</string>
+
     <string name="scan_hint">Aim a code.</string>
     <string name="scan_error_invalid_settings">Configuration is not valid.\nGo to Settings first!</string>
     <string name="scan_error">Error occurred while scanning.</string>
