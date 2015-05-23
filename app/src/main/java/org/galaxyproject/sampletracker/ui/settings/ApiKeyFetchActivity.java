@@ -13,10 +13,12 @@ import com.google.inject.Inject;
 import org.galaxyproject.sampletracker.GalaxyApplication;
 import org.galaxyproject.sampletracker.R;
 import org.galaxyproject.sampletracker.logic.galaxy.AuthenticateResourceController;
+import org.galaxyproject.sampletracker.model.galaxy.AbstractResponse;
 import org.galaxyproject.sampletracker.model.galaxy.authenticate.AuthenticateResponse;
 import org.galaxyproject.sampletracker.ui.component.EmptyTextWatcher;
 import org.galaxyproject.sampletracker.ui.component.PendingDialogFragment;
 import org.galaxyproject.sampletracker.ui.core.BaseActivity;
+import org.galaxyproject.sampletracker.util.Toasts;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -32,6 +34,8 @@ import roboguice.util.Ln;
  */
 @ContentView(R.layout.act_api_key_fetch)
 public final class ApiKeyFetchActivity extends BaseActivity implements View.OnClickListener, Callback<AuthenticateResponse> {
+
+    public static final String EXTRA_API_KEY = "api_key";
 
     public static final Intent showIntent() {
         return new Intent(GalaxyApplication.get(), ApiKeyFetchActivity.class);
@@ -83,14 +87,31 @@ public final class ApiKeyFetchActivity extends BaseActivity implements View.OnCl
     }
 
     @Override
-    public void success(AuthenticateResponse reponse, Response response) {
+    public void success(AuthenticateResponse userAuthentication, Response response) {
         PendingDialogFragment.hidePendingDialog(getFragmentManager());
-        // TODO
+
+        // Validate response for required fields
+        String apiKey = userAuthentication.getKey();
+        if (TextUtils.isEmpty(apiKey)) {
+            Toasts.showLong(R.string.net_error_incomplete_response);
+        } else {
+            setResult(RESULT_OK, new Intent().putExtra(EXTRA_API_KEY, apiKey));
+            finish();
+        }
     }
 
     @Override
     public void failure(RetrofitError error) {
         PendingDialogFragment.hidePendingDialog(getFragmentManager());
-        // TODO
+        try {
+            if (error.getBody() instanceof AbstractResponse) {
+                Toasts.showLong(((AbstractResponse) error.getBody()).getErrorMessage());
+            } else {
+                throw new IllegalStateException("Invalid response received");
+            }
+        } catch (Exception e) {
+            Ln.w(error, "Unexpected error");
+            Toasts.showLong(error.getMessage());
+        }
     }
 }
