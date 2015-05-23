@@ -27,7 +27,7 @@ import roboguice.util.Ln;
 
 /**
  * Allows to modify user and project settings.
- * 
+ *
  * @author Pavel Sveda <xsveda@gmail.com>
  */
 @ContentView(R.layout.act_settings)
@@ -37,9 +37,12 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
         return new Intent(GalaxyApplication.get(), SettingsActivity.class);
     }
 
+    private static final int API_KEY_REQUEST = 1;
+
     @Inject private SettingsController mSettingsController;
     @Inject private GalaxyRestAdapter mGalaxyRestAdapter;
     @InjectView(R.id.key) private EditText mKeyField;
+    @InjectView(R.id.key_fetch) private Button mKeyFetchButton;
     @InjectView(R.id.project_id) private EditText mProjectIdField;
     @InjectView(R.id.server_url) private EditText mServerUrlField;
     @InjectView(R.id.save) private Button mSaveButton;
@@ -52,6 +55,7 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
         mKeyField.addTextChangedListener(this);
         mProjectIdField.addTextChangedListener(this);
         mServerUrlField.addTextChangedListener(this);
+        mKeyFetchButton.setOnClickListener(this);
         mSaveButton.setOnClickListener(this);
 
         mKeyField.setText(mSettingsController.loadApiKey());
@@ -65,6 +69,15 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
             if (TextUtils.isEmpty(mProjectIdField.getText())) {
                 mProjectIdField.setText("f2db41e1fa331b3e");
             }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == API_KEY_REQUEST && resultCode == RESULT_OK && data != null && data.hasExtra(ApiKeyFetchActivity.EXTRA_API_KEY)) {
+            mKeyFetchButton.setText(data.getStringExtra(ApiKeyFetchActivity.EXTRA_API_KEY));
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -84,6 +97,9 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.key_fetch:
+                startActivityForResult(ApiKeyFetchActivity.showIntent(), API_KEY_REQUEST);
+                break;
             case R.id.save:
                 doSave();
                 break;

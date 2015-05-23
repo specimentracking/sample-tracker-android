@@ -24,6 +24,7 @@
     <string name="settings_title">Settings</string>
     <string name="settings_key">API access key</string>
     <string name="settings_key_hint">Please enter API key</string>
+    <string name="settings_key_fetch">Fetch API key</string>
     <string name="settings_project_id">ID of current project</string>
     <string name="settings_project_id_hint">Please enter project ID</string>
     <string name="settings_galaxy_server_url">Galaxy server</string>
