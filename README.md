@@ -3,8 +3,7 @@
 Welcome to the Galaxy Android specimen tracking system.
 
 ### Other parts of Galaxy Specimen Tracking###
- * The specimen tracking galaxy repo is available here: https://bitbucket.org/martenson/galaxy-central-sample-tracking
- * The iOS application (mirror of this one) is available here: https://bitbucket.org/galaxyproject/sample-tracker-ios
+See https://github.com/specimentracking
 
 ### Version
  * latest version 0.4
