@@ -6,7 +6,7 @@ Welcome to the Galaxy Android specimen tracking system.
 See https://github.com/specimentracking
 
 ### Version
- * latest version 0.4
+ * latest version 0.7
 
 ### What is this repository for? ###
 
