@@ -4,8 +4,8 @@ import org.galaxyproject.sampletracker.model.galaxy.authenticate.AuthenticateRes
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
+import retrofit.http.GET;
 import retrofit.http.Header;
-import retrofit.http.POST;
 
 /**
  * {@link RestAdapter} resource for authentication.
@@ -14,6 +14,6 @@ import retrofit.http.POST;
  */
 public interface AuthenticateResource {
 
-    @POST("/api/authenticate/baseauth")
+    @GET("/api/authenticate/baseauth")
     void authenticate(@Header("Authorization") String authorization, Callback<AuthenticateResponse> callback);
 }
