@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 24
     buildToolsVersion "24.0.2"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 24
 
         versionCode 6
         versionName "0.6"
@@ -62,7 +62,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v13:21.0.3'
+    compile 'com.android.support:support-v13:24.2.1'
     compile 'org.roboguice:roboguice:2.0'
     compile 'com.google.guava:guava:18.0'
     compile 'com.google.code.findbugs:jsr305:2.0.2'
