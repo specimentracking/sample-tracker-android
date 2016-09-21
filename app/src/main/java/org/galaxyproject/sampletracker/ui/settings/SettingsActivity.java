@@ -75,7 +75,7 @@ public final class SettingsActivity extends BaseActivity implements OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == API_KEY_REQUEST && resultCode == RESULT_OK && data != null && data.hasExtra(ApiKeyFetchActivity.EXTRA_API_KEY)) {
-            mKeyFetchButton.setText(data.getStringExtra(ApiKeyFetchActivity.EXTRA_API_KEY));
+            mKeyField.setText(data.getStringExtra(ApiKeyFetchActivity.EXTRA_API_KEY));
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
